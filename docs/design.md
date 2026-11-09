@@ -1,25 +1,18 @@
 # Design and limitations
 
-## Roles, prompts, and tools
+## Design boundaries
 
-Each invocation combines [`common.md`](../labloop/prompts/common.md), the relevant
-[`actor`](../labloop/prompts/actor.md), [`critic`](../labloop/prompts/critic.md), or
-[`distiller`](../labloop/prompts/distiller.md) instructions, and the scientist's
-JSON prompt. These packaged Markdown files are invocation instructions; Codex
-retains its own system instructions.
+See the [README](../README.md) for the learning loop,
+[Codex execution](codex-backend.md) for prompt assembly, tools, sandboxes, and
+invocation artifacts, and [knowledge and feedback](knowledge-base.md) for storage,
+retrieval, and lesson lifecycle rules.
 
-Codex supplies file, shell, image, and configured tool access. LabLoop supplies a
-`recall` command in each role's context and validates structured reports. Agents
-cite results and reusable scripts; the controller records file paths and hashes.
+Packaged role prompts are invocation instructions; Codex retains its own system
+instructions. The distiller proposes tests for the actor rather than running
+another experiment stage. Codex permissions and account limits apply.
+
 Work products have an identifier, description, evidence paths, and an actor-chosen
 `type_name`. Domain concepts such as `CrossoverCandidate` emerge during research.
-
-Actor and critic use Codex's `workspace-write` sandbox; the distiller uses
-`read-only` and proposes tests for the actor rather than running another experiment
-stage. Prompts direct generated files into the current run directory and prohibit
-changing inputs or the vault. These instructions do not narrow the actor's and
-critic's write access beyond the project sandbox. Codex permissions and account
-limits apply.
 
 ### Limits on criteria invariance
 
@@ -37,18 +30,16 @@ and may need scientist review.
 
 Tests cover two-cycle handoff, knowledge retrieval, ontology extension, file
 provenance, scientist feedback, input requests, schema validation, and CLI failures
-and timeouts. Integration tests use a Codex CLI test double; they verify
-orchestration, not scientific learning.
+and timeouts. The [execution guide](codex-backend.md) describes the test double and
+its limits.
 
 A live CLI smoke test reached the service, but this account rejected its configured
 `gpt-6.1-sol` model. No fallback was selected; use `--model` with an available model.
 A complete live run remains unverified. IGV was not installed during development,
 so visual crossover audits remain unverified too.
 
-Each run saves a manifest and RDF. Each invocation saves its prompt/context,
-schema, CLI version and arguments, JSONL events, stderr, result, duration, exit
-status, and usage when available. Git branch, commit, and dirty state are recorded
-at run start; LabLoop does not manage branches or commits.
+Git branch, commit, and dirty state are recorded at run start; LabLoop does not
+manage branches or commits.
 
 For building this prototype, Sol is a reasonable default and Astra is not required
 by the design. This is engineering judgment, not a measured model comparison.
