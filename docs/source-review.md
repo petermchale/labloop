@@ -16,6 +16,4 @@ on definitions, methods, evaluation, and limitations.
 | [Gulwani's Cornell lecture](https://vod.video.cornell.edu/id/1_1mqdu9e5), [summary](https://www.linkedin.com/posts/sumit-gulwani_neurosymbolicai-agenticai-programsynthesis-share-7514045265604079617-WuQV), and [generality spectrum](https://pbs.twimg.com/media/HWnTsrubIAAM5Vh.jpg?name=orig) | Let reusable scientific code emerge during research. Keep stable orchestration in Python and use Codex for investigation, interpretation, and code development. |
 
 These sources motivate the design; they do not validate LabLoop's scientific
-performance. The actor applies and tests proposed lessons through its next actions,
-and the critic evaluates the resulting evidence. Automatic compilation of successful
-trajectories into standalone tools remains future work.
+performance.
