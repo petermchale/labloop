@@ -35,6 +35,9 @@ if mode == "timeout":
 if mode == "nonzero":
     print("Deliberate test failure", file=sys.stderr)
     sys.exit(7)
+if mode == "blocked-runtime":
+    print("failed to open state DB: attempt to write a readonly database", file=sys.stderr)
+    sys.exit(1)
 result_path = Path(argv[argv.index("--output-last-message") + 1])
 if mode != "missing":
     if mode == "invalid":
@@ -149,3 +152,13 @@ def test_timeout_kills_invocation_and_ignores_stale_result(tmp_path, fake_codex)
 def test_missing_codex_has_actionable_error():
     with pytest.raises(ValueError, match="Codex CLI not found"):
         CodexAgent(executable="/nonexistent/codex")
+
+
+def test_blocked_runtime_explains_parent_permissions(tmp_path, fake_codex):
+    (tmp_path / 'mode.txt').write_text('blocked-runtime')
+    agent = CodexAgent(executable=fake_codex)
+    with pytest.raises(RuntimeError, match="parent.*normal terminal"):
+        run_loop({'goal': 'Test', 'criteria': 'Test', 'distill': 'Test'}, tmp_path, agent, cycles=1)
+    manifest = json.loads(next((tmp_path / 'runs').glob('*/run.json')).read_text())
+    assert manifest['state'] == 'failed'
+    assert len(manifest['metrics']) == 1  # Never automatically retry with weaker permissions.

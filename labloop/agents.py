@@ -86,6 +86,20 @@ class CodexAgent:
         if timed_out:
             raise RuntimeError(f"Codex {role} exceeded {self.timeout}s; see {stderr_path}")
         if process.returncode:
+            stderr_text = stderr_path.read_text()
+            runtime_blocked = (
+                "attempt to write a readonly database" in stderr_text
+                or ("failed to initialize in-process app-server client" in stderr_text
+                    and "Operation not permitted" in stderr_text)
+            )
+            if runtime_blocked:
+                raise RuntimeError(
+                    f"Codex {role} could not initialize its local runtime. The parent "
+                    "environment may block writes to Codex's home directory or local "
+                    "app-server startup. Run LabLoop from a normal terminal, or grant "
+                    "the LabLoop launch permission in the parent application. Changing "
+                    "the role's --sandbox setting cannot remove parent restrictions. "
+                    f"See {stderr_path}")
             raise RuntimeError(f"Codex {role} exited {process.returncode}; see {stderr_path}")
         events = [json.loads(line) for line in trace.read_text().splitlines() if line.strip()]
         if any(event.get("type") in ("turn.failed", "thread.failed", "error") for event in events):

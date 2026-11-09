@@ -109,6 +109,15 @@ No shell alias or global wrapper is needed. For a custom installation, add
 `--igv /path/to/igv.sh`. Snapshots require a graphical desktop session and GUI
 access from the role process; checking CLI availability does not verify rendering.
 
+When running LabLoop through a chat in ChatGPT Desktop or the Codex desktop app,
+the chat's sandbox may block the child Codex runtime from starting. Ask the agent
+to **run the command with an escalated launch** and approve the execution request
+if prompted. Automatic approval review may handle the request instead. This
+approval applies to the parent launch; changing LabLoop's role sandbox does not
+resolve it. Alternatively, run the command in a normal terminal.
+See [setup troubleshooting](docs/usage.md#codex-runtime-blocked-by-a-parent-sandbox)
+for symptoms and approval details.
+
 The example uses the chromosome 22 trio fixture in `trio_dev_data/input/`.
 The actor develops analyses, the critic audits each candidate in IGV, and distilled
 lessons reach the next iteration of the actor. LabLoop uses Codex's saved authentication and
