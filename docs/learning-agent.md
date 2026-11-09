@@ -80,6 +80,8 @@ their "changes" arrow equates to my "update_actor_with_distilled_lesson".
 
 ---
 
+<a id="problem-generator"></a>
+
 **10/14**
 
 Additionally, they have a "problem generator" element that is very similar to the "automatic curriculum" of Voyager (https://arxiv.org/abs/2305.16291)

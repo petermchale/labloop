@@ -135,9 +135,8 @@ This is a prototype.
 - [Knowledge and feedback](docs/knowledge-base.md): retrieval, RDF export, scientist
   corrections, and requests for input.
 - [Codex execution](docs/codex-backend.md): role invocation and experiment artifacts.
-- [Design and limitations](docs/design.md): prompts, permissions, criteria,
-  verification, and future work.
 - [Original development prompt](docs/original-prompt.md): instructions to a coding
   agent to create LabLoop, distinct from its subagents' runtime prompts.
 - [Source review](docs/source-review.md): research informing the design.
 - [Editable architecture diagram](docs/architecture.mmd).
+- [Future work](docs/future-work.md).
