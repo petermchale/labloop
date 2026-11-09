@@ -1,25 +1,12 @@
 # Running LabLoop
 
-## Crossover discovery
+For installation and the demo, see the [README quick start](../README.md#quick-start).
+For the crossover workflow and launch command, see the
+[case study](../README.md#case-study-crossover-discovery).
 
-Install Codex CLI, sign in with `codex login`, and make IGV Desktop's launcher
-available as `igv`. Activate the environment from the
-[README quick start](../README.md#quick-start), then run:
+## CLI options
 
-```bash
-python -m pip install -e '.[genomics]'
-python -m labloop.cli run examples/crossover-discovery.json --cycles 2
-```
-
-The example uses the trio's chromosome 22 fixture in `trio_dev_data/input/`.
-The actor discovers crossover candidates using
-`whatshap phase --ped --recombination-list` and decides whether unphasing,
-phasing statistics, or BAM haplotagging is needed. The critic audits each candidate
-against read alignments in IGV. The distiller's lessons reach the actor in cycle 2.
-Scientific scripts are developed during the run; no custom genomics helper is
-required up front.
-
-LabLoop uses Codex's saved authentication and configured model. Options include:
+Use these options with `python -m labloop.cli run CONFIG`:
 
 | Option | Purpose |
 | --- | --- |

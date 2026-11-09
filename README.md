@@ -131,7 +131,7 @@ and start another experiment with the same vault.
 
 This is a prototype.
 
-- [Running guide](docs/usage.md): crossover workflow, CLI options, and monitoring.
+- [Running guide](docs/usage.md): CLI options and detailed monitoring instructions.
 - [Knowledge and feedback](docs/knowledge-base.md): retrieval, RDF export, scientist
   corrections, and requests for input.
 - [Codex execution](docs/codex-backend.md): role invocation and experiment artifacts.
