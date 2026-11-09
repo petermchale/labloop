@@ -2,7 +2,7 @@
 
 A scientific learning loop: **actor → critic → distiller → actor → …**.
 A Python controller runs each role in a fresh Codex CLI session. Lessons persist
-and evolve in a knowledge base; LLM weights stay unchanged
+and evolve in a compounding knowledge base; LLM weights stay unchanged
 ([conceptual background](docs/learning-agent.md)).
 
 The scientist supplies three prompts in a JSON file:
@@ -17,29 +17,6 @@ Lessons remain hypotheses for the next actor to test. The critic evaluates the
 resulting evidence against the same criteria throughout the run.
 
 ![LabLoop architecture: actor, critic, and distiller repeat over N cycles, sharing a knowledge base.](docs/architecture.svg)
-
-## Compounding scientific knowledge
-
-LabLoop preserves findings, hypotheses, and failed approaches across cycles and
-experiments so each investigation can build on earlier work. An extensible
-knowledge graph connects goals and criteria to experiments, work products,
-observations, diagnoses, lessons, and evidence; new scientific entity types can
-emerge as needed. Knowledge base records contain the file paths and hashes of
-experimental evidence, while Git references identify an experiment's code context.
-
-Lessons cite observations and propose tests. The next actor receives active lessons
-and retrieved context, but lessons remain hypotheses to test. Contradictory evidence
-can retire assertions without erasing their provenance; rejected heuristics cannot
-silently return as identical proposals. Scientists can contribute corrections,
-domain knowledge, and answers to requests for input through
-[explicit feedback](docs/knowledge-base.md#supply-scientist-feedback).
-
-Markdown records in `vault/` support RDF export as Turtle or JSON-LD for portable
-knowledge exchange. Shared publication on the web and collaboration between
-scientists within labs and between labs remain goals. Retrieval uses word matching;
-experiment branches and checkpoint commits are not yet managed. See
-[knowledge and feedback](docs/knowledge-base.md) and
-[planned improvements](docs/design.md#future-work).
 
 ## Quick start
 
