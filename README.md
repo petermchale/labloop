@@ -2,7 +2,7 @@
 
 A scientific learning loop: **actor → critic → distiller → actor → …**.
 A Python controller runs each role in a fresh Codex CLI session. Lessons persist
-in a knowledge base and inform the next cycle; LLM weights stay unchanged.
+and evolve in a knowledge base; LLM weights stay unchanged.
 
 The scientist supplies three prompts in a JSON file:
 
