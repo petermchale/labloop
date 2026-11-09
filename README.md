@@ -46,23 +46,18 @@ A predicted switch is only a candidate. Incorrect genotypes, misplaced reads, an
 phasing errors can mimic a change in inheritance. Repeats and structural variation
 can make several nearby markers wrong together, so a cluster of apparent switches
 may reflect one difficult region. Conversely, sparse informative markers can leave
-a genuine crossover localized only to a broad interval. These challenges are
-illustrated by [inGAP-family](https://pmc.ncbi.nlm.nih.gov/articles/PMC9801030/)
-and the human-trio study [MRLR](https://pmc.ncbi.nlm.nih.gov/articles/PMC6956785/).
+a genuine crossover localized only to a broad interval.
 
 Filtering therefore involves a tradeoff: permissive filters retain artifacts;
 strict filters can remove genuine events or the markers needed to resolve them.
-The task is to discover **which evidence distinguishes reliable candidates in this
-dataset**, then turn that evidence into a reproducible filtering procedure.
+The task is to discover **which evidence distinguishes reliable candidates in the
+dataset at hand**, then turn that evidence into a reproducible filtering procedure.
 
 | Where to filter | Examples of rules to investigate | What could be lost |
 | --- | --- | --- |
-| Variants | Genotype quality, depth, allele balance, Mendelian consistency, difficult genomic regions | Informative markers and breakpoint resolution |
+| Variants | Genotype quality, depth, allele balance, difficult genomic regions | Informative markers and breakpoint resolution |
 | Reads | Mapping/base quality, ambiguous alignments, support at informative markers | Coverage and haplotype connectivity |
-| Crossover candidates | Flanking-marker support, parental transmission consistency, phasing context, suspicious clusters | Real events with weak or unusual evidence |
-
-These are possible experiments, not validated LabLoop defaults. Thresholds and
-combinations must be tested against the data.
+| Crossover candidates | Flanking-marker support, phase-block boundaries and phasing confidence, suspicious clusters | Real events with weak or unusual evidence |
 
 ### How LabLoop develops a filter
 
