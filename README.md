@@ -20,29 +20,24 @@ resulting evidence against the same criteria throughout the run.
 
 ## Compounding scientific knowledge
 
-LabLoop carries knowledge across cycles and experiments: what was tried, what the evidence
-showed, which explanations remain hypotheses, and which approaches failed. The aim
-is for each investigation to leave useful context for the next, reducing repeated
-searches and rediscovery of dead ends.
+LabLoop preserves findings, hypotheses, and failed approaches across cycles and
+experiments so each investigation can build on earlier work. An extensible
+knowledge graph connects goals and criteria to experiments, work products,
+observations, diagnoses, lessons, and evidence; new scientific entity types can
+emerge as needed. Knowledge base records contain the file paths and hashes of
+experimental evidence, while Git references identify an experiment's code context.
 
-An extensible knowledge graph links goals, criteria, experiments, work products,
-observations, diagnoses, lessons, and evidence files. Lessons cite the observations
-that motivated them and propose tests; the next actor receives active lessons and
-retrieved context. New scientific entity types can emerge during an investigation.
-Knowledge base records contain the file paths and hashes of experimental evidence,
-and Git references identify the code context of an experiment.
+Lessons cite observations and propose tests. The next actor receives active lessons
+and retrieved context, but lessons remain hypotheses to test. Contradictory evidence
+can retire assertions without erasing their provenance; rejected heuristics cannot
+silently return as identical proposals. Scientists can contribute corrections,
+domain knowledge, and answers to requests for input through
+[explicit feedback](docs/knowledge-base.md#supply-scientist-feedback).
 
-Contradictory evidence can retire an assertion while preserving its provenance.
-Rejected heuristics leave the active lesson list and cannot silently return as
-identical proposals. Scientists can add corrections or domain knowledge through
-[explicit feedback](docs/knowledge-base.md#supply-scientist-feedback), including
-answers when a role requests input. Recorded lessons remain hypotheses to test.
-
-The current implementation stores Markdown records in `vault/` and derives RDF for
-export as Turtle or JSON-LD. These standards support portable knowledge exchange;
-shared publication on the web and collaboration between scientists within labs
-and between labs remain goals. Retrieval currently uses word matching, and LabLoop
-does not yet manage experiment branches or checkpoint commits. See
+Markdown records in `vault/` support RDF export as Turtle or JSON-LD for portable
+knowledge exchange. Shared publication on the web and collaboration between
+scientists within labs and between labs remain goals. Retrieval uses word matching;
+experiment branches and checkpoint commits are not yet managed. See
 [knowledge and feedback](docs/knowledge-base.md) and
 [planned improvements](docs/design.md#future-work).
 
