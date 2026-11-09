@@ -50,8 +50,8 @@ a genuine crossover localized only to a broad interval.
 
 Filtering therefore involves a tradeoff: permissive filters retain artifacts;
 strict filters can remove genuine events or the markers needed to resolve them.
-The task is to discover **which evidence distinguishes reliable candidates in the
-dataset at hand**, then turn that evidence into a reproducible filtering procedure.
+The task is to discover which evidence distinguishes reliable candidates in the
+dataset at hand, then turn that evidence into a reproducible filtering procedure.
 
 | Where to filter | Examples of rules to investigate | What could be lost |
 | --- | --- | --- |
@@ -59,7 +59,7 @@ dataset at hand**, then turn that evidence into a reproducible filtering procedu
 | Reads | Mapping/base quality, ambiguous alignments, support at informative markers | Coverage and haplotype connectivity |
 | Crossover candidates | Flanking-marker support, phase-block boundaries and phasing confidence, suspicious clusters | Real events with weak or unusual evidence |
 
-### How LabLoop develops a filter
+### How LabLoop develops a filter for crossovers
 
 LabLoop's **actor → critic → distiller** loop automates the repeated investigation
 normally done by a bioinformatician inspecting calls and revising scripts:
@@ -71,32 +71,30 @@ normally done by a bioinformatician inspecting calls and revising scripts:
    or filtering the resulting candidates.
 2. **Audit the evidence.** The critic evaluates each reported candidate against
    the scientist's fixed criteria, inspecting alignments and IGV snapshots,
-   informative markers, parental origin, and phasing context. Coverage or haplotags
-   alone do not establish a crossover; missing evidence remains uncertain.
+   informative markers, parental origin, and phasing context.
 3. **Explain failures.** The distiller turns the audits into evidence-linked,
    testable lessons: for example, a hypothesis that a particular class of calls
    depends on unreliable genotypes, with a suggested test using a genotype filter.
-4. **Test the next revision.** The next actor applies and tests proposed lessons;
-   the critic audits the new candidates. The knowledge base retains observations,
-   candidate lessons, and rejected assertions for reuse across experiments.
+4. **Iterate.** The next iteration of the actor applies and tests proposed lessons;
+   the critic audits the new candidates, the distiller learns a lesson, if it exists.
 
 For example, if audits implicate low-quality markers in an apparent cluster of
 crossovers, the actor could filter those markers and rerun phasing. The follow-up
 must examine whether the inheritance pattern is now better supported and what
-informative evidence was removed. A smaller call set alone is not success.
+informative evidence was removed; A smaller call set alone is not success.
 
 The automation is the search for and testing of better analysis rules, guided by
-explanatory feedback. It is an agent-directed investigation, with no built-in
-numerical optimizer or proven optimal filter. The current example defines
-candidate-level audits; it does not yet supply a held-out benchmark or measure
-missed events. Establishing improved precision and sensitivity requires an
-independent truth set or validation assay, checks on excluded candidates, and
-held-out evaluation. IGV review helps diagnose artifacts but is not independent
+explanatory feedback in natural language. It is an agent-directed investigation, not a
+numerical optimizer. The current example defines
+candidate-level audits; it does not yet supply a held-out benchmark.
+Establishing improved precision and sensitivity requires an
+independent truth set or validation assay.
+IGV review helps diagnose artifacts but is not independent
 biological proof.
 
-### Run crossover discovery
+### Run LabLoop to filter crossovers automatically
 
-For the crossover example, install Codex CLI, sign in with `codex login`, and make
+Install Codex CLI, sign in with `codex login`, and make
 IGV Desktop's launcher available as `igv`. With the environment above activated:
 
 ```bash
@@ -106,12 +104,12 @@ python -m labloop.cli run examples/crossover-discovery.json --cycles 2
 
 The example uses the chromosome 22 trio fixture in `trio_dev_data/input/`.
 The actor develops analyses, the critic audits each candidate in IGV, and distilled
-lessons reach the next actor. LabLoop uses Codex's saved authentication and
+lessons reach the next iteration of the actor. LabLoop uses Codex's saved authentication and
 configured model; use `--model` to override it.
 
 For your own task, copy an [example configuration](examples/demo.json), edit
 `goal`, `criteria`, and `distill`, and run it with a separate `--vault` per project.
-Use one writer per vault.
+Do not run multiple LabLoop experiments against the same vault simultaneously.
 
 By default, an experiment creates and populates `vault/` with Markdown knowledge records,
 ontology classes, and a shared `context.jsonld`. Pass `--vault PATH` to use another
@@ -131,10 +129,7 @@ and start another experiment with the same vault.
 
 ## Status and documentation
 
-This is a prototype. Tests verify orchestration with a CLI test double; scientific
-learning, a complete live experiment, and visual IGV audits remain unverified. A live
-smoke test reached the service but its configured model was rejected; select an
-available model with `--model`.
+This is a prototype.
 
 - [Running guide](docs/usage.md): crossover workflow, CLI options, and monitoring.
 - [Knowledge and feedback](docs/knowledge-base.md): retrieval, RDF export, scientist
