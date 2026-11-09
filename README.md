@@ -60,11 +60,10 @@ dependency versions, rather than a complete dependency lockfile.
 
 ### Why crossover discovery needs more than a caller
 
-For a cancer genomics researcher, the familiar problem is separating a biological
-signal from artifacts introduced by variant calling, alignment, and inference.
+Bioinformaticians often need to separate biological signals from artifacts
+introduced by variant calling, alignment, and inference.
 Here the signal is an inherited meiotic crossover in a parent–child trio: a switch
 between the two homologs of a parent along the chromosome transmitted to the child.
-This example uses germline inheritance, rather than tumor recombination or LOH.
 
 A predicted switch is only a candidate. Incorrect genotypes, misplaced reads, and
 phasing errors can mimic a change in inheritance. Repeats and structural variation
