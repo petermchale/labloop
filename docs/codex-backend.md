@@ -27,7 +27,7 @@ codex exec --cd PROJECT_ROOT --sandbox workspace-write \
   --skip-git-repo-check --ephemeral --color never --json \
   --output-schema RESULT.schema.json \
   --output-last-message RESULT.result.json \
-  -c 'model_reasoning_effort="high"' - < RESULT.prompt.json
+  -c 'model_reasoning_effort="medium"' - < RESULT.prompt.json
 ```
 
 The distiller uses `--sandbox read-only`. Actor and critic use `workspace-write`

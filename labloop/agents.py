@@ -19,7 +19,7 @@ def role_instructions(role, scientist_prompt):
 
 
 class CodexAgent:
-    def __init__(self, models=None, *, executable="codex", timeout=900, effort="high"):
+    def __init__(self, models=None, *, executable="codex", timeout=900, effort="medium"):
         if timeout <= 0:
             raise ValueError("Codex timeout must be positive")
         self.executable = shutil.which(executable)

@@ -27,7 +27,7 @@ LabLoop uses Codex's saved authentication and configured model. Options include:
 | `--critic-model`, `--distiller-model` | Override individual roles. |
 | `--cycles` | Number of actor → critic → distiller cycles (default 2). |
 | `--timeout` | Seconds per role invocation (default 900), not per run. |
-| `--effort`, `--codex` | Reasoning effort and CLI executable. |
+| `--effort`, `--codex` | Reasoning effort (default: `medium`) and CLI executable. |
 | `--vault`, `--runs` | Knowledge and run directories (defaults `vault`, `runs`). |
 
 Each candidate gets a separate critic invocation, so runtime depends strongly on

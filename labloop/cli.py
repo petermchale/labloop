@@ -44,7 +44,7 @@ def main():
     run.add_argument("--distiller-model")
     run.add_argument("--codex", default="codex", help="Codex CLI executable")
     run.add_argument("--timeout", type=float, default=900, help="Seconds allowed per role invocation")
-    run.add_argument("--effort", choices=["low", "medium", "high", "xhigh", "max"], default="high")
+    run.add_argument("--effort", choices=["low", "medium", "high", "xhigh", "max"], default="medium")
     run.add_argument("--vault", default="vault")
     run.add_argument("--runs", default="runs")
     recall = sub.add_parser("recall")
