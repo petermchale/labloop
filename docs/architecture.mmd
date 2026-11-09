@@ -1,0 +1,11 @@
+flowchart LR
+    Scientist -->|goal| Actor
+    Scientist -->|criteria| Critic
+    Scientist -->|learning guidance| Distiller
+    Actor -->|work products and evidence| Critic
+    Critic -->|observations and diagnoses| Distiller
+    Distiller -->|candidate lessons and tests| Actor
+    Actor <--> Knowledge
+    Critic <--> Knowledge
+    Distiller <--> Knowledge
+    Scientist -->|outcome feedback| Knowledge

@@ -1,0 +1,5 @@
+{
+  "goal": "Exercise the actor-critic-distiller orchestration using synthetic evidence.",
+  "criteria": "Synthetic ambiguity must be labeled uncertain. This is not genomic validation.",
+  "distill": "Propose one falsifiable heuristic with observation IDs and a held-out test."
+}
