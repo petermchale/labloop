@@ -2,5 +2,6 @@
   "goal": "Compute a reliable set of genomic crossover candidates in the chr22 fixture at trio_dev_data/input using whatshap phase --ped --recombination-list. Decide whether whatshap unphase is needed to avoid mixed phasing, whether to run whatshap stats, and whether to haplotag the BAMs. Report each candidate crossover separately, identifying the trio member, chromosome, and flanking coordinates.",
   "criteria": "Audit each crossover candidate against the corresponding read alignments using IGV's CLI or batch interface and snapshots of the candidate interval. Determine whether informative spanning alignments support the predicted crossover, accounting for read quality, parental origin, and phasing context. Coverage or haplotags alone do not establish a true crossover.",
   "distill": "Distill heuristics about unreliable crossover candidates from the alignment audits. Focus on failure modes that could guide subsequent crossover discovery.",
-  "max_products": 100
+  "max_products": 100,
+  "required_tools": ["igv"]
 }

@@ -94,13 +94,20 @@ biological proof.
 
 ### Run LabLoop to filter crossovers automatically
 
-Install Codex CLI, sign in with `codex login`, and make
-IGV Desktop's launcher available as `igv`. With the environment above activated:
+Install Codex CLI, sign in with `codex login`, and install
+[IGV Desktop](https://igv.org/doc/desktop/DownloadPage/). With the environment above activated:
 
 ```bash
 python -m pip install -e '.[genomics]'
 python -m labloop.cli run examples/crossover-discovery.json --cycles 2
 ```
+
+Before launching model sessions, this example checks for an IGV CLI that supports
+batch scripts. LabLoop finds `igv` or `igv.sh` on PATH; on macOS it also finds
+`IGV*.app` in `/Applications` and `~/Applications` and uses its bundled Java.
+No shell alias or global wrapper is needed. For a custom installation, add
+`--igv /path/to/igv.sh`. Snapshots require a graphical desktop session and GUI
+access from the role process; checking CLI availability does not verify rendering.
 
 The example uses the chromosome 22 trio fixture in `trio_dev_data/input/`.
 The actor develops analyses, the critic audits each candidate in IGV, and distilled
@@ -140,3 +147,4 @@ This is a prototype.
 - [Source review](docs/source-review.md): research informing the design.
 - [Editable architecture diagram](docs/architecture.mmd).
 - [Future work](docs/future-work.md).
+- [IGV CLI and igv-reports comparison](docs/igv-reports-comparison.md): findings from the renderer experiment and the decision to retain IGV CLI.

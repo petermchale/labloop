@@ -43,6 +43,7 @@ def main():
     run.add_argument("--critic-model")
     run.add_argument("--distiller-model")
     run.add_argument("--codex", default="codex", help="Codex CLI executable")
+    run.add_argument("--igv", help="IGV CLI launcher path (otherwise auto-discovered when required)")
     run.add_argument("--timeout", type=float, default=900, help="Seconds allowed per role invocation")
     run.add_argument("--effort", choices=["low", "medium", "high", "xhigh", "max"], default="medium")
     run.add_argument("--vault", default="vault")
@@ -66,12 +67,21 @@ def main():
     if args.command == "run":
         from .agents import DemoAgent, CodexAgent
         from .loop import run_loop
+        from .tool_setup import prepare_tools
+        config = json.loads(args.config.read_text())
+        try:
+            tools = {} if args.demo else prepare_tools(config, igv=args.igv)
+        except ValueError as exc:
+            parser.error(str(exc))
+        for name, tool in tools.items():
+            import shlex
+            print(f"{name} ready: {shlex.join(tool['argv'])}", flush=True)
         models = {"actor": args.model, "critic": args.critic_model or args.model,
                   "distiller": args.distiller_model or args.model}
         agent = DemoAgent() if args.demo else CodexAgent(models, executable=args.codex,
                                                        timeout=args.timeout, effort=args.effort)
-        path = run_loop(json.loads(args.config.read_text()), args.root, agent,
-                        cycles=args.cycles, vault_dir=args.vault, run_dir=args.runs)
+        path = run_loop(config, args.root, agent, cycles=args.cycles,
+                        vault_dir=args.vault, run_dir=args.runs, tools=tools)
         print(path)
         manifest = json.loads(path.read_text())
         print(manifest["state"])

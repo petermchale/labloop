@@ -17,7 +17,7 @@ def git_context(root):
             "dirty": bool(read("status", "--porcelain"))}
 
 
-def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"):
+def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs", tools=None):
     root = Path(root).resolve()
     if not 1 <= cycles <= 20:
         raise ValueError("cycles must be between 1 and 20")
@@ -40,7 +40,8 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
         refs["commit"] = vault.put("GitCommit", git["commit"], gitDirty=git["dirty"])
     if git["branch"]:
         refs["branch"] = vault.put("GitBranch", git["branch"])
-    manifest = {"session": session, "config": config, "git": git, "cycles": [], "state": "running"}
+    manifest = {"session": session, "config": config, "git": git, "tools": tools or {},
+                "cycles": [], "state": "running"}
     manifest_path = output / "run.json"
     def save():
         manifest["metrics"] = agent.metrics
@@ -54,6 +55,7 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
             record = {"experiment": exp, "cycle": cycle + 1, "observations": []}
             manifest["cycles"].append(record)
             common = {"output": str(output.relative_to(root)),
+                      "tools": tools or {},
                       "knowledge": vault.recall(config["goal"], research_only=True),
                       "heuristics": vault.lessons(),
                       "feedback": [r for r in vault.records.values() if r["type"] == "ll:Feedback"][-30:],
@@ -82,7 +84,8 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
                 product_id = vault.put(item.type_name, item.description, experiment=exp,
                                        files=files, status="proposed")
                 critic = agent.ask("critic", config["criteria"],
-                                   {"output": common["output"], "product": item.model_dump(),
+                                   {"output": common["output"], "tools": common["tools"],
+                                    "product": item.model_dump(),
                                     "knowledge": common["knowledge"], "feedback": common["feedback"]},
                                    Critique, artifacts,
                                    output / f"{cycle + 1}-critic-{index}.jsonl")

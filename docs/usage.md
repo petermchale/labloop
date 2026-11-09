@@ -15,7 +15,26 @@ Use these options with `python -m labloop.cli run CONFIG`:
 | `--cycles` | Number of actor → critic → distiller cycles (default 2). |
 | `--timeout` | Seconds per role invocation (default 900), not per run. |
 | `--effort`, `--codex` | Reasoning effort (default: `medium`) and CLI executable. |
+| `--igv` | IGV CLI launcher path; overrides automatic discovery. |
 | `--vault`, `--runs` | Knowledge and run directories (defaults `vault`, `runs`). |
+
+The crossover configuration declares `"required_tools": ["igv"]` to check IGV
+before starting Codex. `--igv` also enables this check; `--demo` skips it.
+The resolved command is printed at startup, recorded in `run.json`, and supplied
+to every role.
+
+## Setup troubleshooting
+
+### IGV CLI and snapshots
+
+Install [IGV Desktop](https://igv.org/doc/desktop/DownloadPage/) with Java.
+LabLoop finds `igv` or `igv.sh` on PATH, then checks macOS app bundles in
+`/Applications` and `~/Applications`. Use `--igv /path/to/igv.sh` to override
+discovery; supply an executable path or command name, without arguments.
+
+The check confirms CLI batch support, not successful rendering. Snapshots still
+require a GUI session and suitable permissions, and batch mode may display IGV
+windows. `igvtools` cannot replace IGV for snapshots.
 
 ## Monitor a run
 

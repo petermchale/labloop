@@ -87,15 +87,18 @@ def test_codex_runs_all_roles_and_reuses_code_across_cycles(tmp_path, fake_codex
     for kind in ("Goal", "Criteria", "DistillInstructions"):
         vault.put(kind, "ReusableCalculator archived instructions")
     agent = CodexAgent(executable=fake_codex, models={"actor": "test-model"})
-    path = run_loop(config, tmp_path, agent, cycles=2)
+    tools = {"igv": {"argv": ["/test/igv"], "usage": "Append -b batch.txt"}}
+    path = run_loop(config, tmp_path, agent, cycles=2, tools=tools)
     manifest = json.loads(path.read_text())
     invocations = [json.loads(line) for line in (tmp_path / "invocations.jsonl").read_text().splitlines()]
     assert [i["prompt"]["role"] for i in invocations] == ["actor", "critic", "distiller"] * 2
     assert manifest["state"] == "budget_exhausted"
+    assert manifest["tools"] == tools
     assert len(manifest["metrics"]) == 6
     assert all(m["usage"]["output_tokens"] == 20 for m in manifest["metrics"])
     for invocation in invocations:
         argv, prompt = invocation["argv"], invocation["prompt"]
+        assert prompt["context"]["tools"] == tools
         scientist_prompt = config[{"actor": "goal", "critic": "criteria", "distiller": "distill"}[prompt["role"]]]
         assert prompt["instructions"].endswith("Scientist's task-specific instructions:\n" + scientist_prompt)
         for role in ("actor", "critic", "distiller"):
