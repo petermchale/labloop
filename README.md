@@ -13,7 +13,7 @@ The scientist supplies three prompts in a JSON file:
 | `distill` | Distiller: propose lessons and suggested tests from the observations. |
 
 Lessons remain hypotheses for the next actor to test. The critic evaluates the
-resulting evidence against the same criteria throughout the experiment.
+resulting evidence against the same criteria throughout the run.
 
 ![LabLoop architecture: actor, critic, and distiller repeat over N cycles, sharing a knowledge base.](docs/architecture.svg)
 
