@@ -19,8 +19,20 @@ python -m labloop.cli serve --port 8765
 # GET http://127.0.0.1:8765/graph.jsonld
 ```
 
-On first opening a vault, LabLoop initializes classes for goals, criteria,
-experiments, work products, hypotheses, observations, diagnoses, claims, heuristics,
+The controller's injected knowledge and the recall command supplied to agents use
+research-only retrieval (`recall --research-only`). This excludes archived `Goal`,
+`Criteria`, and `DistillInstructions` records before ranking and limiting results,
+so old task instructions do not crowd out findings or enter the actor's research
+context. All three prompts
+remain in the vault for provenance, are linked from each experiment's `because`
+references, and are available through ordinary recall.
+Each role receives its current task instructions explicitly; the actor produces
+candidates and evidence, and the critic performs the criteria-based audit. A tool
+restriction affecting only that audit is an actor-reported limitation, not a reason
+to block the handoff with `needs_input`.
+
+On first opening a vault, LabLoop initializes classes for goals, criteria, distill
+instructions, experiments, work products, hypotheses, observations, diagnoses, claims, heuristics,
 file paths, Git references, and scientist feedback. Learning can add classes;
 new predicates require updating `context.jsonld`. Replace the example namespace
 before public publication.

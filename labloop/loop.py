@@ -32,6 +32,8 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
     artifacts = RunArtifacts(root, output, vault)
     goal = vault.put("Goal", config["goal"])
     criteria = vault.put("Criteria", config["criteria"])
+    distill = vault.put("DistillInstructions", config["distill"])
+    task_records = [goal, criteria, distill]
     git = git_context(root)
     refs = {}
     if git["commit"]:
@@ -48,11 +50,11 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
     try:
         for cycle in range(cycles):
             exp = vault.put("Experiment", f"{session}: cycle {cycle + 1}", status="running",
-                            because=[goal, criteria], **refs)
+                            because=task_records, **refs)
             record = {"experiment": exp, "cycle": cycle + 1, "observations": []}
             manifest["cycles"].append(record)
             common = {"output": str(output.relative_to(root)),
-                      "knowledge": vault.recall(config["goal"]),
+                      "knowledge": vault.recall(config["goal"], research_only=True),
                       "heuristics": vault.lessons(),
                       "feedback": [r for r in vault.records.values() if r["type"] == "ll:Feedback"][-30:],
                       "note": "Heuristics are candidate hypotheses, not evaluation truth.",
@@ -63,7 +65,7 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
             if actor.needs_input:
                 manifest.update(state="needs_input", question=actor.needs_input)
                 vault.put("Experiment", f"{session}: cycle {cycle + 1}", id=exp,
-                          status="needs_input", because=[goal, criteria], **refs)
+                          status="needs_input", because=task_records, **refs)
                 break
             if len({i.key for i in actor.products}) != len(actor.products):
                 raise ValueError("Actor produced duplicate work-product keys")
@@ -97,7 +99,7 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
                     break
             if manifest["state"] == "needs_input":
                 vault.put("Experiment", f"{session}: cycle {cycle + 1}", id=exp,
-                          status="needs_input", because=[goal, criteria], **refs)
+                          status="needs_input", because=task_records, **refs)
                 break
             distilled = agent.ask("distiller", config["distill"],
                                   {**common, "observations": observations}, Distillation, artifacts,
@@ -134,7 +136,7 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
                           target=retraction.target, because=retraction.because, status="rejected")
             record["distillation"] = distilled.model_dump()
             vault.put("Experiment", f"{session}: cycle {cycle + 1}", id=exp,
-                      status="completed", because=[goal, criteria], **refs)
+                      status="completed", because=task_records, **refs)
             save()
             if distilled.needs_input:
                 manifest.update(state="needs_input", question=distilled.needs_input)
@@ -148,7 +150,7 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
         manifest.update(state="failed", error=f"{type(exc).__name__}: {exc}")
         if manifest["cycles"]:
             vault.put("Experiment", str(exc), id=manifest["cycles"][-1]["experiment"],
-                      status="failed", because=[goal, criteria], **refs)
+                      status="failed", because=task_records, **refs)
         raise
     finally:
         save()

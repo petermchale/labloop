@@ -50,6 +50,8 @@ def main():
     recall = sub.add_parser("recall")
     recall.add_argument("query", nargs="?", default="")
     recall.add_argument("--vault", type=Path, default=Path("vault"))
+    recall.add_argument("--research-only", action="store_true",
+                        help="Exclude archived goals, criteria, and distill instructions from research evidence")
     export = sub.add_parser("export")
     export.add_argument("--vault", type=Path, default=Path("vault"))
     export.add_argument("--format", choices=["turtle", "json-ld"], default="turtle")
@@ -76,7 +78,7 @@ def main():
         if "question" in manifest:
             print(manifest["question"])
     elif args.command == "recall":
-        print(json.dumps(Vault(args.vault).recall(args.query), indent=2))
+        print(json.dumps(Vault(args.vault).recall(args.query, research_only=args.research_only), indent=2))
     elif args.command == "feedback":
         from .scientist_feedback import record_feedback
         print(record_feedback(args.root.resolve(), args.vault, json.loads(args.report.read_text())))

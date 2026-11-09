@@ -9,7 +9,7 @@ import yaml
 from rdflib import Graph, Namespace, RDF, RDFS, OWL
 
 NS = Namespace("https://labloop.local/id/")
-TYPES = ("Goal", "Criteria", "Experiment", "WorkProduct", "Hypothesis", "Observation", "Diagnosis",
+TYPES = ("Goal", "Criteria", "DistillInstructions", "Experiment", "WorkProduct", "Hypothesis", "Observation", "Diagnosis",
          "Heuristic", "Claim", "FilePath", "GitCommit", "GitBranch", "Feedback")
 CONTEXT = {
     "@base": str(NS), "ll": str(NS),
@@ -80,10 +80,13 @@ class Vault:
         self._index(data)
         return ident
 
-    def recall(self, query="", *, experiment=None, limit=30):
+    def recall(self, query="", *, experiment=None, limit=30, research_only=False):
+        """Retrieve evidence; research mode excludes archived task instructions."""
         words = set(re.findall(r"\w+", query.lower()))
         candidates = [r for r in self.records.values()
                       if r["type"] != "owl:Class" and
+                      (not research_only or r["type"] not in
+                       ("ll:Goal", "ll:Criteria", "ll:DistillInstructions")) and
                       (experiment is None or r.get("experiment") == experiment)]
         def score(r):
             return len(words & set(re.findall(r"\w+", json.dumps(r).lower())))

@@ -13,6 +13,75 @@ from labloop.file_provenance import RunArtifacts
 CONFIG = {"goal": "Synthetic test", "criteria": "Require evidence", "distill": "Propose a test"}
 
 
+def test_research_recall_filters_instructions_before_ranking_and_limit(tmp_path):
+    vault = Vault(tmp_path / "vault")
+    finding = vault.put("Observation", "Synthetic finding")
+    for kind in ("Goal", "Criteria", "DistillInstructions"):
+        for _ in range(35):
+            vault.put(kind, "Synthetic test archived instructions")
+    # Higher-scoring instructions must not crowd findings out of the result limit.
+    assert [r["id"] for r in vault.recall("Synthetic test", limit=1, research_only=True)] == [finding]
+    assert [r["id"] for r in vault.recall(research_only=True)] == [finding]
+    assert vault.recall("Synthetic test", limit=1)[0]["type"] in ("ll:Goal", "ll:Criteria", "ll:DistillInstructions")
+    assert len(Vault(tmp_path / "vault").records) == len(vault.records)
+
+
+def test_actor_receives_findings_lessons_feedback_without_task_records(tmp_path):
+    vault = Vault(tmp_path / "vault")
+    vault.put("Goal", "Synthetic test old goal")
+    vault.put("Criteria", "Synthetic test old audit instructions")
+    vault.put("DistillInstructions", "Synthetic test old distill instructions")
+    finding = vault.put("Observation", "Synthetic test prior finding")
+    lesson = vault.put("Heuristic", "Synthetic test proposed lesson", status="proposed")
+    feedback = vault.put("Feedback", "Scientist correction")
+
+    class ChecksKnowledge(DemoAgent):
+        def ask(self, role, instruction, context, schema, artifacts, trace):
+            if role == "actor":
+                assert instruction == CONFIG["goal"]
+                assert all(r["type"] not in ("ll:Goal", "ll:Criteria", "ll:DistillInstructions") for r in context["knowledge"])
+                assert finding in {r["id"] for r in context["knowledge"]}
+                assert lesson in {r["id"] for r in context["heuristics"]}
+                assert feedback in {r["id"] for r in context["feedback"]}
+            return super().ask(role, instruction, context, schema, artifacts, trace)
+
+    run_loop(CONFIG, tmp_path, ChecksKnowledge(), cycles=2)
+
+
+@pytest.mark.parametrize("stop", [None, "actor", "critic", "failure"])
+def test_all_task_prompts_are_archived_and_linked_across_experiment_states(tmp_path, stop):
+    class StopsAtRole(DemoAgent):
+        def ask(self, role, instruction, context, schema, artifacts, trace):
+            if stop == "failure":
+                raise RuntimeError("Test execution failure")
+            result = super().ask(role, instruction, context, schema, artifacts, trace)
+            if role == stop:
+                result.needs_input = "Test missing input"
+            return result
+
+    if stop == "failure":
+        with pytest.raises(RuntimeError, match="Test execution failure"):
+            run_loop(CONFIG, tmp_path, StopsAtRole(), cycles=2)
+    else:
+        run_loop(CONFIG, tmp_path, StopsAtRole(), cycles=2)
+    vault = Vault(tmp_path / "vault")
+    prompts = {kind: [r for r in vault.recall() if r["type"] == "ll:" + kind]
+               for kind in ("Goal", "Criteria", "DistillInstructions")}
+    for kind, key in (("Goal", "goal"), ("Criteria", "criteria"), ("DistillInstructions", "distill")):
+        assert len(prompts[kind]) == 1
+        assert prompts[kind][0]["text"] == CONFIG[key]
+    prompt_ids = {records[0]["id"] for records in prompts.values()}
+    assert not prompt_ids.intersection(r["id"] for r in vault.recall(research_only=True))
+    manifest = json.loads(next((tmp_path / "runs").glob("*/run.json")).read_text())
+    for cycle in manifest["cycles"]:
+        assert set(vault.records[cycle["experiment"]]["because"]) == prompt_ids
+    graph = Graph().parse(data=vault.export(), format="turtle")
+    assert (NS.DistillInstructions, RDF.type, OWL.Class) in graph
+    for cycle in manifest["cycles"]:
+        for ident in prompt_ids:
+            assert (NS[cycle["experiment"]], NS.because, NS[ident]) in graph
+
+
 def test_two_cycles_feed_back_and_rdf_roundtrip(tmp_path):
     class CheckingAgent(DemoAgent):
         seen = []

@@ -42,7 +42,7 @@ class CodexAgent:
         schema_path.write_text(json.dumps(schema.model_json_schema(), indent=2))
         # Use the same interpreter/package as the controller for application-specific recall.
         recall = [sys.executable, "-m", "labloop.cli", "recall", "<query>",
-                  "--vault", str(artifacts.vault.root.resolve())]
+                  "--vault", str(artifacts.vault.root.resolve()), "--research-only"]
         prompt = {"role": role, "instructions": role_instructions(role, instruction),
                   "project_root": str(artifacts.root), "context": context,
                   "knowledge_access": {"recall_argv": recall,

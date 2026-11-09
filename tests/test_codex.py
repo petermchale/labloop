@@ -49,6 +49,7 @@ if mode != "missing":
                       for v in prompt["knowledge_access"]["recall_argv"]]
             records = json.loads(subprocess.check_output(recall, cwd=root, text=True))
             assert any(r.get("text") == "ReusableCalculator" for r in records)
+            assert all(r["type"] not in ("ll:Goal", "ll:Criteria", "ll:DistillInstructions") for r in records)
             assert context["heuristics"][0]["text"] == "Reuse the verified calculation"
             script = root / context["previous_cycles"][0]["actor"]["products"][0]["evidence"][0]
         output = root / context["output"] / ("answer-" + str(context["cycle"]) + ".txt")
@@ -82,6 +83,9 @@ def test_codex_runs_all_roles_and_reuses_code_across_cycles(tmp_path, fake_codex
     from pathlib import Path
     monkeypatch.setenv("PYTHONPATH", str(Path(__file__).resolve().parents[1]))
     config = {"goal": "Calculate a square root", "criteria": "Check independently", "distill": "Learn"}
+    vault = Vault(tmp_path / "vault")
+    for kind in ("Goal", "Criteria", "DistillInstructions"):
+        vault.put(kind, "ReusableCalculator archived instructions")
     agent = CodexAgent(executable=fake_codex, models={"actor": "test-model"})
     path = run_loop(config, tmp_path, agent, cycles=2)
     manifest = json.loads(path.read_text())
@@ -101,6 +105,7 @@ def test_codex_runs_all_roles_and_reuses_code_across_cycles(tmp_path, fake_codex
         sandbox = argv[argv.index("--sandbox") + 1]
         assert sandbox == ("read-only" if prompt["role"] == "distiller" else "workspace-write")
         assert "agenda" not in prompt["context"]
+        assert "--research-only" in prompt["knowledge_access"]["recall_argv"]
         schema_path = __import__('pathlib').Path(argv[argv.index("--output-schema") + 1])
         assert json.loads(schema_path.read_text())["additionalProperties"] is False
     assert "--model" in invocations[0]["argv"]
