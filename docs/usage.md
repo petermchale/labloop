@@ -17,16 +17,13 @@ Use these options with `python -m labloop.cli run CONFIG`:
 | `--effort`, `--codex` | Reasoning effort (default: `medium`) and CLI executable. |
 | `--vault`, `--runs` | Knowledge and run directories (defaults `vault`, `runs`). |
 
-Each candidate gets a separate critic invocation, so runtime depends strongly on
-how many candidates the actor produces.
-
 ## Monitor a run
 
 Run LabLoop in one terminal. In a second terminal in the project directory, find
 the manifest and follow the first actor's event log:
 
 ```bash
-ls -lt runs/*/run.json
+ls -lt runs/*/run.json # run.json records cycle summaries and final state
 run_dir="runs/RUN_ID"  # replace with your run directory
 tail -n +1 -f "$run_dir/1-actor.jsonl"
 ```
@@ -45,5 +42,5 @@ tail -n +1 -f "$run_dir/1-critic-0.jsonl"
 The first number is the cycle; `critic-0` audits the first product. `tail` does not
 switch files automatically. Ctrl+C in this monitoring terminal leaves LabLoop
 running. For diagnostics, follow the matching `1-actor.stderr.txt` file.
-`run.json` records cycle summaries and final state. Substitute your `--runs`
+Substitute your `--runs`
 directory if you changed it.
