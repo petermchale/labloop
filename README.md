@@ -2,7 +2,7 @@
 
 A scientific learning loop: **actor → critic → distiller → actor → …**.
 A Python controller runs each role in a fresh Codex CLI session. Lessons persist
-in a knowledge base and inform the next cycle; model weights stay unchanged.
+in a knowledge base and inform the next cycle; LLM weights stay unchanged.
 
 The scientist supplies three prompts in a JSON file:
 
@@ -13,13 +13,13 @@ The scientist supplies three prompts in a JSON file:
 | `distill` | Distiller: propose lessons and suggested tests from the observations. |
 
 Lessons remain hypotheses for the next actor to test. The critic evaluates the
-resulting evidence against the same criteria throughout the run.
+resulting evidence against the same criteria throughout the experiment.
 
 ![LabLoop architecture: actor, critic, and distiller repeat over N cycles, sharing a knowledge base.](docs/architecture.svg)
 
 ## Compounding scientific knowledge
 
-LabLoop carries knowledge across cycles and runs: what was tried, what the evidence
+LabLoop carries knowledge across cycles and experiments: what was tried, what the evidence
 showed, which explanations remain hypotheses, and which approaches failed. The aim
 is for each investigation to leave useful context for the next, reducing repeated
 searches and rediscovery of dead ends.
@@ -28,8 +28,8 @@ An extensible knowledge graph links goals, criteria, experiments, work products,
 observations, diagnoses, lessons, and evidence files. Lessons cite the observations
 that motivated them and propose tests; the next actor receives active lessons and
 retrieved context. New scientific entity types can emerge during an investigation.
-Evidence paths and hashes connect records to research artifacts, and starting Git
-references identify the code context of a run.
+Knowledge base records contain the file paths and hashes of experimental evidence,
+and Git references identify the code context of an experiment.
 
 Contradictory evidence can retire an assertion while preserving its provenance.
 Rejected heuristics leave the active lesson list and cannot silently return as
@@ -39,12 +39,11 @@ answers when a role requests input. Recorded lessons remain hypotheses to test.
 
 The current implementation stores Markdown records in `vault/` and derives RDF for
 export as Turtle or JSON-LD. These standards support portable knowledge exchange;
-shared publication and collaboration remain goals. Retrieval currently uses word
-matching, and LabLoop does not yet manage experiment branches or checkpoint
-commits. See [knowledge and feedback](docs/knowledge-base.md) and
-[planned improvements](docs/design.md#future-work). This cumulative memory is a
-central part of the [development prompt used to create LabLoop](docs/original-prompt.md); its effect
-on scientific productivity has not yet been measured.
+shared publication on the web and collaboration between scientists within labs
+and between labs remain goals. Retrieval currently uses word matching, and LabLoop
+does not yet manage experiment branches or checkpoint commits. See
+[knowledge and feedback](docs/knowledge-base.md) and
+[planned improvements](docs/design.md#future-work).
 
 ## Quick start
 
@@ -112,7 +111,7 @@ normally done by a bioinformatician inspecting calls and revising scripts:
    depends on unreliable genotypes, with a suggested test using a genotype filter.
 4. **Test the next revision.** The next actor applies and tests proposed lessons;
    the critic audits the new candidates. The knowledge base retains observations,
-   candidate lessons, and rejected assertions for reuse across runs.
+   candidate lessons, and rejected assertions for reuse across experiments.
 
 For example, if audits implicate low-quality markers in an apparent cluster of
 crossovers, the actor could filter those markers and rerun phasing. The follow-up
@@ -147,33 +146,33 @@ For your own task, copy an [example configuration](examples/demo.json), edit
 `goal`, `criteria`, and `distill`, and run it with a separate `--vault` per project.
 Use one writer per vault.
 
-By default, a run creates and populates `vault/` with Markdown knowledge records,
+By default, an experiment creates and populates `vault/` with Markdown knowledge records,
 ontology classes, and a shared `context.jsonld`. Pass `--vault PATH` to use another
 location; the demo above uses `runs/demo-vault/`.
 
-Runs save a `run.json` manifest, evidence, and per-role logs under `runs/`.
+Experiments save a `run.json` manifest, evidence, and per-role logs under `runs/`.
 To follow the first actor in a second terminal:
 
 ```bash
 tail -n +1 -f runs/RUN_ID/1-actor.jsonl
 ```
 
-Replace `RUN_ID` with your run directory. See the [running guide](docs/usage.md)
-for options, log names, and monitoring details. If a run stops with `needs_input`,
+Replace `RUN_ID` with your experiment directory. See the [running guide](docs/usage.md)
+for options, log names, and monitoring details. If an experiment stops with `needs_input`,
 [record scientist feedback](docs/knowledge-base.md#answer-a-request-for-scientist-input)
-and start another run with the same vault.
+and start another experiment with the same vault.
 
 ## Status and documentation
 
 This is a prototype. Tests verify orchestration with a CLI test double; scientific
-learning, a complete live run, and visual IGV audits remain unverified. A live
+learning, a complete live experiment, and visual IGV audits remain unverified. A live
 smoke test reached the service but its configured model was rejected; select an
 available model with `--model`.
 
 - [Running guide](docs/usage.md): crossover workflow, CLI options, and monitoring.
 - [Knowledge and feedback](docs/knowledge-base.md): retrieval, RDF export, scientist
   corrections, and requests for input.
-- [Codex execution](docs/codex-backend.md): role invocation and run artifacts.
+- [Codex execution](docs/codex-backend.md): role invocation and experiment artifacts.
 - [Design and limitations](docs/design.md): prompts, permissions, criteria,
   verification, and future work.
 - [Original development prompt](docs/original-prompt.md): instructions to a coding
