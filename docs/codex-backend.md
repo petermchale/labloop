@@ -1,13 +1,13 @@
 # Codex role execution
 
-LabLoop invokes `codex exec` for the actor, critic, and distiller. Codex provides
-the model conversation and its existing file, shell, image, and configured tool
-capabilities. LabLoop has no direct model API client and no custom tool dispatcher.
+For the learning loop and role descriptions, see the [README](../README.md).
+This page describes the `codex exec` subprocess contract. Codex provides the model
+conversation and its existing file, shell, image, and configured tool capabilities;
+LabLoop has no direct model API client or custom tool dispatcher.
 
-Each cycle executes the actor, then a critic invocation for each returned work
-product, then the distiller. Distilled lessons enter the next actor's prompt.
-Every invocation starts a fresh conversation; previous context is supplied
-explicitly through records and reports rather than by resuming a Codex session.
+Each returned work product gets a separate critic invocation. Previous context is
+supplied explicitly through records and reports rather than by resuming a Codex
+session.
 
 For each invocation the Python controller:
 
@@ -51,14 +51,13 @@ preloads relevant records so each role can begin with context. Evidence file
 existence, containment, and hashes are checked by controller-side code in
 `file_provenance.py`; that code is not exposed as a set of agent tools.
 
-CLI authentication and configuration are reused. The model defaults to Codex's
-configured choice; optional role model overrides add `--model`. Run metadata
+Model overrides add `--model` to the relevant role's invocation; see
+[CLI options](usage.md#cli-options). Run metadata
 captures the CLI version, arguments, prompt, result schema, JSONL events, stderr,
 validated final result, duration, exit status, timeout status, and reported usage.
 Authentication credentials are not copied into the run files.
 
-The deterministic `--demo` backend remains available for orchestration checks
-without invoking Codex. Integration tests use a fake CLI process; they verify the
+Integration tests use a fake CLI process; they verify the
 subprocess contract, not actual model reasoning or biological accuracy.
 
 Sources: [noninteractive execution](https://learn.chatgpt.com/docs/non-interactive-mode),
