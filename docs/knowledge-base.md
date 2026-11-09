@@ -19,17 +19,32 @@ python -m labloop.cli serve --port 8765
 # GET http://127.0.0.1:8765/graph.jsonld
 ```
 
-The controller's injected knowledge and the recall command supplied to agents use
-research-only retrieval (`recall --research-only`). This excludes archived `Goal`,
-`Criteria`, and `DistillInstructions` records before ranking and limiting results,
-so old task instructions do not crowd out findings or enter the actor's research
-context. All three prompts
-remain in the vault for provenance, are linked from each experiment's `because`
-references, and are available through ordinary recall.
-Each role receives its current task instructions explicitly; the actor produces
-candidates and evidence, and the critic performs the criteria-based audit. A tool
-restriction affecting only that audit is an actor-reported limitation, not a reason
-to block the handoff with `needs_input`.
+Each role receives its current task instructions explicitly: the actor receives
+the goal, the critic receives the criteria, and the distiller receives the distill
+prompt. Retrieved knowledge supplies prior findings to help with those tasks.
+Previously, retrieval also returned archived task prompts. In the crossover run,
+the actor received criteria directing the critic to audit candidates in IGV.
+Including those instructions alongside research findings blurred the roles: the
+actor could interpret the critic's audit as part of its own assignment. It performed
+audit work and then requested GUI access, stopping the loop before the critic ran.
+The retrieved criteria likely contributed to this behavior, although the broad
+goal of producing reliable candidates also allowed substantial investigation.
+
+The controller's injected knowledge and the recall command supplied to agents now
+use research-only retrieval (`recall --research-only`). This excludes archived
+`Goal`, `Criteria`, and `DistillInstructions` records before ranking and limiting
+results, keeping other roles' instructions and obsolete assignments out of the
+research context and leaving room for relevant findings. All three prompts remain
+in the vault for provenance, are linked from each experiment's `because` references,
+and are available through ordinary recall.
+
+The actor should return its candidates and supporting evidence for the critic to
+audit. For example, if the actor can produce candidates but cannot launch IGV for
+the critic's visual review, it should describe that limitation in its report and
+return the products with `needs_input: null`. Setting `needs_input` would stop the
+controller before it invokes the critic. The critic can attempt the review and
+request help if it is blocked. The actor should still set `needs_input` when a
+missing tool, input, or scientific decision prevents its own work.
 
 On first opening a vault, LabLoop initializes classes for goals, criteria, distill
 instructions, experiments, work products, hypotheses, observations, diagnoses, claims, heuristics,
