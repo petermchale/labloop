@@ -1,5 +1,5 @@
 """Structured report schemas for actor, critic, and distiller outputs."""
-from typing import Literal
+from typing import Annotated, Literal
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -7,9 +7,16 @@ class Schema(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+TypeName = Annotated[str, Field(
+    pattern=r"^[A-Z][A-Za-z0-9]{0,63}$",
+    max_length=64,
+    description="Short PascalCase ontology type, e.g. CrossoverCandidate; no spaces or underscores.",
+)]
+
+
 class WorkProduct(Schema):
     key: str
-    type_name: str
+    type_name: TypeName
     description: str
     evidence: list[str]  # Workspace-relative paths, not invented literature citations.
 
@@ -41,5 +48,5 @@ class Retraction(Schema):
 class Distillation(Schema):
     lessons: list[Lesson]
     retract: list[Retraction]
-    new_types: list[str]
+    new_types: list[TypeName]
     needs_input: str | None
