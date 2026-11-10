@@ -5,8 +5,9 @@ from pathlib import Path
 from uuid import uuid4
 
 from .knowledge import Vault
-from .report_schemas import ActorReport, Critique, Distillation
+from .report_schemas import ActorReport, Critique, Distillation, IgvActorReport, IgvCritique
 from .file_provenance import RunArtifacts
+from .igv import render_views
 
 
 def git_context(root):
@@ -15,6 +16,26 @@ def git_context(root):
         return p.stdout.strip() if p.returncode == 0 else None
     return {"commit": read("rev-parse", "HEAD"), "branch": read("branch", "--show-current"),
             "dirty": bool(read("status", "--porcelain"))}
+
+
+def review_product(agent, criteria, context, artifacts, trace, launcher, request, views):
+    if not launcher:
+        return agent.ask("critic", criteria, context, Critique, artifacts, trace)
+
+    remaining = 2 if request else 0
+    previous = None
+    for attempt in range(remaining + 1):
+        review_context = {**context, "igv": {
+            "views": views, "remaining_requests": remaining, "previous_review": previous,
+        }}
+        attempt_trace = trace if not attempt else trace.with_stem(f"{trace.stem}-view-{attempt}")
+        report = agent.ask("critic", criteria, review_context, IgvCritique if remaining else Critique,
+                           artifacts, attempt_trace)
+        if not remaining or report.needs_input or not report.igv_views:
+            return report
+        views.extend(render_views(artifacts, launcher, [(request, view) for view in report.igv_views]))
+        previous = report.model_dump()
+        remaining -= 1
 
 
 def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs", tools=None):
@@ -30,6 +51,10 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
     output = root / run_dir / session
     output.mkdir(parents=True)
     artifacts = RunArtifacts(root, output, vault)
+    tools = tools or {}
+    igv = tools.get("igv") if config.get("igv_snapshots") else None
+    launcher = igv["argv"] if igv else None
+    role_tools = {name: tool for name, tool in tools.items() if not (igv and name == "igv")}
     goal = vault.put("Goal", config["goal"])
     criteria = vault.put("Criteria", config["criteria"])
     distill = vault.put("DistillInstructions", config["distill"])
@@ -40,7 +65,7 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
         refs["commit"] = vault.put("GitCommit", git["commit"], gitDirty=git["dirty"])
     if git["branch"]:
         refs["branch"] = vault.put("GitBranch", git["branch"])
-    manifest = {"session": session, "config": config, "git": git, "tools": tools or {},
+    manifest = {"session": session, "config": config, "git": git, "tools": tools,
                 "cycles": [], "state": "running"}
     manifest_path = output / "run.json"
     def save():
@@ -55,13 +80,14 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
             record = {"experiment": exp, "cycle": cycle + 1, "observations": []}
             manifest["cycles"].append(record)
             common = {"output": str(output.relative_to(root)),
-                      "tools": tools or {},
+                      "tools": role_tools,
                       "knowledge": vault.recall(config["goal"], research_only=True),
                       "heuristics": vault.lessons(),
                       "feedback": [r for r in vault.records.values() if r["type"] == "ll:Feedback"][-30:],
                       "note": "Heuristics are candidate hypotheses, not evaluation truth.",
                       "cycle": cycle + 1, "previous_cycles": manifest["cycles"][:-1]}
-            actor = agent.ask("actor", config["goal"], common, ActorReport, artifacts,
+            actor_schema = IgvActorReport if launcher else ActorReport
+            actor = agent.ask("actor", config["goal"], common, actor_schema, artifacts,
                               output / f"{cycle + 1}-actor.jsonl")
             record["actor"] = actor.model_dump()
             if actor.needs_input:
@@ -74,6 +100,14 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
             max_products = config.get("max_products", 100)
             if len(actor.products) > max_products:
                 raise ValueError(f"Actor exceeded max_products={max_products}; no products silently dropped")
+            if launcher:
+                requests = {item.key: item.igv_snapshot for item in actor.products if item.igv_snapshot}
+                initial = render_views(artifacts, launcher, [(r, r.view) for r in requests.values()])
+                igv_views = {key: [result] for key, result in zip(requests, initial, strict=True)}
+                for item in actor.products:
+                    igv_views.setdefault(item.key, [{"error": "Actor supplied no IGV snapshot specification"}])
+                record["igv_views"] = igv_views
+                save()
             observations = []
             for index, item in enumerate(actor.products):
                 if not item.evidence:
@@ -83,19 +117,23 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
                 vault.add_type(item.type_name)
                 product_id = vault.put(item.type_name, item.description, experiment=exp,
                                        files=files, status="proposed")
-                critic = agent.ask("critic", config["criteria"],
-                                   {"output": common["output"], "tools": common["tools"],
-                                    "product": item.model_dump(),
-                                    "knowledge": common["knowledge"], "feedback": common["feedback"]},
-                                   Critique, artifacts,
-                                   output / f"{cycle + 1}-critic-{index}.jsonl")
+                critic_context = {"output": common["output"], "tools": common["tools"],
+                                  "product": item.model_dump(),
+                                  "knowledge": common["knowledge"], "feedback": common["feedback"]}
+                critic = review_product(
+                    agent, config["criteria"], critic_context, artifacts,
+                    output / f"{cycle + 1}-critic-{index}.jsonl", launcher,
+                    requests.get(item.key) if launcher else None,
+                    igv_views[item.key] if launcher else [],
+                )
                 evidence = [artifacts.file_record(p, exp) for p in critic.evidence]
                 if critic.verdict != "uncertain" and not evidence:
                     raise ValueError("Definite critique must cite an evidence file")
                 obs = vault.put("Observation", critic.diagnosis, experiment=exp,
                                 because=[product_id], status=critic.verdict, files=evidence)
                 diagnosis = vault.put("Diagnosis", critic.diagnosis, experiment=exp, because=[obs])
-                observations.append({"id": obs, "item": item.key, **critic.model_dump()})
+                observations.append({"id": obs, "item": item.key,
+                                     **critic.model_dump(exclude={"igv_views"})})
                 record["observations"].append({**observations[-1], "diagnosis": diagnosis})
                 if critic.needs_input:
                     manifest.update(state="needs_input", question=critic.needs_input)

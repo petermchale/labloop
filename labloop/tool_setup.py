@@ -62,4 +62,7 @@ def prepare_tools(config, *, igv=None):
     required = config.get('required_tools', [])
     if not isinstance(required, list) or any(name != 'igv' for name in required):
         raise ValueError('required_tools must be a list of supported tool names: igv')
-    return {'igv': resolve_igv(igv)} if 'igv' in required or igv else {}
+    snapshots = config.get('igv_snapshots', False)
+    if not isinstance(snapshots, bool):
+        raise ValueError('igv_snapshots must be a boolean')
+    return {'igv': resolve_igv(igv)} if 'igv' in required or igv or snapshots else {}

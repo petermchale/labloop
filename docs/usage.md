@@ -19,10 +19,11 @@ Use these options with `python -m labloop.cli run CONFIG`:
 | `--igv` | IGV CLI launcher path; overrides automatic discovery. |
 | `--vault`, `--runs` | Knowledge and run directories (defaults `vault`, `runs`). |
 
-The crossover configuration declares `"required_tools": ["igv"]` to check IGV
-before starting Codex. `--igv` also enables this check; `--demo` skips it.
-The resolved command is printed at startup, recorded in `run.json`, and supplied
-to every role.
+The crossover configuration enables `"igv_snapshots": true` to check IGV
+before starting Codex and render snapshots from the controller. A configuration
+can also declare `"required_tools": ["igv"]` to check IGV and supply the launcher
+to the roles for direct use. `--igv` also enables launcher discovery, and
+`--demo` skips IGV. The launcher is printed at startup and recorded in `run.json`.
 
 ## Setup troubleshooting
 
@@ -36,6 +37,19 @@ discovery; supply an executable path or command name, without arguments.
 The check confirms CLI batch support, not successful rendering. Snapshots still
 require a GUI session and suitable permissions, and batch mode may display IGV
 windows. `igvtools` cannot replace IGV for snapshots.
+
+With controller rendering enabled on macOS, use Terminal.app while signed in
+to the Mac desktop, or use an approved Codex desktop launch outside the chat's
+sandbox. See the [README launch instructions](../README.md#run-labloop-to-filter-crossovers-automatically).
+
+The controller batches the actor's initial views before starting the critics.
+Each critic can send the controller up to two requests of four additional views
+each. The controller runs IGV and passes the new snapshots back to the critic
+automatically. The critic can adjust coordinates on the same chromosome, select
+among the actor's BAM or VCF.gz tracks, and change read sorting, grouping, and
+coloring.
+The run manifest records PNG paths or rendering errors, alongside paths to
+the batch and its log when IGV was invoked.
 
 ## Monitor a run
 
@@ -59,8 +73,9 @@ tail -n +1 -f "$run_dir/1-critic-0.jsonl"
 # Later, follow 1-distiller.jsonl or 2-actor.jsonl in the same way.
 ```
 
-The first number is the cycle; `critic-0` audits the first product. `tail` does not
-switch files automatically. Ctrl+C in this monitoring terminal leaves LabLoop
+The first number is the cycle. `critic-0` audits the first product. Additional
+IGV review passes add `-view-1` or `-view-2` to the trace name.
+`tail` follows one file at a time. Ctrl+C in this monitoring terminal leaves LabLoop
 running. For diagnostics, follow the matching `1-actor.stderr.txt` file.
 Substitute your `--runs`
 directory if you changed it.

@@ -101,7 +101,15 @@ Install Codex CLI, sign in with `codex login`, and install
 python -m pip install -e '.[genomics]'
 ```
 
-Paste this prompt into Codex with this repository open (adjust the project path):
+Log in to macOS on the Mac where IGV Desktop is installed.
+
+- **Terminal.app:** Open Terminal.app on that Mac, change to the LabLoop
+  repository, and run
+  `.venv/bin/python -m labloop.cli run examples/crossover-discovery.json --cycles 2`.
+- **Codex desktop:** Open this repository in Codex on the same Mac and paste
+  the prompt below. Adjust the project path to match your checkout. The
+  controller needs an approved launch outside the chat's sandbox so it can
+  open IGV.
 
 ```text
 Run LabLoop's crossover example for two cycles from /Users/petermchale/labloop:
@@ -110,7 +118,7 @@ Run LabLoop's crossover example for two cycles from /Users/petermchale/labloop:
 I explicitly authorize an escalated launch of this command outside the chat's
 sandbox, use of my saved Codex authentication, and child Codex model sessions
 that may transmit sensitive trio/genomic data to the configured model service.
-Request escalation through the execution tool's approval mechanism; keep
+Request escalation through the execution tool's approval mechanism. Keep
 LabLoop's existing per-role sandbox settings. If approval is denied, report
 the reason instead of bypassing it. Allow IGV batch execution for alignment
 snapshots. Monitor this run to completion or a failure/needs_input state,
@@ -118,8 +126,11 @@ then report its manifest, results, and any remaining permission restrictions.
 Do not launch another experiment against the same vault concurrently.
 ```
 
-This supplies task-specific authorization; it does not override automatic approval
-review, organization policy, or macOS GUI access controls.
+The Codex launch is subject to automatic approval review, organization policy,
+and macOS GUI access controls. IGV may open windows while the controller renders
+snapshots. If the critic needs a different view, it sends the request to the
+LabLoop controller, which runs IGV again and returns the new snapshot to the
+critic automatically.
 
 See [IGV setup](docs/usage.md#igv-cli-and-snapshots) for launcher discovery,
 custom installations, and snapshot requirements.

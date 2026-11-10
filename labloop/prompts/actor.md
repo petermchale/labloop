@@ -17,6 +17,11 @@ than starting open-ended optimization.
 Return proposed work products with clear identities, evidence, and reusable code.
 Use short PascalCase type names, such as CrossoverCandidate. For candidate-level
 audits, return each candidate separately; a ledger is supplementary.
+When the output schema includes igv_snapshot, supply the indexed reference,
+ordered local tracks, chromosome, and an initial view for each applicable
+product. Use 1-based inclusive coordinates. A typical initial view uses
+squish, POSITION, NONE grouping, NONE coloring, and null track_indices to
+include all tracks. The controller renders the images after you return.
 
 Stop when candidates and evidence are ready for review. Leave audit verdicts to
 the critic and failure-mode generalizations to the distiller. Report missing
