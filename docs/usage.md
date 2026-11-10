@@ -1,8 +1,9 @@
 # Running LabLoop
 
 For installation and the demo, see the [README quick start](../README.md#quick-start).
-For the crossover workflow and launch command, see the
-[case study](../README.md#case-study-crossover-discovery).
+For the crossover workflow, see the [case study](../README.md#case-study-crossover-discovery).
+Use the [Codex launch prompt](../README.md#run-labloop-to-filter-crossovers-automatically)
+for execution and permissions.
 
 ## CLI options
 
@@ -35,39 +36,6 @@ discovery; supply an executable path or command name, without arguments.
 The check confirms CLI batch support, not successful rendering. Snapshots still
 require a GUI session and suitable permissions, and batch mode may display IGV
 windows. `igvtools` cannot replace IGV for snapshots.
-
-### Codex runtime blocked by a parent sandbox
-
-A restricted parent process can prevent Codex from writing runtime state in
-`~/.codex` or starting its local app-server client. Errors may mention a read-only
-database or `Operation not permitted`; the role's stderr log contains details.
-This can happen when an agent launches LabLoop from a chat in ChatGPT Desktop or
-the Codex desktop app. LabLoop starts a child Codex process, which inherits the
-parent launch's restrictions even though each role has its own sandbox setting.
-
-To retry from the chat:
-
-1. Ask the agent: "Retry the experiment with an escalated launch."
-2. The agent must request execution approval for the LabLoop command outside the
-   parent sandbox. A regular retry inside the sandbox will retain the restriction.
-3. Approve that execution request if prompted. If the chat uses **Approve for me**,
-   the request may go to automatic approval review instead. To review it yourself,
-   select **Ask for approval** in the permissions control below the message box,
-   if available, before requesting the retry. Available options depend on app
-   version and managed policy; see the official
-   [permission modes](https://learn.chatgpt.com/docs/permission-modes) and
-   [automatic review](https://learn.chatgpt.com/docs/sandboxing/auto-review) guidance.
-
-Alternatively, run LabLoop from a normal terminal after `codex login`:
-
-```bash
-cd /path/to/labloop
-.venv/bin/python -m labloop.cli run examples/crossover-discovery.json --cycles 2
-```
-
-Changing the child role's `--sandbox` setting cannot lift parent restrictions.
-Approval of the parent launch does not guarantee that IGV snapshots will render;
-the role still needs access to a graphical desktop session.
 
 ## Monitor a run
 

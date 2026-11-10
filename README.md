@@ -99,24 +99,30 @@ Install Codex CLI, sign in with `codex login`, and install
 
 ```bash
 python -m pip install -e '.[genomics]'
-python -m labloop.cli run examples/crossover-discovery.json --cycles 2
 ```
 
-Before launching model sessions, this example checks for an IGV CLI that supports
-batch scripts. LabLoop finds `igv` or `igv.sh` on PATH; on macOS it also finds
-`IGV*.app` in `/Applications` and `~/Applications` and uses its bundled Java.
-No shell alias or global wrapper is needed. For a custom installation, add
-`--igv /path/to/igv.sh`. Snapshots require a graphical desktop session and GUI
-access from the role process; checking CLI availability does not verify rendering.
+Paste this prompt into Codex with this repository open (adjust the project path):
 
-When running LabLoop through a chat in ChatGPT Desktop or the Codex desktop app,
-the chat's sandbox may block the child Codex runtime from starting. Ask the agent
-to **run the command with an escalated launch** and approve the execution request
-if prompted. Automatic approval review may handle the request instead. This
-approval applies to the parent launch; changing LabLoop's role sandbox does not
-resolve it. Alternatively, run the command in a normal terminal.
-See [setup troubleshooting](docs/usage.md#codex-runtime-blocked-by-a-parent-sandbox)
-for symptoms and approval details.
+```text
+Run LabLoop's crossover example for two cycles from /Users/petermchale/labloop:
+.venv/bin/python -m labloop.cli run examples/crossover-discovery.json --cycles 2
+
+I explicitly authorize an escalated launch of this command outside the chat's
+sandbox, use of my saved Codex authentication, and child Codex model sessions
+that may transmit sensitive trio/genomic data to the configured model service.
+Request escalation through the execution tool's approval mechanism; keep
+LabLoop's existing per-role sandbox settings. If approval is denied, report
+the reason instead of bypassing it. Allow IGV batch execution for alignment
+snapshots. Monitor this run to completion or a failure/needs_input state,
+then report its manifest, results, and any remaining permission restrictions.
+Do not launch another experiment against the same vault concurrently.
+```
+
+This supplies task-specific authorization; it does not override automatic approval
+review, organization policy, or macOS GUI access controls.
+
+See [IGV setup](docs/usage.md#igv-cli-and-snapshots) for launcher discovery,
+custom installations, and snapshot requirements.
 
 The example uses the chromosome 22 trio fixture in `trio_dev_data/input/`.
 The actor develops analyses, the critic audits each candidate in IGV, and distilled
@@ -125,7 +131,6 @@ configured model; use `--model` to override it.
 
 For your own task, copy an [example configuration](examples/demo.json), edit
 `goal`, `criteria`, and `distill`, and run it with a separate `--vault` per project.
-Do not run multiple LabLoop experiments against the same vault simultaneously.
 
 By default, an experiment creates and populates `vault/` with Markdown knowledge records,
 ontology classes, and a shared `context.jsonld`. Pass `--vault PATH` to use another
