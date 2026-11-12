@@ -1,6 +1,7 @@
 """Exercise the real subprocess boundary with a deterministic CLI test double."""
 import json
 import sys
+from pathlib import Path
 
 import pytest
 from pydantic import ValidationError
@@ -13,7 +14,8 @@ from labloop.report_schemas import ActorReport
 
 
 @pytest.fixture
-def fake_codex(tmp_path):
+def fake_codex(tmp_path, monkeypatch):
+    monkeypatch.setenv("PYTHONPATH", str(Path(__file__).resolve().parents[1]))
     executable = tmp_path / "codex-test-double"
     executable.write_text("#!" + sys.executable + "\n" + r'''
 import json, subprocess, sys, time
@@ -39,6 +41,11 @@ if mode == "blocked-runtime":
     print("failed to open state DB: attempt to write a readonly database", file=sys.stderr)
     sys.exit(1)
 result_path = Path(argv[argv.index("--output-last-message") + 1])
+def register_evidence(paths):
+    command = prompt["evidence_registration"]["argv"]
+    citations = json.loads(subprocess.check_output([*command, *paths], cwd=root, text=True))
+    return [citations[path] for path in paths]
+
 if mode != "missing":
     if mode == "invalid":
         result = {"wrong": "schema"}
@@ -58,15 +65,21 @@ if mode != "missing":
         output = root / context["output"] / ("answer-" + str(context["cycle"]) + ".txt")
         with output.open("w") as handle:
             subprocess.run([sys.executable, str(script)], stdout=handle, check=True)
+        evidence = register_evidence([str(script.relative_to(root)), str(output.relative_to(root))])
+        if mode == "unregistered":
+            evidence = ["evidence_" + "0" * 32]
         result = {"summary": "Computed a square root", "products": [{"key": "root",
                   "type_name": "Calculation", "description": "ReusableCalculator",
-                  "evidence": [str(script.relative_to(root)), str(output.relative_to(root))]}],
+                  "evidence": evidence}],
                   "needs_input": None}
     elif role == "critic":
-        evidence = context["product"]["evidence"]
+        product = context["batch"][0]["product"] if "batch" in context else context["product"]
+        evidence = product["evidence"]
         assert (root / evidence[-1]).read_text().strip() == "9.0"
         result = {"verdict": "supported", "diagnosis": "9 squared equals 81",
-                  "evidence": evidence, "needs_input": None}
+                  "evidence": register_evidence(evidence), "needs_input": None}
+        if "batch" in context:
+            result = {"reviews": [{**result, "key": product["key"]}]}
     else:
         result = {"lessons": [{"claim": "Reuse the verified calculation",
                   "because": [context["observations"][0]["id"]],
@@ -81,11 +94,10 @@ print(json.dumps({"type": "turn.failed" if mode == "failed-event" else "turn.com
     return str(executable)
 
 
-def test_codex_runs_all_roles_and_reuses_code_across_cycles(tmp_path, fake_codex, monkeypatch):
-    # The recalled package must be available from the temporary research project.
-    from pathlib import Path
-    monkeypatch.setenv("PYTHONPATH", str(Path(__file__).resolve().parents[1]))
-    config = {"goal": "Calculate a square root", "criteria": "Check independently", "distill": "Learn"}
+@pytest.mark.parametrize("batch_size", [1, 10])
+def test_codex_runs_all_roles_and_reuses_code_across_cycles(tmp_path, fake_codex, batch_size):
+    config = {"goal": "Calculate a square root", "criteria": "Check independently", "distill": "Learn",
+              "critic_batch_size": batch_size}
     vault = Vault(tmp_path / "vault")
     for kind in ("Goal", "Criteria", "DistillInstructions"):
         vault.put(kind, "ReusableCalculator archived instructions")
@@ -113,11 +125,19 @@ def test_codex_runs_all_roles_and_reuses_code_across_cycles(tmp_path, fake_codex
         assert "agenda" not in prompt["context"]
         assert "--research-only" in prompt["knowledge_access"]["recall_argv"]
         schema_path = __import__('pathlib').Path(argv[argv.index("--output-schema") + 1])
-        assert json.loads(schema_path.read_text())["additionalProperties"] is False
+        output_schema = json.loads(schema_path.read_text())
+        assert output_schema["additionalProperties"] is False
+        if prompt["role"] == "distiller":
+            ids = [observation["id"] for observation in prompt["context"]["observations"]]
+            for name in ("Lesson", "Retraction"):
+                citation = output_schema["$defs"][name]["properties"]["because"]["items"]
+                assert citation["enum"] == ids
     assert "--model" in invocations[0]["argv"]
     assert "--model" not in invocations[1]["argv"]
     first, second = [cycle["actor"]["products"][0]["evidence"][0] for cycle in manifest["cycles"]]
     assert first == second
+    actor_result = json.loads((path.parent / "1-actor.result.json").read_text())
+    assert actor_result["products"][0]["evidence"][0].startswith("evidence_")
     records = Vault(tmp_path / "vault").records.values()
     assert any(r.get("path") == first and r.get("sha256") for r in records)
     assert len(list(path.parent.glob("*.prompt.json"))) == 6
@@ -125,7 +145,8 @@ def test_codex_runs_all_roles_and_reuses_code_across_cycles(tmp_path, fake_codex
 
 
 @pytest.mark.parametrize("mode,error", [("nonzero", RuntimeError), ("missing", RuntimeError),
-                                      ("invalid", ValidationError), ("failed-event", RuntimeError)])
+                                      ("invalid", ValidationError), ("failed-event", RuntimeError),
+                                      ("unregistered", ValueError)])
 def test_cli_failures_are_recorded(tmp_path, fake_codex, mode, error):
     (tmp_path / "mode.txt").write_text(mode)
     agent = CodexAgent(executable=fake_codex)

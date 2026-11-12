@@ -5,9 +5,10 @@ This page describes the `codex exec` subprocess contract. Codex provides the mod
 conversation and its existing file, shell, image, and configured tool capabilities;
 LabLoop has no direct model API client or custom tool dispatcher.
 
-Each returned work product gets a separate critic invocation. Previous context is
-supplied explicitly through records and reports rather than by resuming a Codex
-session.
+The critic reviews one work product per invocation by default. With batching
+enabled, the output schema lists the allowed product keys for that invocation.
+The controller checks that each product receives exactly one review. Each role
+gets its previous context through records and reports.
 
 For each invocation the Python controller:
 
@@ -45,11 +46,12 @@ interpreter and exact vault path:
 /path/to/python -m labloop.cli recall 'QUERY' --vault /path/to/vault
 ```
 
-This is LabLoop-specific retrieval, invoked through Codex's existing shell
-capabilities. It does not recreate file or shell tools. The controller also
-preloads relevant records so each role can begin with context. Evidence file
-existence, containment, and hashes are checked by controller-side code in
-`file_provenance.py`; that code is not exposed as a set of agent tools.
+The controller also preloads relevant records so each role can begin with
+context. Actor and critic prompts supply a `register-evidence` command for the
+current run. The command verifies that each supplied path identifies an existing
+file within the project and returns an evidence ID for that file. Role result
+files contain the IDs. The controller resolves them to paths for manifests and
+subsequent roles, and hashes the files when recording provenance in the vault.
 
 Model overrides add `--model` to the relevant role's invocation; see
 [CLI options](usage.md#cli-options). Run metadata

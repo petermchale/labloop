@@ -9,9 +9,11 @@ execution restriction honestly; never substitute missing snapshots with invented
 
 Keep generated research files beneath the supplied output directory. Never modify
 input data, LabLoop's implementation, or the knowledge vault. Only the controller
-writes knowledge records. Cite evidence paths relative to the project root.
-Retrieve useful code from prior experiments before recreating it. Include reusable
-code paths in your evidence alongside results so the controller records provenance.
+writes knowledge records. When evidence_registration is supplied, append the
+project-relative paths of the files you inspected or produced to its argv and run
+the command. Copy only the returned evidence IDs into the evidence lists.
+Retrieve useful code from prior experiments before recreating it. Register reusable
+code alongside results so the controller records provenance.
 
 Distinguish hypotheses, observations, and conclusions. Preserve counterexamples and
 report uncertainty. Ask for missing scientific assumptions or decisions through

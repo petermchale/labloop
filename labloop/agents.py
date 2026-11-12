@@ -8,6 +8,9 @@ import sys
 from importlib.resources import files
 from time import monotonic
 
+from .file_provenance import EVIDENCE_ID_PATTERN, EvidenceRegistry
+from .report_schemas import ActorReport, Critique
+
 
 def role_instructions(role, scientist_prompt):
     if role not in ("actor", "critic", "distiller"):
@@ -39,7 +42,6 @@ class CodexAgent:
         result_path = trace.with_suffix(".result.json")
         prompt_path = trace.with_suffix(".prompt.json")
         stderr_path = trace.with_suffix(".stderr.txt")
-        schema_path.write_text(json.dumps(schema.model_json_schema(), indent=2))
         # Use the same interpreter/package as the controller for application-specific recall.
         recall = [sys.executable, "-m", "labloop.cli", "recall", "<query>",
                   "--vault", str(artifacts.vault.root.resolve()), "--research-only"]
@@ -47,6 +49,22 @@ class CodexAgent:
                   "project_root": str(artifacts.root), "context": context,
                   "knowledge_access": {"recall_argv": recall,
                                        "usage": "Replace <query> with your search; run from project_root."}}
+        output_schema = schema.model_json_schema()
+        registry = None
+        if role in ("actor", "critic"):
+            registry = EvidenceRegistry(artifacts.root, artifacts.output / ".evidence")
+            registry.directory.mkdir(exist_ok=True)
+            prompt["evidence_registration"] = {
+                "argv": [sys.executable, "-m", "labloop.cli", "register-evidence",
+                         "--registry", str(registry.directory), "--"],
+                "usage": "Run from project_root. Append one argument per evidence file path. "
+                         "Use the returned IDs in the evidence lists.",
+            }
+            for definition in (output_schema, *output_schema.get("$defs", {}).values()):
+                evidence = definition.get("properties", {}).get("evidence")
+                if evidence is not None:
+                    evidence["items"]["pattern"] = EVIDENCE_ID_PATTERN
+        schema_path.write_text(json.dumps(output_schema, indent=2))
         prompt_path.write_text(json.dumps(prompt, indent=2))
         argv = [self.executable, "exec", "--cd", str(artifacts.root),
                 "--sandbox", sandbox, "--skip-git-repo-check", "--ephemeral",
@@ -110,7 +128,17 @@ class CodexAgent:
         metric["usage"] = completed[-1].get("usage", {})
         if not result_path.is_file():
             raise RuntimeError(f"Codex {role} produced no final JSON result; see {trace}")
-        return schema.model_validate_json(result_path.read_text())
+        report = schema.model_validate_json(result_path.read_text())
+        if registry is not None:
+            if isinstance(report, ActorReport):
+                citations = report.products
+            elif isinstance(report, Critique):
+                citations = [report]
+            else:
+                citations = report.reviews
+            for citation in citations:
+                citation.evidence = [registry.resolve(evidence_id) for evidence_id in citation.evidence]
+        return report
 
 
 class DemoAgent:
@@ -127,8 +155,14 @@ class DemoAgent:
                  "description": "Synthetic low-GQ call", "evidence": [path]}],
                 "needs_input": None}
         elif role == "critic":
-            result = {"verdict": "uncertain", "diagnosis": "Synthetic low-GQ ambiguity; no biological conclusion.",
-                      "evidence": context["product"]["evidence"], "needs_input": None}
+            verdict = {"verdict": "uncertain", "diagnosis": "Synthetic low-GQ ambiguity; no biological conclusion.",
+                       "needs_input": None}
+            if "batch" in context:
+                result = {"reviews": [{**verdict, "key": entry["product"]["key"],
+                                       "evidence": entry["product"]["evidence"]}
+                                      for entry in context["batch"]]}
+            else:
+                result = {**verdict, "evidence": context["product"]["evidence"]}
         else:
             result = {"lessons": [{"claim": "Test whether low-GQ variants inflate false crossovers.",
                                    "because": [context["observations"][0]["id"]],

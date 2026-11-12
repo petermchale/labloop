@@ -4,8 +4,9 @@ import subprocess
 from pathlib import Path
 from uuid import uuid4
 
+from .critic_batch import review_batch
 from .knowledge import Vault
-from .report_schemas import ActorReport, Critique, Distillation, IgvActorReport, IgvCritique
+from .report_schemas import ActorReport, Critique, IgvActorReport, IgvCritique, distillation_schema
 from .file_provenance import RunArtifacts
 from .igv import render_views
 
@@ -42,6 +43,9 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
     root = Path(root).resolve()
     if not 1 <= cycles <= 20:
         raise ValueError("cycles must be between 1 and 20")
+    batch_size = config.get("critic_batch_size", 1)
+    if type(batch_size) is not int or batch_size < 1:
+        raise ValueError("critic_batch_size must be a positive integer")
     # Resolve destinations through the same path policy as evidence.
     for directory in (vault_dir, run_dir):
         if not (root / directory).resolve().is_relative_to(root):
@@ -100,6 +104,7 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
             max_products = config.get("max_products", 100)
             if len(actor.products) > max_products:
                 raise ValueError(f"Actor exceeded max_products={max_products}; no products silently dropped")
+            requests, igv_views = {}, {}
             if launcher:
                 requests = {item.key: item.igv_snapshot for item in actor.products if item.igv_snapshot}
                 initial = render_views(artifacts, launcher, [(r, r.view) for r in requests.values()])
@@ -109,43 +114,56 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
                 record["igv_views"] = igv_views
                 save()
             observations = []
-            for index, item in enumerate(actor.products):
-                if not item.evidence:
-                    raise ValueError("Actor work product must cite evidence")
-                files = [artifacts.file_record(p, exp) for p in item.evidence]
-                # Scientific entity types arise from the task, rather than a core enum.
-                vault.add_type(item.type_name)
-                product_id = vault.put(item.type_name, item.description, experiment=exp,
-                                       files=files, status="proposed")
-                critic_context = {"output": common["output"], "tools": common["tools"],
-                                  "product": item.model_dump(),
-                                  "knowledge": common["knowledge"], "feedback": common["feedback"]}
-                critic = review_product(
-                    agent, config["criteria"], critic_context, artifacts,
-                    output / f"{cycle + 1}-critic-{index}.jsonl", launcher,
-                    requests.get(item.key) if launcher else None,
-                    igv_views[item.key] if launcher else [],
-                )
-                evidence = [artifacts.file_record(p, exp) for p in critic.evidence]
-                if critic.verdict != "uncertain" and not evidence:
-                    raise ValueError("Definite critique must cite an evidence file")
-                obs = vault.put("Observation", critic.diagnosis, experiment=exp,
-                                because=[product_id], status=critic.verdict, files=evidence)
-                diagnosis = vault.put("Diagnosis", critic.diagnosis, experiment=exp, because=[obs])
-                observations.append({"id": obs, "item": item.key,
-                                     **critic.model_dump(exclude={"igv_views"})})
-                record["observations"].append({**observations[-1], "diagnosis": diagnosis})
-                if critic.needs_input:
-                    manifest.update(state="needs_input", question=critic.needs_input)
+            critic_context = {key: common[key] for key in ("output", "tools", "knowledge", "feedback")}
+            for index in range(0, len(actor.products), batch_size):
+                products = actor.products[index:index + batch_size]
+                product_ids = {}
+                for item in products:
+                    if not item.evidence:
+                        raise ValueError("Actor work product must cite evidence")
+                    files = [artifacts.file_record(p, exp) for p in item.evidence]
+                    vault.add_type(item.type_name)
+                    product_ids[item.key] = vault.put(item.type_name, item.description, experiment=exp,
+                                                      files=files, status="proposed")
+                if batch_size == 1:
+                    item = products[0]
+                    critic = review_product(
+                        agent, config["criteria"], {**critic_context, "product": item.model_dump()},
+                        artifacts, output / f"{cycle + 1}-critic-{index}.jsonl", launcher,
+                        requests.get(item.key), igv_views.get(item.key, []),
+                    )
+                    reviews = {item.key: critic}
+                else:
+                    trace = output / f"{cycle + 1}-critic-batch-{index // batch_size}.jsonl"
+                    reviews = review_batch(agent, config["criteria"], critic_context, artifacts,
+                                           trace, products, launcher, requests, igv_views)
+                for item in products:
+                    critic = reviews[item.key]
+                    evidence = [artifacts.file_record(p, exp) for p in critic.evidence]
+                    if critic.verdict != "uncertain" and not evidence:
+                        raise ValueError("Definite critique must cite an evidence file")
+                    obs = vault.put("Observation", critic.diagnosis, experiment=exp,
+                                    because=[product_ids[item.key]], status=critic.verdict, files=evidence)
+                    diagnosis = vault.put("Diagnosis", critic.diagnosis, experiment=exp, because=[obs])
+                    observations.append({"id": obs, "item": item.key,
+                                         **critic.model_dump(exclude={"igv_views", "key"})})
+                    record["observations"].append({**observations[-1], "diagnosis": diagnosis})
+                    if critic.needs_input and manifest["state"] == "running":
+                        manifest.update(state="needs_input", question=critic.needs_input)
+                if batch_size > 1:
+                    save()
+                if manifest["state"] == "needs_input":
                     break
             if manifest["state"] == "needs_input":
                 vault.put("Experiment", f"{session}: cycle {cycle + 1}", id=exp,
                           status="needs_input", because=task_records, **refs)
                 break
+            observation_ids = tuple(o["id"] for o in observations)
             distilled = agent.ask("distiller", config["distill"],
-                                  {**common, "observations": observations}, Distillation, artifacts,
+                                  {**common, "observations": observations},
+                                  distillation_schema(observation_ids), artifacts,
                                   output / f"{cycle + 1}-distiller.jsonl")
-            known = {o["id"] for o in observations}
+            known = set(observation_ids)
             # Validate the whole proposal before making any of its changes.
             for change in [*distilled.lessons, *distilled.retract]:
                 if not set(change.because) <= known:

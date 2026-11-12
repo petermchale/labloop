@@ -63,6 +63,9 @@ def main():
     feedback.add_argument("report", type=Path)
     feedback.add_argument("--root", type=Path, default=Path.cwd())
     feedback.add_argument("--vault", default="vault")
+    evidence = sub.add_parser("register-evidence", help="Register evidence files for an active run")
+    evidence.add_argument("--registry", type=Path, required=True)
+    evidence.add_argument("paths", nargs="+")
     args = parser.parse_args()
     if args.command == "run":
         from .agents import DemoAgent, CodexAgent
@@ -92,6 +95,14 @@ def main():
     elif args.command == "feedback":
         from .scientist_feedback import record_feedback
         print(record_feedback(args.root.resolve(), args.vault, json.loads(args.report.read_text())))
+    elif args.command == "register-evidence":
+        from .file_provenance import EvidenceRegistry
+        try:
+            registry = EvidenceRegistry(Path.cwd(), args.registry)
+            citations = {path: registry.register(path) for path in args.paths}
+        except (OSError, ValueError) as error:
+            parser.error(str(error))
+        print(json.dumps(citations))
     elif args.command == "export":
         print(Vault(args.vault).export(args.format))
     else:

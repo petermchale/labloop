@@ -3,7 +3,7 @@ import pytest
 from pydantic import ValidationError
 
 from labloop.knowledge import Vault
-from labloop.report_schemas import ActorReport, Distillation
+from labloop.report_schemas import ActorReport, Distillation, distillation_schema
 
 
 @pytest.mark.parametrize("name", ["CrossoverCandidate", "GenomicCrossoverCandidate", "A", "A" * 64])
@@ -42,3 +42,26 @@ def test_codex_json_schemas_expose_type_name_constraints():
     for constraint in (actor_type, distiller_type):
         assert constraint["pattern"] == r"^[A-Z][A-Za-z0-9]{0,63}$"
         assert constraint["maxLength"] == 64
+
+
+@pytest.mark.parametrize("ids", [(), ("obs1",), ("obs1", "obs2")])
+def test_distillation_accepts_only_supplied_observation_ids(ids):
+    schema = distillation_schema(ids)
+    result = {
+        "lessons": [{"claim": "A finding", "because": ["obs1"], "test": "A test"}],
+        "retract": [{"target": "prior", "because": ["obs1"]}],
+        "new_types": [],
+        "needs_input": None,
+    }
+    if not ids:
+        with pytest.raises(ValidationError):
+            schema.model_validate(result)
+        schema.model_validate({**result, "lessons": [], "retract": []})
+        return
+
+    assert schema.model_validate(result).model_dump() == result
+    for field in ("lessons", "retract"):
+        for invalid_id in ("obs1: Explanation", "outside"):
+            with pytest.raises(ValidationError):
+                schema.model_validate({**result, field: [{**result[field][0],
+                                                         "because": [invalid_id]}]})
