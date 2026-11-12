@@ -186,6 +186,8 @@ Point your agent at a run directory (`runs/RUN_ID/`) and ask for a summary,
 slides, or a short report. Have it start with `run.json` and cite the supporting
 evidence and vault records for its findings.
 
+We used this approach to produce the [crossover walkthrough](#walk-through-a-completed-run).
+
 ## Status and documentation
 
 This is a prototype.
