@@ -108,7 +108,8 @@ is missing, build it from the local chromosome 22 trio inputs in
 .venv/bin/python examples/prepare_crossover_fixture.py
 ```
 
-The fixture data lives outside Git.
+Git tracks the preparation script and ignores `trio_dev_data/`. The chromosome
+22 inputs must already be present locally to build the focused fixture.
 
 Log in to macOS on the Mac where IGV Desktop is installed.
 
