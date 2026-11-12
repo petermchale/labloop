@@ -180,6 +180,12 @@ actor's follow-up test.
 
 <!-- To feature a new run, see examples/crossover-walkthrough/MAINTAINING.md. -->
 
+## Summarize a run
+
+Point your agent at a run directory (`runs/RUN_ID/`) and ask for a summary,
+slides, or a short report. Have it start with `run.json` and cite the supporting
+evidence and vault records for its findings.
+
 ## Status and documentation
 
 This is a prototype.
@@ -216,10 +222,6 @@ We'll want to harden that.
   remains authoritative or becomes an import/export format. Add SHACL validation
   for RDF structure and relationships, richer source and assertion provenance,
   and graph-aware retrieval alongside text search.
-- **Presentations:** produce a slide narrative from knowledge-base records and
-  linked plots, IGV snapshots, and other evidence: question → hypotheses →
-  experiments → observations → failed approaches → lessons → uncertainties.
-  Cite source records and distinguish hypotheses from supported or rejected claims.
 - **Research agenda:** optionally use Russell and Norvig's
   [**problem generator**](docs/learning-agent.md#problem-generator)
   and [Voyager's curriculum](https://arxiv.org/abs/2305.16291) to propose and
