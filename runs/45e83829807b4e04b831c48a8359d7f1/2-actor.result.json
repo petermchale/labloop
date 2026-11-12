@@ -1,0 +1,123 @@
+{
+  "summary": "The automated flank search strengthened the evidence for the paternal crossover at chr22:20,959,352–20,961,970. Three child reads linked the G/G endpoint pattern to qualifying paternal markers on both sides. Both maternal candidates remain unresolved. All three candidates were retained, and the endpoint-only review order was unchanged. Motivated by the prior critic’s linkage findings, the follow-up used a fixed 15 kb window on each side, trio GQ ≥20, and parental read support for each marker’s phase. These three previously reviewed intervals provide a reproducibility check. Detection accuracy on independent candidates remains unmeasured. IGV views are specified for controller rendering.",
+  "products": [
+    {
+      "key": "NA12877-chr22-20959352-20961970",
+      "type_name": "CrossoverCandidate",
+      "description": "The trio evidence supports a paternal HP1-to-HP2 crossover within phase set 19256651. Eight paternal-origin child reads carry G/G across the endpoints, four on each strand. Neither parent has an eligible G/G spanning read. All eight child reads link the endpoint pattern to upstream HP1 markers, and three also link it to downstream HP2 markers. Two of those three cover both 20,968,297 and 20,968,600. The listed endpoints bound the switch at marker resolution.",
+      "evidence": [
+        "evidence_f58f8580c465f05fb87e058f9cc759ee",
+        "evidence_9577d5db7e62bbf985e1f9f5d21ef3e8",
+        "evidence_731f7ccb6172d2bcf95317030451f943",
+        "evidence_5b4260390187519a28efe9a9b970614e",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_72693b6d37ace260c9178634b0f12f8a",
+        "evidence_17d6611c7a24f930320c5d0b719c3271",
+        "evidence_0997870762cd9d486868fc8f2ee534e9",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "igv_snapshot": {
+        "reference": "trio_dev_data/focused/chr22.fa",
+        "tracks": [
+          "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/trio.vcf.gz"
+        ],
+        "chromosome": "chr22",
+        "view": {
+          "start": 20955100,
+          "end": 20969500,
+          "display": "squish",
+          "sort": "HAPLOTYPE",
+          "group": "PHASE",
+          "color": "READ_STRAND",
+          "track_indices": null
+        }
+      }
+    },
+    {
+      "key": "NA12878-chr22-21165471-21165499",
+      "type_name": "CrossoverCandidate",
+      "description": "The maternal switch remains unresolved. The endpoint VCF implies HP1-to-HP2, but maternal GQ is 15 at the left endpoint and 3 at the right. C/A occurs in all 26 eligible child reads and all 68 paternal reads spanning both endpoints, as well as 11 maternal reads across both HP tags. The automated search found no qualifying upstream marker and one qualifying downstream marker at 21,178,758. One maternally assigned child read links its C/A endpoint pattern to the HP1 allele at that marker.",
+      "evidence": [
+        "evidence_ff8d6e13913b01c047cbb3781c278ab7",
+        "evidence_2fdf06e4e792ce5106f41908aad3826f",
+        "evidence_731f7ccb6172d2bcf95317030451f943",
+        "evidence_5b4260390187519a28efe9a9b970614e",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_72693b6d37ace260c9178634b0f12f8a",
+        "evidence_17d6611c7a24f930320c5d0b719c3271",
+        "evidence_0997870762cd9d486868fc8f2ee534e9",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "igv_snapshot": {
+        "reference": "trio_dev_data/focused/chr22.fa",
+        "tracks": [
+          "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/trio.vcf.gz"
+        ],
+        "chromosome": "chr22",
+        "view": {
+          "start": 21165320,
+          "end": 21166140,
+          "display": "squish",
+          "sort": "HAPLOTYPE",
+          "group": "PHASE",
+          "color": "READ_STRAND",
+          "track_indices": null
+        }
+      }
+    },
+    {
+      "key": "NA12878-chr22-21291740-21291798",
+      "type_name": "CrossoverCandidate",
+      "description": "The maternal switch remains unresolved. The left endpoint is unphased at maternal GQ 9. At the right endpoint, the VCF assigns A to maternal HP2, while all eight eligible HP2-tagged maternal reads covering that base carry G. The baseline assigns three C/A child reads to maternal origin, and the same endpoint pair occurs in four maternal reads and one paternal read. Under the stricter follow-up criteria, no flanking marker qualified on either side and no endpoint-spanning child read could be assigned maternal origin.",
+      "evidence": [
+        "evidence_4c7b875f8502c682bcf646f902a3af72",
+        "evidence_c5c8725f42e21b66ff33c61290b8623c",
+        "evidence_731f7ccb6172d2bcf95317030451f943",
+        "evidence_5b4260390187519a28efe9a9b970614e",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_72693b6d37ace260c9178634b0f12f8a",
+        "evidence_17d6611c7a24f930320c5d0b719c3271",
+        "evidence_0997870762cd9d486868fc8f2ee534e9",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "igv_snapshot": {
+        "reference": "trio_dev_data/focused/chr22.fa",
+        "tracks": [
+          "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/trio.vcf.gz"
+        ],
+        "chromosome": "chr22",
+        "view": {
+          "start": 21290840,
+          "end": 21292470,
+          "display": "squish",
+          "sort": "HAPLOTYPE",
+          "group": "PHASE",
+          "color": "READ_STRAND",
+          "track_indices": null
+        }
+      }
+    }
+  ],
+  "needs_input": null
+}

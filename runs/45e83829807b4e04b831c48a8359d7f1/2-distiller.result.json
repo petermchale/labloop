@@ -1,0 +1,16 @@
+{
+  "lessons": [
+    {
+      "claim": "Test whether confidently phased flanking markers can rescue crossover candidates with a low-quality, unphased, or read-discordant endpoint. The current audit requires both endpoints to pass before counting switch-supporting reads. A rescue call would require multiple child molecules to link opposite parental haplotypes at flanking markers in the same parental phase set, with parental reads corroborating marker phase and a Mendelian anchor corroborating child origin on at least one of those molecules. Report the interval between the corroborating markers. In the supported paternal case, three child reads linked upstream HP1 and downstream HP2 markers. One unresolved maternal case had only a downstream HP1 link on a read without a direct origin anchor. The other had no qualifying flanks, and all eight maternal HP2-tagged reads at the right endpoint disagreed with the VCF phase. Both maternal cases would remain unresolved under this rule. Whether the rule recovers additional genuine switches remains untested.",
+      "because": [
+        "81659e3fa5f34c719e2e5984382fb6a6",
+        "73f27d21641d41678a65661478c56b80",
+        "2a0a613144da4095a574ae857b63b555"
+      ],
+      "test": "Reuse child_origins, phase_support, phase_supported, and spanning from trio_flank_linkage.py. Add a branch for candidates that fail endpoint eligibility, and evaluate read linkage directly between qualifying flanks without requiring the endpoint alleles. Prespecify the search radius, minimum molecule count, and parental coverage criteria. On held-out trio candidates with independently adjudicated switches and artifacts, compare the existing audit with and without this branch at a fixed false-positive rate. Measure how many additional confirmed switches it recovers and how wide their reported intervals are. Keep both maternal review cases as unresolved regression checks."
+    }
+  ],
+  "retract": [],
+  "new_types": [],
+  "needs_input": null
+}

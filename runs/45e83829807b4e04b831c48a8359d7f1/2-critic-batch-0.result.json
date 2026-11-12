@@ -1,0 +1,28 @@
+{
+  "reviews": [
+    {
+      "verdict": "supported",
+      "diagnosis": "The trio reads support a paternal HP1-to-HP2 switch in NA12879 within NA12877 phase set 19256651. Eight child reads assigned to paternal origin carry G/G across the endpoints, four on each strand. Six directly carry the paternal allele at the Mendelian anchor at 20,955,483. The father has 17 HP1 G/A reads and 17 HP2 A/G reads spanning the endpoints, and neither parent has an eligible G/G spanning read. All eight G/G child reads link to upstream HP1 markers, three also link to downstream HP2 markers, and two cover both 20,968,297 and 20,968,600. The IGV overview shows child alignments extending from the interval into the downstream marker region. The reproduced BAM and VCF audit supports the switch at marker resolution.",
+      "evidence": ["evidence_df4953bbe7643542f2aa162d6d4016ce", "evidence_f58f8580c465f05fb87e058f9cc759ee", "evidence_17d6611c7a24f930320c5d0b719c3271", "evidence_72693b6d37ace260c9178634b0f12f8a", "evidence_011c616cc7daae9462055951f520c454", "evidence_5b4260390187519a28efe9a9b970614e", "evidence_d7ec8ec95ec8c439c3e44050161fe289", "evidence_6f085174dda86f3223ed3385fbb419cb", "evidence_213d68d21d5b2ac746932307cc6a19c4", "evidence_fe448de6acff6a52954d1108f2c9d523"],
+      "needs_input": null,
+      "igv_views": null,
+      "key": "NA12877-chr22-20959352-20961970"
+    },
+    {
+      "verdict": "uncertain",
+      "diagnosis": "The VCF implies maternal HP1-to-HP2, with maternal GQ 15 at the left endpoint and 3 at the right. The reproduced read audit found C/A in all 26 eligible child reads, all 68 eligible paternal reads, and 11 maternal reads across both HP tags. The only qualifying flank was downstream at 21,178,758, where one child read links C/A to maternal HP1. Its maternal assignment comes from the child phase set, and the read covers no qualifying origin anchor. The local IGV view shows gaps and mismatches in the maternal pileup. Confident maternal phase and informative alleles linked on child reads on both sides would help resolve the switch.",
+      "evidence": ["evidence_0c2a5c79e4c8621ccda7452775f67ce6", "evidence_ff8d6e13913b01c047cbb3781c278ab7", "evidence_17d6611c7a24f930320c5d0b719c3271", "evidence_72693b6d37ace260c9178634b0f12f8a", "evidence_011c616cc7daae9462055951f520c454", "evidence_5b4260390187519a28efe9a9b970614e", "evidence_d7ec8ec95ec8c439c3e44050161fe289", "evidence_6f085174dda86f3223ed3385fbb419cb", "evidence_213d68d21d5b2ac746932307cc6a19c4", "evidence_fe448de6acff6a52954d1108f2c9d523"],
+      "needs_input": null,
+      "igv_views": null,
+      "key": "NA12878-chr22-21165471-21165499"
+    },
+    {
+      "verdict": "uncertain",
+      "diagnosis": "The maternal left endpoint is unphased at GQ 9. At the right endpoint, the VCF assigns A to maternal HP2, while all eight eligible maternal reads tagged HP2 in that phase set carry G. The three child reads assigned maternal origin by the baseline carry C/A, and their four-site C/C/A/A pattern also occurs in four maternal reads and one paternal read. The reproduced stricter audit found no qualifying flank on either side and assigned maternal origin to zero endpoint-spanning child reads. The IGV view shows alignments spanning the interval in all three samples. Resolving maternal phase at both endpoints and linking it to informative markers on child reads would help distinguish a switch.",
+      "evidence": ["evidence_3d1bff096aba033c3eb1d143e92def92", "evidence_4c7b875f8502c682bcf646f902a3af72", "evidence_17d6611c7a24f930320c5d0b719c3271", "evidence_72693b6d37ace260c9178634b0f12f8a", "evidence_011c616cc7daae9462055951f520c454", "evidence_5b4260390187519a28efe9a9b970614e", "evidence_d7ec8ec95ec8c439c3e44050161fe289", "evidence_6f085174dda86f3223ed3385fbb419cb", "evidence_213d68d21d5b2ac746932307cc6a19c4", "evidence_fe448de6acff6a52954d1108f2c9d523"],
+      "needs_input": null,
+      "igv_views": null,
+      "key": "NA12878-chr22-21291740-21291798"
+    }
+  ]
+}

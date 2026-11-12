@@ -1,0 +1,108 @@
+{
+  "summary": "The trio baseline supports one paternal crossover candidate at chr22:20,959,352–20,961,970. Evidence for a crossover at either maternal interval is inconclusive. The baseline used Mendelian transmission at biallelic SNVs within 5 kb of each interval and checked linkage on primary reads with MAPQ ≥30 and base quality ≥20. VCF genotype quality was retained for interpretation. All three IGV views are specified for controller rendering. Snapshot images were not inspected.",
+  "products": [
+    {
+      "key": "NA12877-chr22-20959352-20961970",
+      "type_name": "CrossoverCandidate",
+      "description": "The trio genotypes imply paternal HP1 at 20,959,352 and HP2 at 20,961,970 within paternal phase set 19256651. A Mendelian marker at 20,955,483 anchors child HP1 to the father. Eight child HP1 reads carry G/G across the endpoints, and six of those also carry the paternal G allele at the upstream anchor. The father has 17 G/A and 17 A/G spanning reads, with zero G/G, while the mother has 26 G/A and 23 A/G, with zero G/G. These observations support a paternal crossover between the listed markers. The right endpoint is the only resolved paternal HP2 marker in the analyzed window.",
+      "evidence": [
+        "evidence_9577d5db7e62bbf985e1f9f5d21ef3e8",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_0997870762cd9d486868fc8f2ee534e9",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "igv_snapshot": {
+        "reference": "trio_dev_data/focused/chr22.fa",
+        "tracks": [
+          "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/trio.vcf.gz"
+        ],
+        "chromosome": "chr22",
+        "view": {
+          "start": 20955000,
+          "end": 20963500,
+          "display": "squish",
+          "sort": "POSITION",
+          "group": "NONE",
+          "color": "NONE",
+          "track_indices": null
+        }
+      }
+    },
+    {
+      "key": "NA12878-chr22-21165471-21165499",
+      "type_name": "CrossoverCandidate",
+      "description": "The VCF implies maternal HP1 to HP2 within phase set 20420164, with maternal GQ 3 at the right endpoint. The child's C/A endpoint pair occurs in all 26 eligible spanning child reads, all 68 spanning paternal reads, and 11 spanning maternal reads across both HP tags. Other maternal reads carry C/G (8) or G/A (39). The phased VCF implies maternal HP1 again at 21,166,076. The shared endpoint pair and return to HP1 leave a single maternal crossover unresolved.",
+      "evidence": [
+        "evidence_2fdf06e4e792ce5106f41908aad3826f",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_0997870762cd9d486868fc8f2ee534e9",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "igv_snapshot": {
+        "reference": "trio_dev_data/focused/chr22.fa",
+        "tracks": [
+          "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/trio.vcf.gz"
+        ],
+        "chromosome": "chr22",
+        "view": {
+          "start": 21163500,
+          "end": 21166550,
+          "display": "squish",
+          "sort": "POSITION",
+          "group": "NONE",
+          "color": "NONE",
+          "track_indices": null
+        }
+      }
+    },
+    {
+      "key": "NA12878-chr22-21291740-21291798",
+      "type_name": "CrossoverCandidate",
+      "description": "The maternal left endpoint is unphased in the VCF at GQ 9. Three child reads on the maternally assigned child HP1 carry C/A across the endpoints, a pair also observed in four maternal reads and one paternal read. Those same three child reads carry C/C/A/A at 21,290,886, 21,291,740, 21,291,798 and 21,292,406, matching four maternal HP1 reads and one paternal read across all four sites. The phased VCF assigns maternal HP2 at both flanking markers. The existing maternal read pattern and sparse eligible child coverage leave the proposed switch unresolved.",
+      "evidence": [
+        "evidence_c5c8725f42e21b66ff33c61290b8623c",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_0997870762cd9d486868fc8f2ee534e9",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "igv_snapshot": {
+        "reference": "trio_dev_data/focused/chr22.fa",
+        "tracks": [
+          "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam",
+          "trio_dev_data/focused/trio.vcf.gz"
+        ],
+        "chromosome": "chr22",
+        "view": {
+          "start": 21290200,
+          "end": 21292900,
+          "display": "squish",
+          "sort": "POSITION",
+          "group": "NONE",
+          "color": "NONE",
+          "track_indices": null
+        }
+      }
+    }
+  ],
+  "needs_input": null
+}

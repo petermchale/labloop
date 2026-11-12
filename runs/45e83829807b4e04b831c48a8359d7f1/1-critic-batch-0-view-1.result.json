@@ -1,0 +1,61 @@
+{
+  "reviews": [
+    {
+      "verdict": "supported",
+      "diagnosis": "The trio reads support a paternal HP1-to-HP2 switch in NA12879 within NA12877 phase set 19256651. Eight eligible child reads carry G/G across the endpoints, four on each strand. Six also carry the paternal G allele at the upstream Mendelian anchor at 20,955,483. The father has 17 G/A reads on HP1 and 17 A/G reads on HP2, and neither parent has an eligible G/G spanning read. Two child reads link the G/G endpoint pair to paternal HP2 alleles at both 20,968,297 and 20,968,600. The phase-grouped IGV view shows child HP1 alignments extending across the candidate interval into the downstream marker region. The audited linkage supports a crossover within the interval at marker resolution.",
+      "evidence": [
+        "evidence_015f2bb61072fd3f56ced702c0a0e2e8",
+        "evidence_134b1a1607187c4e4c5cff3e40940376",
+        "evidence_17d6611c7a24f930320c5d0b719c3271",
+        "evidence_72693b6d37ace260c9178634b0f12f8a",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_9577d5db7e62bbf985e1f9f5d21ef3e8",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "needs_input": null,
+      "key": "NA12877-chr22-20959352-20961970"
+    },
+    {
+      "verdict": "uncertain",
+      "diagnosis": "The VCF suggests maternal HP1-to-HP2 across the endpoints. The right endpoint has maternal GQ 3, and the marker at 21,166,076 implies HP1 again. All 26 eligible child reads and all 68 eligible paternal reads spanning both endpoints carry C/A, as do 11 maternal reads across both HP tags. Including the upstream maternal-origin anchor and downstream marker still leaves the same four-site pattern in eight maternal-origin child reads, five maternal reads across both HP tags, and 20 paternal reads. The zoomed, phase-grouped IGV view shows mismatches and alignment gaps in the local maternal pileup. The read patterns leave the switch unresolved. Confidently phased maternal markers linked on child reads on both sides would help distinguish a switch.",
+      "evidence": [
+        "evidence_45c7dffac5721bb432743163e39bfa02",
+        "evidence_43037cc88fffed8ed29875b465fca9b4",
+        "evidence_17d6611c7a24f930320c5d0b719c3271",
+        "evidence_72693b6d37ace260c9178634b0f12f8a",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_2fdf06e4e792ce5106f41908aad3826f",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "needs_input": null,
+      "key": "NA12878-chr22-21165471-21165499"
+    },
+    {
+      "verdict": "uncertain",
+      "diagnosis": "The maternal left endpoint is unphased at GQ 9, and the VCF implies maternal HP2 at both flanking markers. The three eligible maternal-origin child reads spanning both endpoints and both flanks carry C/C/A/A, a pattern also present in four maternal HP1-tagged reads and one paternal read. Three other maternal HP1-tagged reads carry T at the left endpoint, so that tag contains both C and T there. The phase-grouped IGV view shows alignments spanning the flanks in the child and both parents. The audited bases leave the maternal switch unresolved. Resolving the maternal phase at the left endpoint and linking it to additional informative markers on child reads would help.",
+      "evidence": [
+        "evidence_1eb2e47fe644c6e6adc4e96de45ef34d",
+        "evidence_6a293950c2545dcd60c29af4fe410714",
+        "evidence_17d6611c7a24f930320c5d0b719c3271",
+        "evidence_72693b6d37ace260c9178634b0f12f8a",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_c5c8725f42e21b66ff33c61290b8623c",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "needs_input": null,
+      "key": "NA12878-chr22-21291740-21291798"
+    }
+  ]
+}

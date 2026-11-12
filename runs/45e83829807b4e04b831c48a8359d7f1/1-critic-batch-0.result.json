@@ -1,0 +1,91 @@
+{
+  "reviews": [
+    {
+      "verdict": "supported",
+      "diagnosis": "The trio reads support a paternal HP1-to-HP2 switch in NA12879 within NA12877 phase set 19256651. Eight child reads carry G/G across the endpoints, four on each strand. Six also carry the paternal G allele at the upstream Mendelian anchor. The father has 17 G/A and 17 A/G spanning reads, and neither parent has a G/G spanning read at the audit thresholds. Extending the audit from 5 kb to 15 kb on either side found additional paternal HP2 markers. Two child reads link the endpoint G/G to paternal HP2 alleles at both 20,968,297 and 20,968,600. The supplied IGV overview shows reads spanning the interval. A phase-grouped view spanning the anchor and downstream markers would let me check the alignment context of the linked reads before finalizing.",
+      "evidence": [
+        "evidence_015f2bb61072fd3f56ced702c0a0e2e8",
+        "evidence_17d6611c7a24f930320c5d0b719c3271",
+        "evidence_72693b6d37ace260c9178634b0f12f8a",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_9577d5db7e62bbf985e1f9f5d21ef3e8",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "needs_input": null,
+      "igv_views": [
+        {
+          "start": 20955100,
+          "end": 20969100,
+          "display": "squish",
+          "sort": "HAPLOTYPE",
+          "group": "PHASE",
+          "color": "READ_STRAND",
+          "track_indices": null
+        }
+      ],
+      "key": "NA12877-chr22-20959352-20961970"
+    },
+    {
+      "verdict": "uncertain",
+      "diagnosis": "The maternal VCF implies HP1-to-HP2 across the endpoints, but the right-hand maternal genotype has GQ 3 and the next informative marker at 21,166,076 implies HP1 again. All 26 eligible child reads and all 68 eligible paternal reads spanning both endpoints carry C/A. Eleven maternal reads also carry C/A across both maternal HP tags. Even with the upstream maternal-origin anchor and the downstream marker included, the same four-site pattern occurs in eight maternal-origin child reads, five maternal reads across both HP tags, and 20 paternal reads. The supplied IGV overview shows dense mismatches and alignment gaps around the locus. A tighter, phase-grouped view can test whether those alignment features account for the discordant maternal endpoint calls. The current reads leave the maternal switch unresolved.",
+      "evidence": [
+        "evidence_45c7dffac5721bb432743163e39bfa02",
+        "evidence_17d6611c7a24f930320c5d0b719c3271",
+        "evidence_72693b6d37ace260c9178634b0f12f8a",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_2fdf06e4e792ce5106f41908aad3826f",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "needs_input": null,
+      "igv_views": [
+        {
+          "start": 21165320,
+          "end": 21166140,
+          "display": "squish",
+          "sort": "HAPLOTYPE",
+          "group": "PHASE",
+          "color": "READ_STRAND",
+          "track_indices": null
+        }
+      ],
+      "key": "NA12878-chr22-21165471-21165499"
+    },
+    {
+      "verdict": "uncertain",
+      "diagnosis": "The maternal left endpoint is unphased at GQ 9, and the phased flanking markers both imply maternal HP2. The three eligible maternal-origin child reads that span the endpoints carry C/C/A/A across the endpoints and the two flanking sites. Four maternal HP1-tagged reads and one paternal read already carry that same pattern. The ungrouped IGV overview shows all three read tracks across the interval. A phase-grouped view would let me check whether the maternal reads carrying the child pattern share a consistent local alignment and whether the maternal T allele at the left endpoint distinguishes a separate read group. The current evidence leaves the maternal switch unresolved.",
+      "evidence": [
+        "evidence_1eb2e47fe644c6e6adc4e96de45ef34d",
+        "evidence_17d6611c7a24f930320c5d0b719c3271",
+        "evidence_72693b6d37ace260c9178634b0f12f8a",
+        "evidence_011c616cc7daae9462055951f520c454",
+        "evidence_c5c8725f42e21b66ff33c61290b8623c",
+        "evidence_d7ec8ec95ec8c439c3e44050161fe289",
+        "evidence_41c24b685e0828bbd2389e199bdba4a8",
+        "evidence_6f085174dda86f3223ed3385fbb419cb",
+        "evidence_213d68d21d5b2ac746932307cc6a19c4",
+        "evidence_fe448de6acff6a52954d1108f2c9d523"
+      ],
+      "needs_input": null,
+      "igv_views": [
+        {
+          "start": 21290840,
+          "end": 21292470,
+          "display": "squish",
+          "sort": "HAPLOTYPE",
+          "group": "PHASE",
+          "color": "READ_STRAND",
+          "track_indices": null
+        }
+      ],
+      "key": "NA12878-chr22-21291740-21291798"
+    }
+  ]
+}

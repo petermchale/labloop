@@ -1,8 +1,8 @@
 # Auditing three meiotic crossover candidates and testing flanking-marker evidence
 
 LabLoop used the [focused configuration](../crossover-focused.json) to review
-three candidate crossovers on chromosome 22 over two cycles. The source links
-below require the local `runs/` and `vault/` directories, which Git ignores.
+three candidate crossovers on chromosome 22 over two cycles. The original run
+artifacts and vault records are linked below.
 [Run manifest](../../runs/45e83829807b4e04b831c48a8359d7f1/run.json)
 
 ## Cycle 1 · Audit the candidates

@@ -1,0 +1,206 @@
+{
+  "$defs": {
+    "IgvSnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "reference": {
+          "description": "Project-relative indexed FASTA",
+          "title": "Reference",
+          "type": "string"
+        },
+        "tracks": {
+          "description": "Project-relative indexed BAM and optional VCF.gz tracks",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Tracks",
+          "type": "array"
+        },
+        "chromosome": {
+          "pattern": "^[A-Za-z0-9_.-]+$",
+          "title": "Chromosome",
+          "type": "string"
+        },
+        "view": {
+          "$ref": "#/$defs/IgvView"
+        }
+      },
+      "required": [
+        "reference",
+        "tracks",
+        "chromosome",
+        "view"
+      ],
+      "title": "IgvSnapshot",
+      "type": "object"
+    },
+    "IgvView": {
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "description": "First base, 1-based inclusive",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "description": "Last base, 1-based inclusive",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "title": "End",
+          "type": "integer"
+        },
+        "display": {
+          "enum": [
+            "collapse",
+            "squish",
+            "expand"
+          ],
+          "title": "Display",
+          "type": "string"
+        },
+        "sort": {
+          "enum": [
+            "POSITION",
+            "BASE",
+            "STRAND",
+            "QUALITY",
+            "READNAME",
+            "HAPLOTYPE"
+          ],
+          "title": "Sort",
+          "type": "string"
+        },
+        "group": {
+          "enum": [
+            "NONE",
+            "STRAND",
+            "SAMPLE",
+            "READ_GROUP",
+            "PHASE"
+          ],
+          "title": "Group",
+          "type": "string"
+        },
+        "color": {
+          "enum": [
+            "NONE",
+            "READ_STRAND",
+            "SAMPLE",
+            "READ_GROUP",
+            "MAPPED_SIZE"
+          ],
+          "title": "Color",
+          "type": "string"
+        },
+        "track_indices": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Zero-based indices into the product's track list, in display order, or null for all",
+          "title": "Track Indices"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "display",
+        "sort",
+        "group",
+        "color",
+        "track_indices"
+      ],
+      "title": "IgvView",
+      "type": "object"
+    },
+    "IgvWorkProduct": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "type_name": {
+          "description": "Short PascalCase ontology type, e.g. CrossoverCandidate; no spaces or underscores.",
+          "maxLength": 64,
+          "pattern": "^[A-Z][A-Za-z0-9]{0,63}$",
+          "title": "Type Name",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string",
+            "pattern": "^evidence_[0-9a-f]{32}$"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "igv_snapshot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/IgvSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "key",
+        "type_name",
+        "description",
+        "evidence",
+        "igv_snapshot"
+      ],
+      "title": "IgvWorkProduct",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "summary": {
+      "title": "Summary",
+      "type": "string"
+    },
+    "products": {
+      "items": {
+        "$ref": "#/$defs/IgvWorkProduct"
+      },
+      "title": "Products",
+      "type": "array"
+    },
+    "needs_input": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Needs Input"
+    }
+  },
+  "required": [
+    "summary",
+    "products",
+    "needs_input"
+  ],
+  "title": "IgvActorReport",
+  "type": "object"
+}

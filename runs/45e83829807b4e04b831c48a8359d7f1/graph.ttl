@@ -1,0 +1,1247 @@
+@prefix ll: <https://labloop.local/id/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ll:1e4099b536da4ebf849fa5bc9f6709ba a ll:Diagnosis ;
+    ll:because ll:324f470874c44773af835ea84c8a74a7 ;
+    ll:created "2026-11-11T04:07:57.719603+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:text "The trio reads support a paternal HP1-to-HP2 switch in NA12879 within NA12877 phase set 19256651. Eight eligible child reads carry G/G across the endpoints, four on each strand. Six also carry the paternal G allele at the upstream Mendelian anchor at 20,955,483. The father has 17 G/A reads on HP1 and 17 A/G reads on HP2, and neither parent has an eligible G/G spanning read. Two child reads link the G/G endpoint pair to paternal HP2 alleles at both 20,968,297 and 20,968,600. The phase-grouped IGV view shows child HP1 alignments extending across the candidate interval into the downstream marker region. The audited linkage supports a crossover within the interval at marker resolution." .
+
+ll:5259c1407d4d44cfbd0cc4a22885987b a ll:Diagnosis ;
+    ll:because ll:73f27d21641d41678a65661478c56b80 ;
+    ll:created "2026-11-11T04:13:56.938238+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:text "The VCF implies maternal HP1-to-HP2, with maternal GQ 15 at the left endpoint and 3 at the right. The reproduced read audit found C/A in all 26 eligible child reads, all 68 eligible paternal reads, and 11 maternal reads across both HP tags. The only qualifying flank was downstream at 21,178,758, where one child read links C/A to maternal HP1. Its maternal assignment comes from the child phase set, and the read covers no qualifying origin anchor. The local IGV view shows gaps and mismatches in the maternal pileup. Confident maternal phase and informative alleles linked on child reads on both sides would help resolve the switch." .
+
+ll:70de48265a5945dca20e821d1b695053 a ll:Diagnosis ;
+    ll:because ll:2a0a613144da4095a574ae857b63b555 ;
+    ll:created "2026-11-11T04:13:57.009020+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:text "The maternal left endpoint is unphased at GQ 9. At the right endpoint, the VCF assigns A to maternal HP2, while all eight eligible maternal reads tagged HP2 in that phase set carry G. The three child reads assigned maternal origin by the baseline carry C/A, and their four-site C/C/A/A pattern also occurs in four maternal reads and one paternal read. The reproduced stricter audit found no qualifying flank on either side and assigned maternal origin to zero endpoint-spanning child reads. The IGV view shows alignments spanning the interval in all three samples. Resolving maternal phase at both endpoints and linking it to informative markers on child reads would help distinguish a switch." .
+
+ll:854c96e90e324c1dabeb9e3f0f83b947 a ll:Diagnosis ;
+    ll:because ll:07e889d3f722427c81c21fe482365c69 ;
+    ll:created "2026-11-11T04:07:57.762999+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:text "The VCF suggests maternal HP1-to-HP2 across the endpoints. The right endpoint has maternal GQ 3, and the marker at 21,166,076 implies HP1 again. All 26 eligible child reads and all 68 eligible paternal reads spanning both endpoints carry C/A, as do 11 maternal reads across both HP tags. Including the upstream maternal-origin anchor and downstream marker still leaves the same four-site pattern in eight maternal-origin child reads, five maternal reads across both HP tags, and 20 paternal reads. The zoomed, phase-grouped IGV view shows mismatches and alignment gaps in the local maternal pileup. The read patterns leave the switch unresolved. Confidently phased maternal markers linked on child reads on both sides would help distinguish a switch." .
+
+ll:8675f09512a849bcac27b11cc02d0a37 a ll:Diagnosis ;
+    ll:because ll:81659e3fa5f34c719e2e5984382fb6a6 ;
+    ll:created "2026-11-11T04:13:56.899349+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:text "The trio reads support a paternal HP1-to-HP2 switch in NA12879 within NA12877 phase set 19256651. Eight child reads assigned to paternal origin carry G/G across the endpoints, four on each strand. Six directly carry the paternal allele at the Mendelian anchor at 20,955,483. The father has 17 HP1 G/A reads and 17 HP2 A/G reads spanning the endpoints, and neither parent has an eligible G/G spanning read. All eight G/G child reads link to upstream HP1 markers, three also link to downstream HP2 markers, and two cover both 20,968,297 and 20,968,600. The IGV overview shows child alignments extending from the interval into the downstream marker region. The reproduced BAM and VCF audit supports the switch at marker resolution." .
+
+ll:Claim a owl:Class ;
+    ll:created "2026-11-11T04:00:04.459981+00:00" ;
+    ll:text "Claim" .
+
+ll:Feedback a owl:Class ;
+    ll:created "2026-11-11T04:00:04.465338+00:00" ;
+    ll:text "Feedback" .
+
+ll:Hypothesis a owl:Class ;
+    ll:created "2026-11-11T04:00:04.454952+00:00" ;
+    ll:text "Hypothesis" .
+
+ll:WorkProduct a owl:Class ;
+    ll:created "2026-11-11T04:00:04.454052+00:00" ;
+    ll:text "WorkProduct" .
+
+ll:fd7cc56b96a149a192520a5d90418d62 a ll:Diagnosis ;
+    ll:because ll:887624952fa64d96b69887c4319e2c00 ;
+    ll:created "2026-11-11T04:07:57.825265+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:text "The maternal left endpoint is unphased at GQ 9, and the VCF implies maternal HP2 at both flanking markers. The three eligible maternal-origin child reads spanning both endpoints and both flanks carry C/C/A/A, a pattern also present in four maternal HP1-tagged reads and one paternal read. Three other maternal HP1-tagged reads carry T at the left endpoint, so that tag contains both C and T there. The phase-grouped IGV view shows alignments spanning the flanks in the child and both parents. The audited bases leave the maternal switch unresolved. Resolving the maternal phase at the left endpoint and linking it to additional informative markers on child reads would help." .
+
+ll:heuristic_5fce197902b9a8e508612549 a ll:Heuristic ;
+    ll:because ll:2a0a613144da4095a574ae857b63b555,
+        ll:73f27d21641d41678a65661478c56b80,
+        ll:81659e3fa5f34c719e2e5984382fb6a6 ;
+    ll:created "2026-11-11T04:14:24.327884+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:status "proposed" ;
+    ll:test "Reuse child_origins, phase_support, phase_supported, and spanning from trio_flank_linkage.py. Add a branch for candidates that fail endpoint eligibility, and evaluate read linkage directly between qualifying flanks without requiring the endpoint alleles. Prespecify the search radius, minimum molecule count, and parental coverage criteria. On held-out trio candidates with independently adjudicated switches and artifacts, compare the existing audit with and without this branch at a fixed false-positive rate. Measure how many additional confirmed switches it recovers and how wide their reported intervals are. Keep both maternal review cases as unresolved regression checks." ;
+    ll:text "Test whether confidently phased flanking markers can rescue crossover candidates with a low-quality, unphased, or read-discordant endpoint. The current audit requires both endpoints to pass before counting switch-supporting reads. A rescue call would require multiple child molecules to link opposite parental haplotypes at flanking markers in the same parental phase set, with parental reads corroborating marker phase and a Mendelian anchor corroborating child origin on at least one of those molecules. Report the interval between the corroborating markers. In the supported paternal case, three child reads linked upstream HP1 and downstream HP2 markers. One unresolved maternal case had only a downstream HP1 link on a read without a direct origin anchor. The other had no qualifying flanks, and all eight maternal HP2-tagged reads at the right endpoint disagreed with the VCF phase. Both maternal cases would remain unresolved under this rule. Whether the rule recovers additional genuine switches remains untested." .
+
+ll:heuristic_8d6779429db1e79ea69cd632 a ll:Heuristic ;
+    ll:because ll:07e889d3f722427c81c21fe482365c69,
+        ll:324f470874c44773af835ea84c8a74a7,
+        ll:887624952fa64d96b69887c4319e2c00 ;
+    ll:created "2026-11-11T04:08:27.874827+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:status "proposed" ;
+    ll:test "Reuse collect_markers and read_observations from trio_baseline.py and spanning_counts from critic_trio_audit.py. Replace the audit's hand-selected marker panels with an automatic search using a prespecified window and marker-quality criteria. Compare endpoint-only and augmented rankings on held-out trio candidates with independently adjudicated switches and artifacts. At a fixed review budget, test whether the augmented ranking recovers more confirmed switches, and report how often insufficient informative read coverage leaves candidates unresolved. Use the three reviewed loci as regression cases and keep the two maternal cases labeled unresolved." ;
+    ll:text "Test whether ranking crossover candidates by read-linked support from additional informative markers improves on ranking by endpoint evidence alone. For each candidate, look on both sides for confidently phased markers in the same phase set of the transmitting parent. Up-rank a switch when child reads assigned to that parent link the candidate to markers that corroborate the inferred haplotype on each side and the parental reads support the marker phase. In the supported paternal case, child reads linked the endpoint pattern to an upstream paternal-origin anchor, and two child reads linked that same endpoint pattern to two downstream HP2 markers beyond the original window. In both unresolved maternal cases, the longer child patterns also occurred in parental reads, and a low-quality or unphased endpoint weakened the haplotype assignment. Sparse coverage or a lack of informative markers can leave a genuine switch unresolved, so retain such candidates for review. These three reviews motivate the hypothesis but do not establish a gain in detection accuracy." .
+
+ll:01b6b1d181874d3db2948039f38166e7 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.134612+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:0613096bd5c24c8ea94079d7285a4aa0 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.072442+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:090591da20fe4b87bca22c30a421ae49 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.975622+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:0bf7ea58e84246f99c4f590f0f0f0260 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.908855+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" ;
+    ll:sha256 "6e783c7c7e9c329d4262751f586607d862bb7e3235241af27518c6db29faa5b3" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" .
+
+ll:0c62106340b8404b8246587783dfe4d8 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.165022+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" ;
+    ll:sha256 "6e783c7c7e9c329d4262751f586607d862bb7e3235241af27518c6db29faa5b3" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" .
+
+ll:0ca8f0e388084649843fa5133911b63d a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.147716+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:0dfc1494648b496b8217208f4846865f a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.078676+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" ;
+    ll:sha256 "e7483bc4736b043e238749bce90a26a80298c1ecf791f5c1ed3e620d682d8cc6" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" .
+
+ll:1114d6911d2343d3961b2364b2536834 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.736626+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:12e630f8d24a41b796ff0c9269065431 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.100980+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:1338ead45892403089c0fc0e4e111c18 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.953980+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" ;
+    ll:sha256 "3b2a3493daea06beee2d46dac39ad35c4380057bf28317822012b7c682aef90c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" .
+
+ll:13a6fd9875104bedb013e8fbc97975aa a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.851037+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:150aaa48023e4ff086a0b1f7ace9ddae a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.075179+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" ;
+    ll:sha256 "3b2a3493daea06beee2d46dac39ad35c4380057bf28317822012b7c682aef90c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" .
+
+ll:164ab7994f0a4a98b009602130792b1f a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.980098+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:18a74e00242e45d4ade0c7c935131cfb a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.902938+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12878-chr22-21165471-21165499.json" ;
+    ll:sha256 "f5e82551af3f017e8a83c90950df03a7d191fc6998ec6b2acece128b7093da83" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12878-chr22-21165471-21165499.json" .
+
+ll:1dae7a1f1fb44726b81b8ebb50bf42ef a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.065577+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/NA12877-chr22-20959352-20961970.json" ;
+    ll:sha256 "bb838413cd2dcfb47570dee2de480767a432312540e370473c4a7b8f44e1ae20" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/NA12877-chr22-20959352-20961970.json" .
+
+ll:1dbf66b0483946939e7376439545dd82 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.662849+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/NA12877-chr22-20959352-20961970.json" ;
+    ll:sha256 "bb838413cd2dcfb47570dee2de480767a432312540e370473c4a7b8f44e1ae20" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/NA12877-chr22-20959352-20961970.json" .
+
+ll:1ffadb014fe84e4ba5d5afb06114acd0 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:02.992790+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:21380e1e5e9745db8544411d3ad765ba a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.904389+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" ;
+    ll:sha256 "e7483bc4736b043e238749bce90a26a80298c1ecf791f5c1ed3e620d682d8cc6" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" .
+
+ll:2179479de096405bad5bda48555ab0d7 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.087784+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:2596198969334678802585d7e962ccd1 a ll:CrossoverCandidate ;
+    ll:created "2026-11-11T04:12:23.151197+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:files ll:01b6b1d181874d3db2948039f38166e7,
+        ll:0ca8f0e388084649843fa5133911b63d,
+        ll:28a969c8914b404cb30598fb2f799090,
+        ll:595b024d94924dcda580e22618c6a911,
+        ll:7149e84b7ca145bb84e57085380093a9,
+        ll:86f77ec0c7354bf39a0b3e1d7516dc35,
+        ll:8a02bfb7f8fa4caaa097a4a7d0b92b7c,
+        ll:9cc0d774dc9a4ffd8d30fe140df5aded,
+        ll:b5cceca913f94774953a5b173f3abfd8,
+        ll:cca2c0d76fdf43d690d7515e1e225ab1,
+        ll:d713dee825984b90976440a2f37f3cb4,
+        ll:d9e9928306254d378cdab259a2cd693e,
+        ll:f994aff61628476ebe8d2ebea650d9d6 ;
+    ll:status "proposed" ;
+    ll:text "The maternal switch remains unresolved. The endpoint VCF implies HP1-to-HP2, but maternal GQ is 15 at the left endpoint and 3 at the right. C/A occurs in all 26 eligible child reads and all 68 paternal reads spanning both endpoints, as well as 11 maternal reads across both HP tags. The automated search found no qualifying upstream marker and one qualifying downstream marker at 21,178,758. One maternally assigned child read links its C/A endpoint pattern to the HP1 allele at that marker." .
+
+ll:2863bedf68d740fbb269efff4527dd96 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.709515+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:28a969c8914b404cb30598fb2f799090 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.120657+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" ;
+    ll:sha256 "e7483bc4736b043e238749bce90a26a80298c1ecf791f5c1ed3e620d682d8cc6" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" .
+
+ll:2a174b2d8fa94131ab08036a6deba308 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.159133+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:2c61cb5154004da69180437b4e09af69 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.118676+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21291740-21291798.json" ;
+    ll:sha256 "a47ed0113ff807c5b4c9f80fb86b687ee3c8a60eb8ae477bd048e2fc05c9885a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21291740-21291798.json" .
+
+ll:303098248bb64102a5f59a85dc90e7b9 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.758361+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:30d2ba28eb534d2b9ee05cfb7da27f1f a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.855009+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" ;
+    ll:sha256 "6e783c7c7e9c329d4262751f586607d862bb7e3235241af27518c6db29faa5b3" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" .
+
+ll:3245ffdf0d4b4755b7f0c0108ae68cc4 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.951379+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" ;
+    ll:sha256 "e7483bc4736b043e238749bce90a26a80298c1ecf791f5c1ed3e620d682d8cc6" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" .
+
+ll:3349f17cb64b4c04be72109201b84bb2 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.201358+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:344cbc839fe54526b6102d783d0b475c a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.079349+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.ped" ;
+    ll:sha256 "8ae6facf7e41367d50c73911d87fd574afc5c6394d23b067548867ec88c90330" ;
+    ll:text "trio_dev_data/focused/trio.ped" .
+
+ll:37ef0aac7a2d494ebba3f586c830ce89 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.925035+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:385c673a64e34bd4b7c8701fd8be7479 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.744346+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:38bcabd5f12c4354ae5722502fb34887 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.820700+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:38d5d84d2d6648a591db0aa540f6629f a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.104851+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:3e25271f674f4796aadb0cc274ad8071 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.669852+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:3e39800c27ce42a280729243641d692b a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.062641+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:3ed09297fba34a6fba2cceeba1e7e92d a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.754545+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:46f757aebe144dbb99cebc67c2576d7d a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.907083+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:475c2aa3a2854b84a1b347b9e35e5f70 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.125119+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.ped" ;
+    ll:sha256 "8ae6facf7e41367d50c73911d87fd574afc5c6394d23b067548867ec88c90330" ;
+    ll:text "trio_dev_data/focused/trio.ped" .
+
+ll:4c6826ba5b1240139d9b0cd3094fc60f a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.910596+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:4f0e5b214e1d4e9c8d5082985498da39 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.967335+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:50aea150e4294e88a9d36341b1639ecb a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.133327+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:52d653a5d90e4d31aace96361d3b9a51 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.735006+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.ped" ;
+    ll:sha256 "8ae6facf7e41367d50c73911d87fd574afc5c6394d23b067548867ec88c90330" ;
+    ll:text "trio_dev_data/focused/trio.ped" .
+
+ll:530d0a880c8b495eaccec7ae1a801960 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.162864+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_comparison.json" ;
+    ll:sha256 "c36357e687dae9d433faae8bec0399876b541e8cef5197fc41c389617bc737ba" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_comparison.json" .
+
+ll:534ce5702a3041eba9302dbdc4410fb9 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.722119+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/view-2.png" ;
+    ll:sha256 "cb06937bfcefc8a52e03bb6c1146947df5b2e85b0c8f34b33e25f662f7c67ef4" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/view-2.png" .
+
+ll:538ac7a8b3244b93840a620c3805fdcc a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.176206+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" ;
+    ll:sha256 "3b2a3493daea06beee2d46dac39ad35c4380057bf28317822012b7c682aef90c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" .
+
+ll:54c54e2fcb1b456cbd0f6699bb72d904 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.179000+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" ;
+    ll:sha256 "e7483bc4736b043e238749bce90a26a80298c1ecf791f5c1ed3e620d682d8cc6" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" .
+
+ll:560c2c5468414b579275c56dfe6d05d1 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.645585+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/igv-p90h8th3/view-1.png" ;
+    ll:sha256 "4464903551194de876fbaf05dd22bf9c4e71af2b3db1eddba63d70f04f8c0c72" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/igv-p90h8th3/view-1.png" .
+
+ll:58a72f4e7f52473d824f7ee96c48bd0d a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.205262+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:5934311ba7ac47c4b09b2dbcbe68e08d a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.836236+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12877-chr22-20959352-20961970.json" ;
+    ll:sha256 "086a04c2bd038461057c585cb236159709bbe6226c66661aef8360304b5e7ba2" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12877-chr22-20959352-20961970.json" .
+
+ll:595b024d94924dcda580e22618c6a911 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.118178+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" ;
+    ll:sha256 "3b2a3493daea06beee2d46dac39ad35c4380057bf28317822012b7c682aef90c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" .
+
+ll:5cfbc6a30b3341efbb3d756a5a41d8f1 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.807256+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:5ea7c1e672d6423b9858840110a4b2f8 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.173750+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:6130ca47d9ae48c59ad8c24803a032c0 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.948693+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12878-chr22-21291740-21291798.json" ;
+    ll:sha256 "a7414deb5ccc549efc277efe59f762e633ef0bc247059482ee855108a11987b1" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12878-chr22-21291740-21291798.json" .
+
+ll:63c7d16c1bbd4a03a7cc927d16ed3564 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.876377+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:648de976748e49d480c9f8e2c8678281 a ll:CrossoverCandidate ;
+    ll:created "2026-11-11T04:12:23.106113+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:files ll:0613096bd5c24c8ea94079d7285a4aa0,
+        ll:0dfc1494648b496b8217208f4846865f,
+        ll:12e630f8d24a41b796ff0c9269065431,
+        ll:150aaa48023e4ff086a0b1f7ace9ddae,
+        ll:1dae7a1f1fb44726b81b8ebb50bf42ef,
+        ll:38d5d84d2d6648a591db0aa540f6629f,
+        ll:7325cabdb797494682d701735bd2d27d,
+        ll:91c10923529c46749667508487f6188a,
+        ll:99fe613569604eca8fdf181b77eb8d38,
+        ll:cbc33db6bb0a48b3974670762120270f,
+        ll:d1c82236feea4bed93f45589f8c43b04,
+        ll:e2d0db10db284db39130f9a0e1eb83fe,
+        ll:f0e5eabe301b4780826b9e6692f6454a ;
+    ll:status "proposed" ;
+    ll:text "The trio evidence supports a paternal HP1-to-HP2 crossover within phase set 19256651. Eight paternal-origin child reads carry G/G across the endpoints, four on each strand. Neither parent has an eligible G/G spanning read. All eight child reads link the endpoint pattern to upstream HP1 markers, and three also link it to downstream HP2 markers. Two of those three cover both 20,968,297 and 20,968,600. The listed endpoints bound the switch at marker resolution." .
+
+ll:653daea1c2ed40f88e6fd6f3a312f043 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.081003+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:665cb17cd18b40349449cb06604687c8 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.726066+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" ;
+    ll:sha256 "e7483bc4736b043e238749bce90a26a80298c1ecf791f5c1ed3e620d682d8cc6" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" .
+
+ll:66f254951c1242d6bfc4b6db374dc107 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.182234+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/trio.ped" ;
+    ll:sha256 "8ae6facf7e41367d50c73911d87fd574afc5c6394d23b067548867ec88c90330" ;
+    ll:text "trio_dev_data/focused/trio.ped" .
+
+ll:67c01da6b60d4e0692e1a48ac25530cb a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.887164+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:68a404a2ee5b422284ece82f3440cd4f a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.077444+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/candidates.tsv" ;
+    ll:sha256 "93a19a14a6640da280bf87386ba964573f630b9e3f4eb1bde39b153d449dad9a" ;
+    ll:text "trio_dev_data/focused/candidates.tsv" .
+
+ll:6b23ac8f67db4a51a79a16dffa6fdc47 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.771572+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/igv-p90h8th3/view-3.png" ;
+    ll:sha256 "502ecef23d361e351ba8bd217c289d724d5aec35761d934131acf1d6c12b7a7c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/igv-p90h8th3/view-3.png" .
+
+ll:6e440f99263e43f1a551dcc42e6a40c1 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.957900+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" ;
+    ll:sha256 "6e783c7c7e9c329d4262751f586607d862bb7e3235241af27518c6db29faa5b3" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" .
+
+ll:7049c238332a4318be56870345d62d12 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.018166+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/candidates.tsv" ;
+    ll:sha256 "93a19a14a6640da280bf87386ba964573f630b9e3f4eb1bde39b153d449dad9a" ;
+    ll:text "trio_dev_data/focused/candidates.tsv" .
+
+ll:7149e84b7ca145bb84e57085380093a9 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.110957+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21165471-21165499.json" ;
+    ll:sha256 "74fda601e6339c381506fdf3f15b037cda0a472e34671f0aaba59fb8a2a00de1" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21165471-21165499.json" .
+
+ll:719444cb8ccc4f09a11bcae872fd3087 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.815939+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:7239a835b05d4b9b9adfbae53a5ac995 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.956336+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:725ee33c23c248778942cbb7f50dd5c4 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.901380+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/igv-iim7ncih/view-2.png" ;
+    ll:sha256 "ff745e6c4d6b61da917adad199290fd8b8f89b27f6d2f48dd57737b7f9e5ec18" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/igv-iim7ncih/view-2.png" .
+
+ll:7325cabdb797494682d701735bd2d27d a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.062490+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12877-chr22-20959352-20961970.json" ;
+    ll:sha256 "086a04c2bd038461057c585cb236159709bbe6226c66661aef8360304b5e7ba2" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12877-chr22-20959352-20961970.json" .
+
+ll:74fa393db0bb4be7afc3bd9383fec602 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.733432+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21165471-21165499.json" ;
+    ll:sha256 "74fda601e6339c381506fdf3f15b037cda0a472e34671f0aaba59fb8a2a00de1" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21165471-21165499.json" .
+
+ll:79a05601aeb9418988f13af673b1798a a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.126585+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:7b515312f8724d6cb9c253995c941022 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.779934+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:7ee1c7872117491fa99a1a01eb341d53 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.120525+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:81e936eaabeb4bd493090ca4704a876f a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.021214+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.ped" ;
+    ll:sha256 "8ae6facf7e41367d50c73911d87fd574afc5c6394d23b067548867ec88c90330" ;
+    ll:text "trio_dev_data/focused/trio.ped" .
+
+ll:8277d43676de4adf88f363827f501bc8 a ll:CrossoverCandidate ;
+    ll:created "2026-11-11T04:04:03.100977+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:files ll:2179479de096405bad5bda48555ab0d7,
+        ll:344cbc839fe54526b6102d783d0b475c,
+        ll:653daea1c2ed40f88e6fd6f3a312f043,
+        ll:68a404a2ee5b422284ece82f3440cd4f,
+        ll:96f4838ce4254d3981675535de143014,
+        ll:995b16a0b7d94c3daeb4442d91416a9a,
+        ll:a48e56f63fc043299f754f6f13b8e00e,
+        ll:e6efe5a22dbf45a783583b41b580faf3 ;
+    ll:status "proposed" ;
+    ll:text "The VCF implies maternal HP1 to HP2 within phase set 20420164, with maternal GQ 3 at the right endpoint. The child's C/A endpoint pair occurs in all 26 eligible spanning child reads, all 68 spanning paternal reads, and 11 spanning maternal reads across both HP tags. Other maternal reads carry C/G (8) or G/A (39). The phased VCF implies maternal HP1 again at 21,166,076. The shared endpoint pair and return to HP1 leave a single maternal crossover unresolved." .
+
+ll:86f77ec0c7354bf39a0b3e1d7516dc35 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.108252+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12878-chr22-21165471-21165499.json" ;
+    ll:sha256 "f5e82551af3f017e8a83c90950df03a7d191fc6998ec6b2acece128b7093da83" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12878-chr22-21165471-21165499.json" .
+
+ll:8a02bfb7f8fa4caaa097a4a7d0b92b7c a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.123973+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/trio.ped" ;
+    ll:sha256 "8ae6facf7e41367d50c73911d87fd574afc5c6394d23b067548867ec88c90330" ;
+    ll:text "trio_dev_data/focused/trio.ped" .
+
+ll:8a7b881e93594c0f87b4c5be201b18ec a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.649835+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" ;
+    ll:sha256 "e7483bc4736b043e238749bce90a26a80298c1ecf791f5c1ed3e620d682d8cc6" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" .
+
+ll:9027483048514c25995b17a8c3e36452 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.122080+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/candidates.tsv" ;
+    ll:sha256 "93a19a14a6640da280bf87386ba964573f630b9e3f4eb1bde39b153d449dad9a" ;
+    ll:text "trio_dev_data/focused/candidates.tsv" .
+
+ll:904d783c30d7474cab1f64542f965fff a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.945130+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/igv-iim7ncih/view-3.png" ;
+    ll:sha256 "502ecef23d361e351ba8bd217c289d724d5aec35761d934131acf1d6c12b7a7c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/igv-iim7ncih/view-3.png" .
+
+ll:91c10923529c46749667508487f6188a a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.082407+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/trio.ped" ;
+    ll:sha256 "8ae6facf7e41367d50c73911d87fd574afc5c6394d23b067548867ec88c90330" ;
+    ll:text "trio_dev_data/focused/trio.ped" .
+
+ll:9590ddd242ca4b168cb27b9e6638b75a a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.794864+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:968a1ee09d9e443c8f81c5847ab545b6 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.791068+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.ped" ;
+    ll:sha256 "8ae6facf7e41367d50c73911d87fd574afc5c6394d23b067548867ec88c90330" ;
+    ll:text "trio_dev_data/focused/trio.ped" .
+
+ll:96f4838ce4254d3981675535de143014 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.099488+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:995b16a0b7d94c3daeb4442d91416a9a a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.096097+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:99fe613569604eca8fdf181b77eb8d38 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.070541+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" ;
+    ll:sha256 "6e783c7c7e9c329d4262751f586607d862bb7e3235241af27518c6db29faa5b3" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" .
+
+ll:9cc0d774dc9a4ffd8d30fe140df5aded a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.143400+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:9db97ea9b3c24953b9ae32ced8ae449a a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.637541+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/view-1.png" ;
+    ll:sha256 "41b36dfd75f4d3a70fc01c28a66b4eeb6be31d355a6b8ea1344a3f0a7c0900b2" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/view-1.png" .
+
+ll:9e86e5963fb74281b65a63d64cb1c67d a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.959558+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:9ffd620848ec441894c8725b09c025cc a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.928486+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:Criteria a owl:Class ;
+    ll:created "2026-11-11T04:00:04.450843+00:00" ;
+    ll:text "Criteria" .
+
+ll:DistillInstructions a owl:Class ;
+    ll:created "2026-11-11T04:00:04.451955+00:00" ;
+    ll:text "DistillInstructions" .
+
+ll:GitBranch a owl:Class ;
+    ll:created "2026-11-11T04:00:04.464416+00:00" ;
+    ll:text "GitBranch" .
+
+ll:GitCommit a owl:Class ;
+    ll:created "2026-11-11T04:00:04.463522+00:00" ;
+    ll:text "GitCommit" .
+
+ll:Goal a owl:Class ;
+    ll:created "2026-11-11T04:00:04.428856+00:00" ;
+    ll:text "Goal" .
+
+ll:a08f9ca27afb4263af60d9045c87ff20 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.686313+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:a0eafe2354434416bd74a180ccd52702 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.847043+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" ;
+    ll:sha256 "3b2a3493daea06beee2d46dac39ad35c4380057bf28317822012b7c682aef90c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" .
+
+ll:a48e56f63fc043299f754f6f13b8e00e a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.075244+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:a661c53c46ef40f0bc7c0e2d7f764e63 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.782767+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21291740-21291798.json" ;
+    ll:sha256 "a47ed0113ff807c5b4c9f80fb86b687ee3c8a60eb8ae477bd048e2fc05c9885a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21291740-21291798.json" .
+
+ll:a7111596beef47898326e41d4d5e2af0 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.160103+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21291740-21291798.json" ;
+    ll:sha256 "a47ed0113ff807c5b4c9f80fb86b687ee3c8a60eb8ae477bd048e2fc05c9885a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21291740-21291798.json" .
+
+ll:b5cceca913f94774953a5b173f3abfd8 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.126651+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:b5d8ae897dc44ab98847c4d17363b2f2 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.653988+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" ;
+    ll:sha256 "3b2a3493daea06beee2d46dac39ad35c4380057bf28317822012b7c682aef90c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" .
+
+ll:babd4d23a5884a51a6278466a2dd1f05 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.724139+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/igv-p90h8th3/view-2.png" ;
+    ll:sha256 "ff745e6c4d6b61da917adad199290fd8b8f89b27f6d2f48dd57737b7f9e5ec18" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/igv-p90h8th3/view-2.png" .
+
+ll:bdf7b88a927043be8b2b7d9bd8b2d772 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.666386+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.ped" ;
+    ll:sha256 "8ae6facf7e41367d50c73911d87fd574afc5c6394d23b067548867ec88c90330" ;
+    ll:text "trio_dev_data/focused/trio.ped" .
+
+ll:bf24ba822e52407f8016f1fb125e47df a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.192342+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:c49d56e01cfb400ca0d3f853e68f578f a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.917312+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:c9252927dc784c0cb406ec01a874d400 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.730100+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:cbc33db6bb0a48b3974670762120270f a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.091644+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:cbd408e29298418caad6c4af1e7682b4 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.031681+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" ;
+    ll:sha256 "d63ef85ec6c9a7c9bcd30d44374038d7d0ccc76745dda00553b61fa2b9425433" ;
+    ll:text "trio_dev_data/focused/NA12877.GRCh38.haplotagged.bam" .
+
+ll:cca2c0d76fdf43d690d7515e1e225ab1 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.112490+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_comparison.json" ;
+    ll:sha256 "c36357e687dae9d433faae8bec0399876b541e8cef5197fc41c389617bc737ba" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_comparison.json" .
+
+ll:ce3d87d0fa6b42c1973c3f0e689c2534 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.840859+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" ;
+    ll:sha256 "e7483bc4736b043e238749bce90a26a80298c1ecf791f5c1ed3e620d682d8cc6" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" .
+
+ll:ce5680a40e55466da4c30782a752d4b4 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.778220+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" ;
+    ll:sha256 "3b2a3493daea06beee2d46dac39ad35c4380057bf28317822012b7c682aef90c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" .
+
+ll:ce57c12dfc4e418c8c3af8bddea4e9d5 a ll:CrossoverCandidate ;
+    ll:created "2026-11-11T04:04:03.069107+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:files ll:1ffadb014fe84e4ba5d5afb06114acd0,
+        ll:3e39800c27ce42a280729243641d692b,
+        ll:7049c238332a4318be56870345d62d12,
+        ll:81e936eaabeb4bd493090ca4704a876f,
+        ll:cbd408e29298418caad6c4af1e7682b4,
+        ll:e7643c3f724347dca263619c6d9a21f0,
+        ll:e7a30e558acd4898bd7c47546a5ef38a,
+        ll:fd83b38046ef40da8044c160fdbdfe73 ;
+    ll:status "proposed" ;
+    ll:text "The trio genotypes imply paternal HP1 at 20,959,352 and HP2 at 20,961,970 within paternal phase set 19256651. A Mendelian marker at 20,955,483 anchors child HP1 to the father. Eight child HP1 reads carry G/G across the endpoints, and six of those also carry the paternal G allele at the upstream anchor. The father has 17 G/A and 17 A/G spanning reads, with zero G/G, while the mother has 26 G/A and 23 A/G, with zero G/G. These observations support a paternal crossover between the listed markers. The right endpoint is the only resolved paternal HP2 marker in the analyzed window." .
+
+ll:ce9b2f4bca5b48ccb52fa75bd020f545 a ll:CrossoverCandidate ;
+    ll:created "2026-11-11T04:12:23.210511+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:files ll:0c62106340b8404b8246587783dfe4d8,
+        ll:3349f17cb64b4c04be72109201b84bb2,
+        ll:530d0a880c8b495eaccec7ae1a801960,
+        ll:538ac7a8b3244b93840a620c3805fdcc,
+        ll:54c54e2fcb1b456cbd0f6699bb72d904,
+        ll:58a72f4e7f52473d824f7ee96c48bd0d,
+        ll:5ea7c1e672d6423b9858840110a4b2f8,
+        ll:66f254951c1242d6bfc4b6db374dc107,
+        ll:a7111596beef47898326e41d4d5e2af0,
+        ll:bf24ba822e52407f8016f1fb125e47df,
+        ll:cfd8440182bf44f08b55286940a9e431,
+        ll:d5ccbb91f2d14bf5be1c9f7c0b5dfcf8,
+        ll:e91afd62dcff436dbc34b21a12b39d3a ;
+    ll:status "proposed" ;
+    ll:text "The maternal switch remains unresolved. The left endpoint is unphased at maternal GQ 9. At the right endpoint, the VCF assigns A to maternal HP2, while all eight eligible HP2-tagged maternal reads covering that base carry G. The baseline assigns three C/A child reads to maternal origin, and the same endpoint pair occurs in four maternal reads and one paternal read. Under the stricter follow-up criteria, no flanking marker qualified on either side and no endpoint-spanning child read could be assigned maternal origin." .
+
+ll:cfd8440182bf44f08b55286940a9e431 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.157814+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12878-chr22-21291740-21291798.json" ;
+    ll:sha256 "a7414deb5ccc549efc277efe59f762e633ef0bc247059482ee855108a11987b1" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/flank-NA12878-chr22-21291740-21291798.json" .
+
+ll:d1c82236feea4bed93f45589f8c43b04 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.084133+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:d2383f482a9744488a66a56e70727115 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.859836+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:d5ccbb91f2d14bf5be1c9f7c0b5dfcf8 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.184346+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:d713dee825984b90976440a2f37f3cb4 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.122496+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/candidates.tsv" ;
+    ll:sha256 "93a19a14a6640da280bf87386ba964573f630b9e3f4eb1bde39b153d449dad9a" ;
+    ll:text "trio_dev_data/focused/candidates.tsv" .
+
+ll:d9e9928306254d378cdab259a2cd693e a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.114232+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" ;
+    ll:sha256 "6e783c7c7e9c329d4262751f586607d862bb7e3235241af27518c6db29faa5b3" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py" .
+
+ll:d9fd90e0e58b42fa85ccb5e73f785c3b a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.701827+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:dc45cbf0a44a45268424f89f4ad99f85 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.727944+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" ;
+    ll:sha256 "3b2a3493daea06beee2d46dac39ad35c4380057bf28317822012b7c682aef90c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" .
+
+ll:e2d0db10db284db39130f9a0e1eb83fe a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.080736+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/candidates.tsv" ;
+    ll:sha256 "93a19a14a6640da280bf87386ba964573f630b9e3f4eb1bde39b153d449dad9a" ;
+    ll:text "trio_dev_data/focused/candidates.tsv" .
+
+ll:e69e842920914c439f3c0acc737e5345 a ll:CrossoverCandidate ;
+    ll:created "2026-11-11T04:04:03.162354+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:files ll:2a174b2d8fa94131ab08036a6deba308,
+        ll:2c61cb5154004da69180437b4e09af69,
+        ll:475c2aa3a2854b84a1b347b9e35e5f70,
+        ll:50aea150e4294e88a9d36341b1639ecb,
+        ll:79a05601aeb9418988f13af673b1798a,
+        ll:7ee1c7872117491fa99a1a01eb341d53,
+        ll:9027483048514c25995b17a8c3e36452,
+        ll:ede008ad834c48e28c08b7cd8f7429fb ;
+    ll:status "proposed" ;
+    ll:text "The maternal left endpoint is unphased in the VCF at GQ 9. Three child reads on the maternally assigned child HP1 carry C/A across the endpoints, a pair also observed in four maternal reads and one paternal read. Those same three child reads carry C/C/A/A at 21,290,886, 21,291,740, 21,291,798 and 21,292,406, matching four maternal HP1 reads and one paternal read across all four sites. The phased VCF assigns maternal HP2 at both flanking markers. The existing maternal read pattern and sparse eligible child coverage leave the proposed switch unresolved." .
+
+ll:e6efe5a22dbf45a783583b41b580faf3 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.072359+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21165471-21165499.json" ;
+    ll:sha256 "74fda601e6339c381506fdf3f15b037cda0a472e34671f0aaba59fb8a2a00de1" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/NA12878-chr22-21165471-21165499.json" .
+
+ll:e7643c3f724347dca263619c6d9a21f0 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.066765+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:e7a30e558acd4898bd7c47546a5ef38a a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.023351+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/trio.vcf.gz" ;
+    ll:sha256 "852fcfcbc23e7cc772f06d45abf7d69fbc44ee22303fa6f754be5a73efaeb7e9" ;
+    ll:text "trio_dev_data/focused/trio.vcf.gz" .
+
+ll:e91afd62dcff436dbc34b21a12b39d3a a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.180867+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/candidates.tsv" ;
+    ll:sha256 "93a19a14a6640da280bf87386ba964573f630b9e3f4eb1bde39b153d449dad9a" ;
+    ll:text "trio_dev_data/focused/candidates.tsv" .
+
+ll:e9301c4d7ae14799ba2b0b1b47fa7c89 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.833143+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/igv-iim7ncih/view-1.png" ;
+    ll:sha256 "fb8f7754f2930f6eb95565aa44a64b396dc6c255736e6d99b0fc0b915d46e209" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/igv-iim7ncih/view-1.png" .
+
+ll:eab5e4a0fa904083b10c8a086e0f1bee a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.658184+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:ec8167a7901f4db79accd4f06da69510 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.774727+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" ;
+    ll:sha256 "e7483bc4736b043e238749bce90a26a80298c1ecf791f5c1ed3e620d682d8cc6" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.json" .
+
+ll:ede008ad834c48e28c08b7cd8f7429fb a ll:FilePath ;
+    ll:created "2026-11-11T04:04:03.153283+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" ;
+    ll:sha256 "a7b45a6fefe717365be383296c1ef68cdc6e19ade24c6e8038c03ceda5e21f7d" ;
+    ll:text "trio_dev_data/focused/NA12878.GRCh38.haplotagged.bam" .
+
+ll:f0e5eabe301b4780826b9e6692f6454a a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.068108+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_comparison.json" ;
+    ll:sha256 "c36357e687dae9d433faae8bec0399876b541e8cef5197fc41c389617bc737ba" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_comparison.json" .
+
+ll:f62bb16487cf459a963a4aa302491307 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.896385+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" ;
+    ll:sha256 "71f4b7d2cefb37861d6a148574257fdc8ba8ac4a37bb29a4633515d58a68225e" ;
+    ll:text "trio_dev_data/focused/NA12879.GRCh38.haplotagged.bam" .
+
+ll:f994aff61628476ebe8d2ebea650d9d6 a ll:FilePath ;
+    ll:created "2026-11-11T04:12:23.115721+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" ;
+    ll:sha256 "625eb0ec4bf08a510a1405a04843f510d421f812408c23f41186977f141c448a" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py" .
+
+ll:fa0ae42da1e14498a7ee76f1efe7d530 a ll:FilePath ;
+    ll:created "2026-11-11T04:07:57.766652+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/view-3.png" ;
+    ll:sha256 "e714a4fdf1d473736149be7a3291f1e0f42d91d376bca378f357643f4e2a2d60" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/view-3.png" .
+
+ll:fd123a2e95074124be5865aaaade3f21 a ll:FilePath ;
+    ll:created "2026-11-11T04:13:56.905718+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" ;
+    ll:sha256 "3b2a3493daea06beee2d46dac39ad35c4380057bf28317822012b7c682aef90c" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/critic_trio_audit.py" .
+
+ll:fd83b38046ef40da8044c160fdbdfe73 a ll:FilePath ;
+    ll:created "2026-11-11T04:04:02.989191+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:path "runs/45e83829807b4e04b831c48a8359d7f1/NA12877-chr22-20959352-20961970.json" ;
+    ll:sha256 "bb838413cd2dcfb47570dee2de480767a432312540e370473c4a7b8f44e1ae20" ;
+    ll:text "runs/45e83829807b4e04b831c48a8359d7f1/NA12877-chr22-20959352-20961970.json" .
+
+ll:009ade78842c4acdab0e74d761985f95 a ll:Criteria ;
+    ll:created "2026-11-11T04:00:04.469092+00:00" ;
+    ll:text "Use the trio reads and IGV views to assess whether the child switches between the two haplotypes of the same parent across each interval. Mark unresolved calls uncertain and continue." .
+
+ll:014159888dc943bd842105e31cd35a75 a ll:DistillInstructions ;
+    ll:created "2026-11-11T04:00:04.470234+00:00" ;
+    ll:text "Use the reviews to propose one testable way to improve crossover detection." .
+
+ll:07e889d3f722427c81c21fe482365c69 a ll:Observation ;
+    ll:because ll:8277d43676de4adf88f363827f501bc8 ;
+    ll:created "2026-11-11T04:07:57.759776+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:files ll:1114d6911d2343d3961b2364b2536834,
+        ll:303098248bb64102a5f59a85dc90e7b9,
+        ll:385c673a64e34bd4b7c8701fd8be7479,
+        ll:3ed09297fba34a6fba2cceeba1e7e92d,
+        ll:52d653a5d90e4d31aace96361d3b9a51,
+        ll:534ce5702a3041eba9302dbdc4410fb9,
+        ll:665cb17cd18b40349449cb06604687c8,
+        ll:74fa393db0bb4be7afc3bd9383fec602,
+        ll:babd4d23a5884a51a6278466a2dd1f05,
+        ll:c9252927dc784c0cb406ec01a874d400,
+        ll:dc45cbf0a44a45268424f89f4ad99f85 ;
+    ll:status "uncertain" ;
+    ll:text "The VCF suggests maternal HP1-to-HP2 across the endpoints. The right endpoint has maternal GQ 3, and the marker at 21,166,076 implies HP1 again. All 26 eligible child reads and all 68 eligible paternal reads spanning both endpoints carry C/A, as do 11 maternal reads across both HP tags. Including the upstream maternal-origin anchor and downstream marker still leaves the same four-site pattern in eight maternal-origin child reads, five maternal reads across both HP tags, and 20 paternal reads. The zoomed, phase-grouped IGV view shows mismatches and alignment gaps in the local maternal pileup. The read patterns leave the switch unresolved. Confidently phased maternal markers linked on child reads on both sides would help distinguish a switch." .
+
+ll:08fe48401fb446ae9c41ef5cbd6d94b8 a ll:GitBranch ;
+    ll:created "2026-11-11T04:00:04.557292+00:00" ;
+    ll:text "main" .
+
+ll:2496ccd9423e41dc8466ab4f5ac3e1e5 a ll:GitCommit ;
+    ll:created "2026-11-11T04:00:04.555787+00:00" ;
+    ll:gitDirty true ;
+    ll:text "e07a52acbdc581d80d82772e33a7a0566beaac61" .
+
+ll:2a0a613144da4095a574ae857b63b555 a ll:Observation ;
+    ll:because ll:ce9b2f4bca5b48ccb52fa75bd020f545 ;
+    ll:created "2026-11-11T04:13:56.982180+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:files ll:090591da20fe4b87bca22c30a421ae49,
+        ll:1338ead45892403089c0fc0e4e111c18,
+        ll:164ab7994f0a4a98b009602130792b1f,
+        ll:3245ffdf0d4b4755b7f0c0108ae68cc4,
+        ll:4f0e5b214e1d4e9c8d5082985498da39,
+        ll:6130ca47d9ae48c59ad8c24803a032c0,
+        ll:6e440f99263e43f1a551dcc42e6a40c1,
+        ll:7239a835b05d4b9b9adfbae53a5ac995,
+        ll:904d783c30d7474cab1f64542f965fff,
+        ll:9e86e5963fb74281b65a63d64cb1c67d ;
+    ll:status "uncertain" ;
+    ll:text "The maternal left endpoint is unphased at GQ 9. At the right endpoint, the VCF assigns A to maternal HP2, while all eight eligible maternal reads tagged HP2 in that phase set carry G. The three child reads assigned maternal origin by the baseline carry C/A, and their four-site C/C/A/A pattern also occurs in four maternal reads and one paternal read. The reproduced stricter audit found no qualifying flank on either side and assigned maternal origin to zero endpoint-spanning child reads. The IGV view shows alignments spanning the interval in all three samples. Resolving maternal phase at both endpoints and linking it to informative markers on child reads would help distinguish a switch." .
+
+ll:324f470874c44773af835ea84c8a74a7 a ll:Observation ;
+    ll:because ll:ce57c12dfc4e418c8c3af8bddea4e9d5 ;
+    ll:created "2026-11-11T04:07:57.716962+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:files ll:1dbf66b0483946939e7376439545dd82,
+        ll:2863bedf68d740fbb269efff4527dd96,
+        ll:3e25271f674f4796aadb0cc274ad8071,
+        ll:560c2c5468414b579275c56dfe6d05d1,
+        ll:8a7b881e93594c0f87b4c5be201b18ec,
+        ll:9db97ea9b3c24953b9ae32ced8ae449a,
+        ll:a08f9ca27afb4263af60d9045c87ff20,
+        ll:b5d8ae897dc44ab98847c4d17363b2f2,
+        ll:bdf7b88a927043be8b2b7d9bd8b2d772,
+        ll:d9fd90e0e58b42fa85ccb5e73f785c3b,
+        ll:eab5e4a0fa904083b10c8a086e0f1bee ;
+    ll:status "supported" ;
+    ll:text "The trio reads support a paternal HP1-to-HP2 switch in NA12879 within NA12877 phase set 19256651. Eight eligible child reads carry G/G across the endpoints, four on each strand. Six also carry the paternal G allele at the upstream Mendelian anchor at 20,955,483. The father has 17 G/A reads on HP1 and 17 A/G reads on HP2, and neither parent has an eligible G/G spanning read. Two child reads link the G/G endpoint pair to paternal HP2 alleles at both 20,968,297 and 20,968,600. The phase-grouped IGV view shows child HP1 alignments extending across the candidate interval into the downstream marker region. The audited linkage supports a crossover within the interval at marker resolution." .
+
+ll:73f27d21641d41678a65661478c56b80 a ll:Observation ;
+    ll:because ll:2596198969334678802585d7e962ccd1 ;
+    ll:created "2026-11-11T04:13:56.933023+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:files ll:0bf7ea58e84246f99c4f590f0f0f0260,
+        ll:18a74e00242e45d4ade0c7c935131cfb,
+        ll:21380e1e5e9745db8544411d3ad765ba,
+        ll:37ef0aac7a2d494ebba3f586c830ce89,
+        ll:46f757aebe144dbb99cebc67c2576d7d,
+        ll:4c6826ba5b1240139d9b0cd3094fc60f,
+        ll:725ee33c23c248778942cbb7f50dd5c4,
+        ll:9ffd620848ec441894c8725b09c025cc,
+        ll:c49d56e01cfb400ca0d3f853e68f578f,
+        ll:fd123a2e95074124be5865aaaade3f21 ;
+    ll:status "uncertain" ;
+    ll:text "The VCF implies maternal HP1-to-HP2, with maternal GQ 15 at the left endpoint and 3 at the right. The reproduced read audit found C/A in all 26 eligible child reads, all 68 eligible paternal reads, and 11 maternal reads across both HP tags. The only qualifying flank was downstream at 21,178,758, where one child read links C/A to maternal HP1. Its maternal assignment comes from the child phase set, and the read covers no qualifying origin anchor. The local IGV view shows gaps and mismatches in the maternal pileup. Confident maternal phase and informative alleles linked on child reads on both sides would help resolve the switch." .
+
+ll:81659e3fa5f34c719e2e5984382fb6a6 a ll:Observation ;
+    ll:because ll:648de976748e49d480c9f8e2c8678281 ;
+    ll:created "2026-11-11T04:13:56.897704+00:00" ;
+    ll:experiment ll:6e5dde445b484d4e91f5fbbb4b623b71 ;
+    ll:files ll:13a6fd9875104bedb013e8fbc97975aa,
+        ll:30d2ba28eb534d2b9ee05cfb7da27f1f,
+        ll:5934311ba7ac47c4b09b2dbcbe68e08d,
+        ll:63c7d16c1bbd4a03a7cc927d16ed3564,
+        ll:67c01da6b60d4e0692e1a48ac25530cb,
+        ll:a0eafe2354434416bd74a180ccd52702,
+        ll:ce3d87d0fa6b42c1973c3f0e689c2534,
+        ll:d2383f482a9744488a66a56e70727115,
+        ll:e9301c4d7ae14799ba2b0b1b47fa7c89,
+        ll:f62bb16487cf459a963a4aa302491307 ;
+    ll:status "supported" ;
+    ll:text "The trio reads support a paternal HP1-to-HP2 switch in NA12879 within NA12877 phase set 19256651. Eight child reads assigned to paternal origin carry G/G across the endpoints, four on each strand. Six directly carry the paternal allele at the Mendelian anchor at 20,955,483. The father has 17 HP1 G/A reads and 17 HP2 A/G reads spanning the endpoints, and neither parent has an eligible G/G spanning read. All eight G/G child reads link to upstream HP1 markers, three also link to downstream HP2 markers, and two cover both 20,968,297 and 20,968,600. The IGV overview shows child alignments extending from the interval into the downstream marker region. The reproduced BAM and VCF audit supports the switch at marker resolution." .
+
+ll:887624952fa64d96b69887c4319e2c00 a ll:Observation ;
+    ll:because ll:e69e842920914c439f3c0acc737e5345 ;
+    ll:created "2026-11-11T04:07:57.823314+00:00" ;
+    ll:experiment ll:9ab34a66f69742b2aaf35aca345f4861 ;
+    ll:files ll:38bcabd5f12c4354ae5722502fb34887,
+        ll:5cfbc6a30b3341efbb3d756a5a41d8f1,
+        ll:6b23ac8f67db4a51a79a16dffa6fdc47,
+        ll:719444cb8ccc4f09a11bcae872fd3087,
+        ll:7b515312f8724d6cb9c253995c941022,
+        ll:9590ddd242ca4b168cb27b9e6638b75a,
+        ll:968a1ee09d9e443c8f81c5847ab545b6,
+        ll:a661c53c46ef40f0bc7c0e2d7f764e63,
+        ll:ce5680a40e55466da4c30782a752d4b4,
+        ll:ec8167a7901f4db79accd4f06da69510,
+        ll:fa0ae42da1e14498a7ee76f1efe7d530 ;
+    ll:status "uncertain" ;
+    ll:text "The maternal left endpoint is unphased at GQ 9, and the VCF implies maternal HP2 at both flanking markers. The three eligible maternal-origin child reads spanning both endpoints and both flanks carry C/C/A/A, a pattern also present in four maternal HP1-tagged reads and one paternal read. Three other maternal HP1-tagged reads carry T at the left endpoint, so that tag contains both C and T there. The phase-grouped IGV view shows alignments spanning the flanks in the child and both parents. The audited bases leave the maternal switch unresolved. Resolving the maternal phase at the left endpoint and linking it to additional informative markers on child reads would help." .
+
+ll:Experiment a owl:Class ;
+    ll:created "2026-11-11T04:00:04.453084+00:00" ;
+    ll:text "Experiment" .
+
+ll:Heuristic a owl:Class ;
+    ll:created "2026-11-11T04:00:04.458396+00:00" ;
+    ll:text "Heuristic" .
+
+ll:db4876ef41dd4209bc24c29d2e1e2d0a a ll:Goal ;
+    ll:created "2026-11-11T04:00:04.467396+00:00" ;
+    ll:text "Identify meiotic crossovers by evaluating the three intervals in trio_dev_data/focused/candidates.tsv. Use trio reads and VCF genotypes to build evidence for each listed candidate ID, and specify an IGV view." .
+
+ll:CrossoverCandidate a owl:Class ;
+    ll:created "2026-11-11T04:04:03.068083+00:00" ;
+    ll:text "CrossoverCandidate" .
+
+ll:Diagnosis a owl:Class ;
+    ll:created "2026-11-11T04:00:04.457354+00:00" ;
+    ll:text "Diagnosis" .
+
+ll:Observation a owl:Class ;
+    ll:created "2026-11-11T04:00:04.456364+00:00" ;
+    ll:text "Observation" .
+
+ll:9ab34a66f69742b2aaf35aca345f4861 a ll:Experiment ;
+    ll:because ll:009ade78842c4acdab0e74d761985f95,
+        ll:014159888dc943bd842105e31cd35a75,
+        ll:db4876ef41dd4209bc24c29d2e1e2d0a ;
+    ll:branch ll:08fe48401fb446ae9c41ef5cbd6d94b8 ;
+    ll:commit ll:2496ccd9423e41dc8466ab4f5ac3e1e5 ;
+    ll:created "2026-11-11T04:08:27.879346+00:00" ;
+    ll:status "completed" ;
+    ll:text "45e83829807b4e04b831c48a8359d7f1: cycle 1" .
+
+ll:6e5dde445b484d4e91f5fbbb4b623b71 a ll:Experiment ;
+    ll:because ll:009ade78842c4acdab0e74d761985f95,
+        ll:014159888dc943bd842105e31cd35a75,
+        ll:db4876ef41dd4209bc24c29d2e1e2d0a ;
+    ll:branch ll:08fe48401fb446ae9c41ef5cbd6d94b8 ;
+    ll:commit ll:2496ccd9423e41dc8466ab4f5ac3e1e5 ;
+    ll:created "2026-11-11T04:14:24.331288+00:00" ;
+    ll:status "completed" ;
+    ll:text "45e83829807b4e04b831c48a8359d7f1: cycle 2" .
+
+ll:FilePath a owl:Class ;
+    ll:created "2026-11-11T04:00:04.462002+00:00" ;
+    ll:text "FilePath" .
+

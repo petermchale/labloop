@@ -1,0 +1,314 @@
+{
+  "candidate": {
+    "key": "NA12878-chr22-21291740-21291798",
+    "child": "NA12879",
+    "parent": "NA12878",
+    "chromosome": "chr22",
+    "left_1based": "21291740",
+    "right_1based": "21291798"
+  },
+  "motivating_lesson": "heuristic_8d6779429db1e79ea69cd632",
+  "window_1based_inclusive": [
+    21276740,
+    21306798
+  ],
+  "rules": {
+    "flank_bp": 15000,
+    "minimum_trio_gq": 20,
+    "accepted_vcf_filter": [
+      ".",
+      "PASS"
+    ],
+    "minimum_mapq": 30,
+    "minimum_baseq": 20,
+    "excluded_flags_hex": "0xf04",
+    "minimum_parent_reads_per_hp": 2,
+    "minimum_parent_concordance_per_hp": 0.8,
+    "minimum_distinct_child_reads_per_side": 2
+  },
+  "excluded_vcf_records": {
+    "non_biallelic_snv": 47
+  },
+  "excluded_reads": {
+    "NA12879": {
+      "flags_or_mapq": 80
+    },
+    "NA12878": {
+      "flags_or_mapq": 357
+    },
+    "NA12877": {
+      "flags_or_mapq": 181
+    }
+  },
+  "endpoint_only": {
+    "saved_baseline_window": [
+      21286740,
+      21296798
+    ],
+    "counts": {
+      "NA12879": {
+        "21245347:1 + C/A": 2,
+        "21245347:1 - C/A": 1,
+        "21245347:2 + C/G": 2,
+        "21245347:2 - C/G": 1
+      },
+      "NA12878": {
+        "21260630:1 + C/A": 2,
+        "21260630:1 + T/G": 3,
+        "21260630:1 - C/A": 2,
+        "21260630:2 + C/G": 6,
+        "21260630:2 - C/G": 2
+      },
+      "NA12877": {
+        "21236781:1 + C/A": 1,
+        "21236781:1 + C/G": 2,
+        "21236781:2 + C/G": 1,
+        "21236781:2 - C/G": 1
+      }
+    },
+    "assigned_child_counts": {
+      "21245347:1 + C/A": 2,
+      "21245347:1 - C/A": 1
+    },
+    "novel_assigned_child_counts": {},
+    "novel_assigned_child_read_count": 0,
+    "endpoints": {
+      "21291740": {
+        "alleles": [
+          "C",
+          "T"
+        ],
+        "filter": [],
+        "calls": {
+          "NA12879": {
+            "gt": [
+              0,
+              0
+            ],
+            "phased": false,
+            "ps": null,
+            "gq": 50,
+            "dp": 30,
+            "ad": [
+              30,
+              0
+            ]
+          },
+          "NA12878": {
+            "gt": [
+              0,
+              1
+            ],
+            "phased": false,
+            "ps": null,
+            "gq": 9,
+            "dp": 116,
+            "ad": [
+              82,
+              34
+            ]
+          },
+          "NA12877": {
+            "gt": [
+              0,
+              0
+            ],
+            "phased": false,
+            "ps": null,
+            "gq": 50,
+            "dp": 80,
+            "ad": [
+              80,
+              0
+            ]
+          }
+        },
+        "mendelian_options": [
+          [
+            1,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "transmitted_target_hp": null,
+        "read_bases_by_ps_hp": {
+          "NA12879": {
+            "21245347:1": {
+              "C": 3
+            },
+            "21245347:2": {
+              "C": 3
+            }
+          },
+          "NA12878": {
+            "21260630:2": {
+              "C": 8
+            },
+            "21260630:1": {
+              "C": 4,
+              "T": 3
+            }
+          },
+          "NA12877": {
+            "21236781:1": {
+              "C": 4
+            },
+            "21236781:2": {
+              "C": 2
+            }
+          }
+        }
+      },
+      "21291798": {
+        "alleles": [
+          "G",
+          "A"
+        ],
+        "filter": [],
+        "calls": {
+          "NA12879": {
+            "gt": [
+              1,
+              0
+            ],
+            "phased": true,
+            "ps": 21245347,
+            "gq": 17,
+            "dp": 32,
+            "ad": [
+              20,
+              12
+            ]
+          },
+          "NA12878": {
+            "gt": [
+              0,
+              1
+            ],
+            "phased": true,
+            "ps": 21260630,
+            "gq": 15,
+            "dp": 116,
+            "ad": [
+              72,
+              44
+            ]
+          },
+          "NA12877": {
+            "gt": [
+              1,
+              0
+            ],
+            "phased": true,
+            "ps": 21236781,
+            "gq": 8,
+            "dp": 83,
+            "ad": [
+              59,
+              24
+            ]
+          }
+        },
+        "mendelian_options": [
+          [
+            2,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "transmitted_target_hp": 2,
+        "read_bases_by_ps_hp": {
+          "NA12879": {
+            "21245347:1": {
+              "A": 3
+            },
+            "21245347:2": {
+              "G": 3
+            }
+          },
+          "NA12878": {
+            "21260630:2": {
+              "G": 8
+            },
+            "21260630:1": {
+              "A": 4,
+              "G": 3
+            }
+          },
+          "NA12877": {
+            "21236781:1": {
+              "G": 2,
+              "A": 2
+            },
+            "21236781:2": {
+              "G": 2
+            }
+          }
+        }
+      }
+    }
+  },
+  "target_phase_set": 21260630,
+  "transmitted_target_hp_at_endpoints": [
+    null,
+    null
+  ],
+  "endpoint_parent_phase_support": {
+    "21291740": {},
+    "21291798": {
+      "1": {
+        "expected": "G",
+        "counts": {
+          "A": 4,
+          "G": 3
+        }
+      },
+      "2": {
+        "expected": "A",
+        "counts": {
+          "G": 8
+        }
+      }
+    }
+  },
+  "eligible_endpoints_for_switch": false,
+  "child_origin_anchors_by_ps_hp": {},
+  "direct_origin_anchors_observed_by_assigned_child_read": {},
+  "assigned_child_endpoint_reads": [],
+  "expected_switch_endpoint_pattern": null,
+  "switch_endpoint_read_names": [],
+  "parent_endpoint_pattern_matches": null,
+  "flank_selection_counts": {
+    "left": {
+      "biallelic_snvs": 287,
+      "outside_target_phase_set": 248,
+      "low_or_missing_gq_or_filtered": 39
+    },
+    "right": {
+      "biallelic_snvs": 162,
+      "outside_target_phase_set": 135,
+      "low_or_missing_gq_or_filtered": 24,
+      "insufficient_parent_phase_support": 3
+    }
+  },
+  "eligible_flanks": {
+    "left": {},
+    "right": {}
+  },
+  "corroborating_flank_positions": {
+    "left": [],
+    "right": []
+  },
+  "corroborating_child_read_names_by_side": {
+    "left": [],
+    "right": []
+  },
+  "child_read_names_corroborating_both_sides": [],
+  "augmented_up_rank": false
+}

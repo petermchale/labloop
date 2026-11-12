@@ -4,7 +4,7 @@ __pycache__/
 *.egg-info/
 .DS_Store
 .env
-runs/
-vault/
+runs/*
+!runs/45e83829807b4e04b831c48a8359d7f1/
 trio_dev_data/*
 !trio_dev_data/focused/

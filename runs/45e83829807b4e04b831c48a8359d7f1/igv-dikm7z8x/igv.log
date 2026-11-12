@@ -1,0 +1,24 @@
+INFO [Nov 10,2026 21:03] [Main] Startup  IGV Version 2.19.6 09/05/2025 06:04 PM
+INFO [Nov 10,2026 21:03] [Main] Java 21.0.5 (build 21.0.5+11-LTS) 2024-10-15
+INFO [Nov 10,2026 21:03] [Main] Java Vendor: Eclipse Adoptium https://adoptium.net/
+INFO [Nov 10,2026 21:03] [Main] JVM: OpenJDK 64-Bit Server VM Temurin-21.0.5+11   
+INFO [Nov 10,2026 21:03] [Main] OS: Mac OS X 26.6.2 aarch64
+INFO [Nov 10,2026 21:03] [Main] IGV Directory: /Users/petermchale/igv
+INFO [Nov 10,2026 21:03] [Main] Resoluction scale = 0.0
+INFO [Nov 10,2026 21:03] [OAuthUtils] Loading Google oAuth properties
+INFO [Nov 10,2026 21:03] [CommandListener] Listening on port 60151
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+INFO [Nov 10,2026 21:03] [AmazonUtils] AWS default credentials found. AWS support enabled.
+INFO [Nov 10,2026 21:03] [BatchRunner] Executing batch script: /Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/batch.txt
+INFO [Nov 10,2026 21:03] [GenomeManager] Loading genome: ./input-1-chr22.fa
+INFO [Nov 10,2026 21:03] [TrackLoader] Loading resource:  /Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/./input-2-NA12879.GRCh38.haplotagged.bam
+INFO [Nov 10,2026 21:03] [TrackLoader] Loading resource:  /Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/./input-3-NA12877.GRCh38.haplotagged.bam
+INFO [Nov 10,2026 21:03] [TrackLoader] Loading resource:  /Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/./input-4-NA12878.GRCh38.haplotagged.bam
+INFO [Nov 10,2026 21:03] [TrackLoader] Loading resource:  /Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/./input-5-trio.vcf.gz
+INFO [Nov 10,2026 21:03] [TrackLoader] Loading resource:  /Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/./input-2-NA12879.GRCh38.haplotagged.bam
+INFO [Nov 10,2026 21:03] [TrackLoader] Loading resource:  /Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/./input-4-NA12878.GRCh38.haplotagged.bam
+INFO [Nov 10,2026 21:03] [TrackLoader] Loading resource:  /Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/./input-3-NA12877.GRCh38.haplotagged.bam
+INFO [Nov 10,2026 21:03] [TrackLoader] Loading resource:  /Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/igv-dikm7z8x/./input-5-trio.vcf.gz
+INFO [Nov 10,2026 21:04] [ShutdownThread] Shutting down

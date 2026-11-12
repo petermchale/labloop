@@ -1,0 +1,51 @@
+{
+  "@context": {
+    "@base": "https://labloop.local/id/",
+    "ll": "https://labloop.local/id/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "type": "@type",
+    "id": "@id",
+    "label": "rdfs:label",
+    "status": "ll:status",
+    "text": "ll:text",
+    "created": "ll:created",
+    "test": "ll:test",
+    "path": "ll:path",
+    "sha256": "ll:sha256",
+    "rejectedBecause": {
+      "@id": "ll:rejectedBecause",
+      "@type": "@id"
+    },
+    "gitDirty": "ll:gitDirty",
+    "subClassOf": {
+      "@id": "rdfs:subClassOf",
+      "@type": "@id"
+    },
+    "because": {
+      "@id": "ll:because",
+      "@type": "@id"
+    },
+    "experiment": {
+      "@id": "ll:experiment",
+      "@type": "@id"
+    },
+    "files": {
+      "@id": "ll:files",
+      "@type": "@id"
+    },
+    "commit": {
+      "@id": "ll:commit",
+      "@type": "@id"
+    },
+    "branch": {
+      "@id": "ll:branch",
+      "@type": "@id"
+    },
+    "target": {
+      "@id": "ll:target",
+      "@type": "@id"
+    }
+  }
+}

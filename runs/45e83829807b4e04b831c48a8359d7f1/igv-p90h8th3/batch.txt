@@ -1,0 +1,32 @@
+genome ./input-1-chr22.fa
+snapshotDirectory $SCRIPT_DIR
+setSleepInterval 250
+load ./input-2-NA12879.GRCh38.haplotagged.bam index=./input-2-NA12879.GRCh38.haplotagged.bam.bai
+load ./input-3-NA12877.GRCh38.haplotagged.bam index=./input-3-NA12877.GRCh38.haplotagged.bam.bai
+load ./input-4-NA12878.GRCh38.haplotagged.bam index=./input-4-NA12878.GRCh38.haplotagged.bam.bai
+load ./input-5-trio.vcf.gz index=./input-5-trio.vcf.gz.tbi
+goto chr22:20955100-20969100
+squish
+group PHASE
+sort HAPLOTYPE
+colorBy READ_STRAND
+snapshot view-1.png
+new
+genome ./input-1-chr22.fa
+load ./input-2-NA12879.GRCh38.haplotagged.bam index=./input-2-NA12879.GRCh38.haplotagged.bam.bai
+load ./input-4-NA12878.GRCh38.haplotagged.bam index=./input-4-NA12878.GRCh38.haplotagged.bam.bai
+load ./input-3-NA12877.GRCh38.haplotagged.bam index=./input-3-NA12877.GRCh38.haplotagged.bam.bai
+load ./input-5-trio.vcf.gz index=./input-5-trio.vcf.gz.tbi
+goto chr22:21165320-21166140
+squish
+group PHASE
+sort HAPLOTYPE
+colorBy READ_STRAND
+snapshot view-2.png
+goto chr22:21290840-21292470
+squish
+group PHASE
+sort HAPLOTYPE
+colorBy READ_STRAND
+snapshot view-3.png
+exit

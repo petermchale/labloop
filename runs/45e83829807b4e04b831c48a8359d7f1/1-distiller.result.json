@@ -1,0 +1,16 @@
+{
+  "lessons": [
+    {
+      "claim": "Test whether ranking crossover candidates by read-linked support from additional informative markers improves on ranking by endpoint evidence alone. For each candidate, look on both sides for confidently phased markers in the same phase set of the transmitting parent. Up-rank a switch when child reads assigned to that parent link the candidate to markers that corroborate the inferred haplotype on each side and the parental reads support the marker phase. In the supported paternal case, child reads linked the endpoint pattern to an upstream paternal-origin anchor, and two child reads linked that same endpoint pattern to two downstream HP2 markers beyond the original window. In both unresolved maternal cases, the longer child patterns also occurred in parental reads, and a low-quality or unphased endpoint weakened the haplotype assignment. Sparse coverage or a lack of informative markers can leave a genuine switch unresolved, so retain such candidates for review. These three reviews motivate the hypothesis but do not establish a gain in detection accuracy.",
+      "because": [
+        "324f470874c44773af835ea84c8a74a7",
+        "07e889d3f722427c81c21fe482365c69",
+        "887624952fa64d96b69887c4319e2c00"
+      ],
+      "test": "Reuse collect_markers and read_observations from trio_baseline.py and spanning_counts from critic_trio_audit.py. Replace the audit's hand-selected marker panels with an automatic search using a prespecified window and marker-quality criteria. Compare endpoint-only and augmented rankings on held-out trio candidates with independently adjudicated switches and artifacts. At a fixed review budget, test whether the augmented ranking recovers more confirmed switches, and report how often insufficient informative read coverage leaves candidates unresolved. Use the three reviewed loci as regression cases and keep the two maternal cases labeled unresolved."
+    }
+  ],
+  "retract": [],
+  "new_types": [],
+  "needs_input": null
+}

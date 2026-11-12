@@ -1,0 +1,181 @@
+{
+  "$defs": {
+    "IgvBatchVerdict": {
+      "additionalProperties": false,
+      "properties": {
+        "verdict": {
+          "enum": [
+            "supported",
+            "contradicted",
+            "uncertain"
+          ],
+          "title": "Verdict",
+          "type": "string"
+        },
+        "diagnosis": {
+          "title": "Diagnosis",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string",
+            "pattern": "^evidence_[0-9a-f]{32}$"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "needs_input": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Needs Input"
+        },
+        "igv_views": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/IgvView"
+              },
+              "maxItems": 4,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Additional views to inspect before returning a final verdict, or null",
+          "title": "Igv Views"
+        },
+        "key": {
+          "enum": [
+            "NA12877-chr22-20959352-20961970",
+            "NA12878-chr22-21165471-21165499",
+            "NA12878-chr22-21291740-21291798"
+          ],
+          "title": "Key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "verdict",
+        "diagnosis",
+        "evidence",
+        "needs_input",
+        "igv_views",
+        "key"
+      ],
+      "title": "IgvBatchVerdict",
+      "type": "object"
+    },
+    "IgvView": {
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "description": "First base, 1-based inclusive",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "title": "Start",
+          "type": "integer"
+        },
+        "end": {
+          "description": "Last base, 1-based inclusive",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "title": "End",
+          "type": "integer"
+        },
+        "display": {
+          "enum": [
+            "collapse",
+            "squish",
+            "expand"
+          ],
+          "title": "Display",
+          "type": "string"
+        },
+        "sort": {
+          "enum": [
+            "POSITION",
+            "BASE",
+            "STRAND",
+            "QUALITY",
+            "READNAME",
+            "HAPLOTYPE"
+          ],
+          "title": "Sort",
+          "type": "string"
+        },
+        "group": {
+          "enum": [
+            "NONE",
+            "STRAND",
+            "SAMPLE",
+            "READ_GROUP",
+            "PHASE"
+          ],
+          "title": "Group",
+          "type": "string"
+        },
+        "color": {
+          "enum": [
+            "NONE",
+            "READ_STRAND",
+            "SAMPLE",
+            "READ_GROUP",
+            "MAPPED_SIZE"
+          ],
+          "title": "Color",
+          "type": "string"
+        },
+        "track_indices": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Zero-based indices into the product's track list, in display order, or null for all",
+          "title": "Track Indices"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "display",
+        "sort",
+        "group",
+        "color",
+        "track_indices"
+      ],
+      "title": "IgvView",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviews": {
+      "items": {
+        "$ref": "#/$defs/IgvBatchVerdict"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Reviews",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reviews"
+  ],
+  "title": "IgvCritiqueBatch",
+  "type": "object"
+}

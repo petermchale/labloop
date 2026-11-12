@@ -1,0 +1,76 @@
+{
+  "$defs": {
+    "BatchVerdict": {
+      "additionalProperties": false,
+      "properties": {
+        "verdict": {
+          "enum": [
+            "supported",
+            "contradicted",
+            "uncertain"
+          ],
+          "title": "Verdict",
+          "type": "string"
+        },
+        "diagnosis": {
+          "title": "Diagnosis",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string",
+            "pattern": "^evidence_[0-9a-f]{32}$"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "needs_input": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Needs Input"
+        },
+        "key": {
+          "enum": [
+            "NA12877-chr22-20959352-20961970",
+            "NA12878-chr22-21165471-21165499",
+            "NA12878-chr22-21291740-21291798"
+          ],
+          "title": "Key",
+          "type": "string"
+        }
+      },
+      "required": [
+        "verdict",
+        "diagnosis",
+        "evidence",
+        "needs_input",
+        "key"
+      ],
+      "title": "BatchVerdict",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviews": {
+      "items": {
+        "$ref": "#/$defs/BatchVerdict"
+      },
+      "maxItems": 3,
+      "minItems": 3,
+      "title": "Reviews",
+      "type": "array"
+    }
+  },
+  "required": [
+    "reviews"
+  ],
+  "title": "CritiqueBatch",
+  "type": "object"
+}

@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "/Users/petermchale/.local/bin/codex",
+    "exec",
+    "--cd",
+    "/Users/petermchale/labloop",
+    "--sandbox",
+    "workspace-write",
+    "--skip-git-repo-check",
+    "--ephemeral",
+    "--color",
+    "never",
+    "--json",
+    "--output-schema",
+    "/Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/2-critic-batch-0.schema.json",
+    "--output-last-message",
+    "/Users/petermchale/labloop/runs/45e83829807b4e04b831c48a8359d7f1/2-critic-batch-0.result.json",
+    "-c",
+    "model_reasoning_effort=\"medium\"",
+    "-"
+  ],
+  "role": "critic",
+  "codex_version": "codex-cli 0.167.0",
+  "sandbox": "workspace-write",
+  "timeout_seconds": 900,
+  "returncode": 0,
+  "timed_out": false,
+  "latency_seconds": 93.56346241617575
+}

@@ -1,0 +1,111 @@
+{
+  "$defs": {
+    "Lesson": {
+      "additionalProperties": false,
+      "properties": {
+        "claim": {
+          "title": "Claim",
+          "type": "string"
+        },
+        "because": {
+          "items": {
+            "enum": [
+              "324f470874c44773af835ea84c8a74a7",
+              "07e889d3f722427c81c21fe482365c69",
+              "887624952fa64d96b69887c4319e2c00"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Because",
+          "type": "array"
+        },
+        "test": {
+          "title": "Test",
+          "type": "string"
+        }
+      },
+      "required": [
+        "claim",
+        "because",
+        "test"
+      ],
+      "title": "Lesson",
+      "type": "object"
+    },
+    "Retraction": {
+      "additionalProperties": false,
+      "properties": {
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "because": {
+          "items": {
+            "enum": [
+              "324f470874c44773af835ea84c8a74a7",
+              "07e889d3f722427c81c21fe482365c69",
+              "887624952fa64d96b69887c4319e2c00"
+            ],
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Because",
+          "type": "array"
+        }
+      },
+      "required": [
+        "target",
+        "because"
+      ],
+      "title": "Retraction",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "lessons": {
+      "items": {
+        "$ref": "#/$defs/Lesson"
+      },
+      "title": "Lessons",
+      "type": "array"
+    },
+    "retract": {
+      "items": {
+        "$ref": "#/$defs/Retraction"
+      },
+      "title": "Retract",
+      "type": "array"
+    },
+    "new_types": {
+      "items": {
+        "description": "Short PascalCase ontology type, e.g. CrossoverCandidate; no spaces or underscores.",
+        "maxLength": 64,
+        "pattern": "^[A-Z][A-Za-z0-9]{0,63}$",
+        "type": "string"
+      },
+      "title": "New Types",
+      "type": "array"
+    },
+    "needs_input": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Needs Input"
+    }
+  },
+  "required": [
+    "lessons",
+    "retract",
+    "new_types",
+    "needs_input"
+  ],
+  "title": "Distillation",
+  "type": "object"
+}
