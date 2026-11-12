@@ -49,13 +49,31 @@ missing tool, input, or scientific decision prevents its own work.
 On first opening a vault, LabLoop initializes classes for goals, criteria, distill
 instructions, experiments, work products, hypotheses, observations, diagnoses, claims, heuristics,
 file paths, Git references, and scientist feedback. Learning can add classes;
-new predicates require updating `context.jsonld`. Replace the example namespace
-before public publication.
+new predicates require updating `context.jsonld`.
 
 Lessons remain **hypotheses to test**, with observation references and suggested
 tests. Retractions require current contradictory observations. Rejected assertions
 remain retrievable with their provenance, but rejected heuristics leave the actor's
 lesson list and cannot silently reappear as identical proposals.
+
+### Publish the knowledge graph
+
+LabLoop uses Semantic Web standards to represent knowledge records and their
+relationships as an RDF graph. Other tools can read the graph in Turtle or
+JSON-LD. [RDF](https://www.w3.org/TR/rdf11-concepts/) ·
+[JSON-LD](https://www.w3.org/TR/json-ld11/)
+
+Export the vault in either format:
+
+```bash
+python -m labloop.cli export --vault vault --format turtle > graph.ttl
+python -m labloop.cli export --vault vault --format json-ld > graph.jsonld
+```
+
+Review the export before sharing it, then upload the file to a web host as
+`text/turtle` or `application/ld+json`, respectively. If readers need to resolve
+individual record identifiers over HTTP, publish them under a stable public
+namespace in place of the example `https://labloop.local/id/` namespace.
 
 ### Supply scientist feedback
 

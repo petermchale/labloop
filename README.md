@@ -154,6 +154,10 @@ By default, an experiment creates and populates `vault/` with Markdown knowledge
 ontology classes, and a shared `context.jsonld`. Pass `--vault PATH` to use another
 location; the demo above uses `runs/demo-vault/`.
 
+The knowledge base uses Semantic Web standards. You can
+[publish its RDF graph](docs/knowledge-base.md#publish-the-knowledge-graph) as
+Turtle or JSON-LD on the web.
+
 Experiments save a `run.json` manifest, evidence, and per-role logs under `runs/`.
 To follow the first actor in a second terminal:
 
