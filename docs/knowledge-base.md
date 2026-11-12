@@ -81,12 +81,12 @@ Record scientist feedback and start a new run with the same vault:
 
 ```bash
 python -m labloop.cli feedback scientist-feedback.json --vault vault
-python -m labloop.cli run examples/crossover-discovery.json --cycles 2 --vault vault
+python -m labloop.cli run examples/crossover-focused.json --cycles 2 --vault vault
 ```
 
 The latest 30 scientist feedback records are automatically supplied; older ones
 remain retrievable. Feedback adds context without guaranteeing priority. To make a
-new hypothesis the explicit task, copy `examples/crossover-discovery.json`, revise its `goal`, and run
+new hypothesis the explicit task, copy `examples/crossover-focused.json`, revise its `goal`, and run
 that configuration with the same vault. Keep the criteria unless the scientific
 question requires different ones.
 

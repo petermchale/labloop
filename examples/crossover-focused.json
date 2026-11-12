@@ -1,0 +1,8 @@
+{
+  "goal": "Identify meiotic crossovers by evaluating the three intervals in trio_dev_data/focused/candidates.tsv. Use trio reads and VCF genotypes to build evidence for each listed candidate ID, and specify an IGV view.",
+  "criteria": "Use the trio reads and IGV views to assess whether the child switches between the two haplotypes of the same parent across each interval. Mark unresolved calls uncertain and continue.",
+  "distill": "Use the reviews to propose one testable way to improve crossover detection.",
+  "max_products": 3,
+  "critic_batch_size": 10,
+  "igv_snapshots": true
+}

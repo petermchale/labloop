@@ -1,6 +1,6 @@
 # Future work
 
-- **Harden criteria:** The actor or critic could technically overwrite criteria in `examples/crossover-discovery.json`
+- **Harden criteria:** The actor or critic could technically overwrite criteria in `examples/crossover-focused.json`
 because they have write access to the project.
 Their prompts prohibit changing inputs, but LabLoop does not enforce that restriction.
 We'll want to harden that.

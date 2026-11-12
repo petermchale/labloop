@@ -59,24 +59,22 @@ dataset at hand, then turn that evidence into a reproducible filtering procedure
 | Reads | Mapping/base quality, ambiguous alignments, support at informative markers | Coverage and haplotype connectivity |
 | Crossover candidates | Flanking-marker support, phase-block boundaries and phasing confidence, suspicious clusters | Real events with weak or unusual evidence |
 
-### How LabLoop develops a filter for crossovers
+### How LabLoop audits crossover candidates
 
 LabLoop's **actor → critic → distiller** loop automates the repeated investigation
 normally done by a bioinformatician inspecting calls and revising scripts:
 
-1. **Discover and revise.** The actor runs pedigree-aware phasing with
-   `whatshap phase --ped --recombination-list`, reports individual candidates,
-   and develops analysis code. In later cycles it uses prior lessons to choose
-   changes, which can include filtering variants or reads before rerunning phasing,
-   or filtering the resulting candidates.
+1. **Build the evidence.** The actor evaluates three predefined chromosome 22
+   intervals using the trio's reads and genotype calls. It reports each candidate
+   with evidence and specifies an initial IGV view.
 2. **Audit the evidence.** The critic evaluates each reported candidate against
    the scientist's fixed criteria, inspecting alignments and IGV snapshots,
    informative markers, parental origin, and phasing context.
 3. **Explain failures.** The distiller turns the audits into evidence-linked,
    testable lessons: for example, a hypothesis that a particular class of calls
    depends on unreliable genotypes, with a suggested test using a genotype filter.
-4. **Iterate.** The next iteration of the actor applies and tests proposed lessons;
-   the critic audits the new candidates, the distiller learns a lesson, if it exists.
+4. **Iterate.** The next actor tests a proposed lesson on the same candidates,
+   and the critic reviews the follow-up evidence under the same criteria.
 
 For example, if audits implicate low-quality markers in an apparent cluster of
 crossovers, the actor could filter those markers and rerun phasing. The follow-up
@@ -92,7 +90,7 @@ independent truth set or validation assay.
 IGV review helps diagnose artifacts but is not independent
 biological proof.
 
-### Run LabLoop to filter crossovers automatically
+### Run the focused crossover example
 
 Install Codex CLI, sign in with `codex login`, and install
 [IGV Desktop](https://igv.org/doc/desktop/DownloadPage/). With the environment above activated:
@@ -101,19 +99,30 @@ Install Codex CLI, sign in with `codex login`, and install
 python -m pip install -e '.[genomics]'
 ```
 
+The [focused configuration](examples/crossover-focused.json) reads candidate
+intervals from `trio_dev_data/focused/candidates.tsv`. If the focused fixture
+is missing, build it from the local chromosome 22 trio inputs in
+`trio_dev_data/input/`:
+
+```bash
+.venv/bin/python examples/prepare_crossover_fixture.py
+```
+
+The fixture data lives outside Git.
+
 Log in to macOS on the Mac where IGV Desktop is installed.
 
 - **Terminal.app:** Open Terminal.app on that Mac, change to the LabLoop
   repository, and run
-  `.venv/bin/python -m labloop.cli run examples/crossover-discovery.json --cycles 2`.
+  `.venv/bin/python -m labloop.cli run examples/crossover-focused.json --cycles 2`.
 - **Codex desktop:** Open this repository in Codex on the same Mac and paste
   the prompt below. Adjust the project path to match your checkout. The
   controller needs an approved launch outside the chat's sandbox so it can
   open IGV.
 
 ```text
-Run LabLoop's crossover example for two cycles from /Users/petermchale/labloop:
-.venv/bin/python -m labloop.cli run examples/crossover-discovery.json --cycles 2
+Run LabLoop's focused crossover example for two cycles from /Users/petermchale/labloop:
+.venv/bin/python -m labloop.cli run examples/crossover-focused.json --cycles 2
 
 I explicitly authorize an escalated launch of this command outside the chat's
 sandbox, use of my saved Codex authentication, and child Codex model sessions
@@ -135,10 +144,8 @@ critic automatically.
 See [IGV setup](docs/usage.md#igv-cli-and-snapshots) for launcher discovery,
 custom installations, and snapshot requirements.
 
-The example uses the chromosome 22 trio fixture in `trio_dev_data/input/`.
-The actor develops analyses, the critic audits each candidate in IGV, and distilled
-lessons reach the next iteration of the actor. LabLoop uses Codex's saved authentication and
-configured model; use `--model` to override it.
+LabLoop uses Codex's saved authentication and configured model. Use `--model`
+to override it.
 
 For your own task, copy an [example configuration](examples/demo.json), edit
 `goal`, `criteria`, and `distill`, and run it with a separate `--vault` per project.

@@ -2,7 +2,7 @@
 
 For installation and the demo, see the [README quick start](../README.md#quick-start).
 For the crossover workflow, see the [case study](../README.md#case-study-crossover-discovery).
-Use the [Codex launch prompt](../README.md#run-labloop-to-filter-crossovers-automatically)
+Use the [Codex launch prompt](../README.md#run-the-focused-crossover-example)
 for execution and permissions.
 
 ## CLI options
@@ -40,7 +40,7 @@ windows. `igvtools` cannot replace IGV for snapshots.
 
 With controller rendering enabled on macOS, use Terminal.app while signed in
 to the Mac desktop, or use an approved Codex desktop launch outside the chat's
-sandbox. See the [README launch instructions](../README.md#run-labloop-to-filter-crossovers-automatically).
+sandbox. See the [README launch instructions](../README.md#run-the-focused-crossover-example).
 
 The controller batches the actor's initial views before starting the critics.
 Each critic can send the controller up to two requests of four additional views
