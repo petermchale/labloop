@@ -6,4 +6,5 @@ __pycache__/
 .env
 runs/
 vault/
-trio_dev_data/
+trio_dev_data/*
+!trio_dev_data/focused/

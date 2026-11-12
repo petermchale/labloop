@@ -99,17 +99,16 @@ Install Codex CLI, sign in with `codex login`, and install
 python -m pip install -e '.[genomics]'
 ```
 
-The [focused configuration](examples/crossover-focused.json) reads candidate
-intervals from `trio_dev_data/focused/candidates.tsv`. If the focused fixture
-is missing, build it from the local chromosome 22 trio inputs in
-`trio_dev_data/input/`:
+The [focused configuration](examples/crossover-focused.json) uses the checked-in
+[three-candidate fixture](trio_dev_data/focused/). The
+[pedigree file](trio_dev_data/focused/trio.ped) records its data provenance.
+To rebuild the fixture, use the preparation script with the chromosome 22 trio
+inputs under `trio_dev_data/input/` and an absent `trio_dev_data/focused/` output
+directory:
 
 ```bash
 .venv/bin/python examples/prepare_crossover_fixture.py
 ```
-
-Git tracks the preparation script and ignores `trio_dev_data/`. The chromosome
-22 inputs must already be present locally to build the focused fixture.
 
 Log in to macOS on the Mac where IGV Desktop is installed.
 
