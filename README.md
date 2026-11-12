@@ -161,10 +161,11 @@ and start another experiment with the same vault.
 
 ### Walk through a completed run
 
-The [two-cycle crossover walkthrough](examples/crossover-walkthrough/README.md)
-follows three candidates through an IGV audit, a lesson saved in the vault, and
-the next actor's test of that lesson. The follow-up strengthened the evidence
-for one paternal crossover and left two maternal candidates unresolved.
+The [crossover walkthrough](examples/crossover-walkthrough/README.md) follows an
+actual run from the critic's audit through a lesson saved in the vault and the
+actor's follow-up test.
+
+<!-- To feature a new run, see examples/crossover-walkthrough/MAINTAINING.md. -->
 
 ## Status and documentation
 
