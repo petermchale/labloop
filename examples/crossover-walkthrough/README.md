@@ -1,4 +1,4 @@
-# Reassessing three meiotic crossover candidates with read-linked flanking markers
+# Auditing three meiotic crossover candidates and testing flanking-marker evidence
 
 LabLoop used the [focused configuration](../crossover-focused.json) to review
 three candidate crossovers on chromosome 22 over two cycles. The source links
