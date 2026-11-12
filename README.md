@@ -193,14 +193,13 @@ We used this approach to produce the [crossover walkthrough](#walk-through-a-com
 This is a prototype.
 
 - [Running guide](docs/usage.md): CLI options and detailed monitoring instructions.
-- [Knowledge and feedback](docs/knowledge-base.md): retrieval, RDF export, scientist
-  corrections, and requests for input.
+- [Knowledge and feedback](docs/knowledge-base.md): retrieval, RDF export, live vault
+  access, scientist corrections, and requests for input.
 - [Codex execution](docs/codex-backend.md): role invocation and experiment artifacts.
 - [Original development prompt](docs/original-prompt.md): instructions to a coding
   agent to create LabLoop, distinct from its subagents' runtime prompts.
 - [Source review](docs/source-review.md): research informing the design.
 - [Editable architecture diagram](docs/architecture.mmd).
-- [Future work](#future-work).
 - [Why LabLoop kept IGV CLI](docs/why-labloop-kept-igv-cli.md).
 
 ## Future work
