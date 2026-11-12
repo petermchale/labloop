@@ -56,24 +56,26 @@ tests. Retractions require current contradictory observations. Rejected assertio
 remain retrievable with their provenance, but rejected heuristics leave the actor's
 lesson list and cannot silently reappear as identical proposals.
 
-### Publish the knowledge graph
+### Live web access
 
 LabLoop uses Semantic Web standards to represent knowledge records and their
-relationships as an RDF graph. Other tools can read the graph in Turtle or
-JSON-LD. [RDF](https://www.w3.org/TR/rdf11-concepts/) ·
-[JSON-LD](https://www.w3.org/TR/json-ld11/)
+relationships as an RDF graph. The local `serve` command reads the vault on
+each request, so `/graph.ttl`, `/graph.jsonld`, and `/recall` reflect changes
+as LabLoop writes them. `/recall` performs lexical search. The server listens
+on localhost.
 
-Export the vault in either format:
+The planned web service will automatically refresh a published RDF graph as the
+vault evolves. Remote agents will be able to fetch the latest graph as Turtle
+or JSON-LD from a stable HTTPS URL and submit structured queries to a read-only
+SPARQL endpoint. Use stable public identifiers so agents can refer to records
+across updates. [SPARQL HTTP query protocol](https://www.w3.org/TR/sparql11-protocol/)
+
+For a point-in-time copy, export the vault in either format:
 
 ```bash
 python -m labloop.cli export --vault vault --format turtle > graph.ttl
 python -m labloop.cli export --vault vault --format json-ld > graph.jsonld
 ```
-
-Review the export before sharing it, then upload the file to a web host as
-`text/turtle` or `application/ld+json`, respectively. If readers need to resolve
-individual record identifiers over HTTP, publish them under a stable public
-namespace in place of the example `https://labloop.local/id/` namespace.
 
 ### Supply scientist feedback
 

@@ -154,9 +154,10 @@ By default, an experiment creates and populates `vault/` with Markdown knowledge
 ontology classes, and a shared `context.jsonld`. Pass `--vault PATH` to use another
 location; the demo above uses `runs/demo-vault/`.
 
-The knowledge base uses Semantic Web standards. You can
-[publish its RDF graph](docs/knowledge-base.md#publish-the-knowledge-graph) as
-Turtle or JSON-LD on the web.
+The knowledge base uses Semantic Web standards. The local HTTP server exposes
+the current RDF graph and supports text search. A
+[live web query endpoint](docs/knowledge-base.md#live-web-access) for remote
+agents is planned.
 
 Experiments save a `run.json` manifest, evidence, and per-role logs under `runs/`.
 To follow the first actor in a second terminal:
@@ -209,6 +210,9 @@ This is a prototype.
 because they have write access to the project.
 Their prompts prohibit changing inputs, but LabLoop does not enforce that restriction.
 We'll want to harden that.
+- **Live knowledge graph on the web.** Automatically update a published RDF
+  graph as LabLoop writes and revises knowledge. Give remote agents a stable
+  HTTPS URL and a read-only SPARQL endpoint.
 - **Knowledge base:** add a transactional database backend for concurrent access,
   indexed retrieval, and immutable record revisions; define whether Markdown
   remains authoritative or becomes an import/export format. Add SHACL validation
