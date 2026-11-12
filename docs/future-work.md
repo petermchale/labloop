@@ -1,10 +1,15 @@
 # Future work
 
-- **Generalize the role prompts.** Use domain-neutral terminology and examples
-  in `labloop/prompts/`. Supply IGV and genomics instructions only when the
-  relevant integration is enabled. Validate the change on a general task and
-  refresh the crossover run and vault evidence when the walkthrough is next
-  updated.
+- **Move genomics support out of the core.** Keep the shared role prompts,
+  CLI, controller, and base report schemas domain-neutral. Put crossover goals,
+  criteria, and scientific instructions in the example configuration. Move IGV
+  launcher discovery, request schemas, rendering, and follow-up instructions
+  into an optional tool integration enabled by that configuration. The core can
+  provide a generic interface for a tool request and its evidence or error, for
+  both single-product and batch reviews. When implementing this, test a generic
+  task with no integration and a crossover task with IGV enabled. Preserve the
+  readability of existing run manifests and vault records. Defer generating new
+  crossover evidence until the walkthrough is next updated.
 - **Harden criteria:** The actor or critic could technically overwrite criteria in `examples/crossover-focused.json`
 because they have write access to the project.
 Their prompts prohibit changing inputs, but LabLoop does not enforce that restriction.
