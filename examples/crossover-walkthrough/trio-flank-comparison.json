@@ -1,0 +1,115 @@
+{
+  "motivating_lesson": "heuristic_8d6779429db1e79ea69cd632",
+  "candidate_comparison": {
+    "NA12877-chr22-20959352-20961970": {
+      "endpoint_novel_assigned_child_reads": 8,
+      "augmented_up_rank": true,
+      "retained_for_review": true,
+      "corroborating_flank_positions": {
+        "left": [
+          20944785,
+          20945289,
+          20946020,
+          20946717,
+          20947704,
+          20947939,
+          20948637,
+          20948754,
+          20949402,
+          20949423,
+          20949530,
+          20950120,
+          20950175,
+          20952112,
+          20952455,
+          20952770,
+          20953947,
+          20955483,
+          20955646,
+          20955661,
+          20956047,
+          20956473,
+          20956772,
+          20957243,
+          20957433,
+          20958141
+        ],
+        "right": [
+          20968297,
+          20968600,
+          20968813,
+          20969069,
+          20969081,
+          20969178,
+          20975001,
+          20975977
+        ]
+      },
+      "corroborating_child_reads_by_side": {
+        "left": 8,
+        "right": 3
+      },
+      "corroborating_child_reads_on_both_sides": 3,
+      "eligible_flanks": {
+        "left": 26,
+        "right": 8
+      }
+    },
+    "NA12878-chr22-21165471-21165499": {
+      "endpoint_novel_assigned_child_reads": 0,
+      "augmented_up_rank": false,
+      "retained_for_review": true,
+      "corroborating_flank_positions": {
+        "left": [],
+        "right": []
+      },
+      "corroborating_child_reads_by_side": {
+        "left": 0,
+        "right": 0
+      },
+      "corroborating_child_reads_on_both_sides": 0,
+      "eligible_flanks": {
+        "left": 0,
+        "right": 1
+      }
+    },
+    "NA12878-chr22-21291740-21291798": {
+      "endpoint_novel_assigned_child_reads": 0,
+      "augmented_up_rank": false,
+      "retained_for_review": true,
+      "corroborating_flank_positions": {
+        "left": [],
+        "right": []
+      },
+      "corroborating_child_reads_by_side": {
+        "left": 0,
+        "right": 0
+      },
+      "corroborating_child_reads_on_both_sides": 0,
+      "eligible_flanks": {
+        "left": 0,
+        "right": 0
+      }
+    }
+  },
+  "endpoint_only_review_tiers": [
+    [
+      "NA12877-chr22-20959352-20961970"
+    ],
+    [
+      "NA12878-chr22-21165471-21165499",
+      "NA12878-chr22-21291740-21291798"
+    ]
+  ],
+  "augmented_review_tiers": [
+    [
+      "NA12877-chr22-20959352-20961970"
+    ],
+    [
+      "NA12878-chr22-21165471-21165499",
+      "NA12878-chr22-21291740-21291798"
+    ]
+  ],
+  "lost_candidates": [],
+  "scope": "Three previously audited intervals. No independent test set or detection accuracy estimate."
+}
