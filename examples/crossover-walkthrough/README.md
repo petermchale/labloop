@@ -1,4 +1,4 @@
-# How a crossover audit became a follow-up test
+# Reassessing three meiotic crossover candidates with read-linked flanking markers
 
 LabLoop reviewed three candidate crossovers on chromosome 22. The first critic
 found evidence for one paternal crossover and left two maternal candidates
