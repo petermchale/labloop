@@ -193,7 +193,7 @@ This is a prototype.
 - [Source review](docs/source-review.md): research informing the design.
 - [Editable architecture diagram](docs/architecture.mmd).
 - [Future work](#future-work).
-- [IGV CLI and igv-reports comparison](docs/igv-reports-comparison.md): findings from the renderer experiment and the decision to retain IGV CLI.
+- [Why LabLoop kept IGV CLI](docs/why-labloop-kept-igv-cli.md).
 
 ## Future work
 
