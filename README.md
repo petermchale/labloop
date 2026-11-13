@@ -170,6 +170,15 @@ We'll want to harden that.
   remains authoritative or becomes an import/export format. Add SHACL validation
   for RDF structure and relationships, richer source and assertion provenance,
   and graph-aware retrieval alongside text search.
+- **Share a lab vault across project checkouts.** Add an authenticated API for
+  reading and writing knowledge records, with project-level access and support
+  for concurrent runs. Lab members could run agents from their own Git checkouts
+  on a laptop or on CHPC. With proposed options such as
+  `--vault-url https://lab1.labloop.org --project crossover`, the controller
+  would retrieve relevant prior findings and save new observations, lessons,
+  and evidence references to the shared vault. Records could include the starting
+  Git commit and CHPC file paths so collaborators with cluster access can find
+  the inputs while large files stay on CHPC.
 - **Publish vaults as Linked Data.** The `labloop.org` domain has already
   been purchased for the project home.
   One could give
