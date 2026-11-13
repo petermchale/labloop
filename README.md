@@ -8,9 +8,6 @@ The [LabLoop presentation](https://docs.google.com/presentation/d/1FzK2NiQOgYmQb
 introduces the ideas behind LabLoop and shows the learning loop in action
 through a genomics case study on crossover discovery.
 
-LabLoop is a prototype. See the [documentation index](docs/README.md) for guides
-and design notes.
-
 ![LabLoop architecture: actor, critic, and distiller repeat over N cycles, sharing a knowledge base.](docs/architecture.svg)
 
 The scientist supplies three prompts in a JSON file:
@@ -24,7 +21,12 @@ The scientist supplies three prompts in a JSON file:
 Lessons remain hypotheses for the next actor to test. The critic evaluates the
 resulting evidence against the same criteria throughout the run.
 
-## Case study: crossover discovery
+LabLoop is a prototype. See the [documentation index](docs/README.md) for guides
+and design notes.
+
+<a name="case-study-crossover-discovery"></a>
+
+## Case study: meiotic crossover discovery in trios
 
 LabLoop audited three candidate meiotic crossovers on chromosome 22 using trio
 reads and genotype calls. The critic found evidence for one paternal switch

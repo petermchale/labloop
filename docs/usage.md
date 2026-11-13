@@ -1,7 +1,7 @@
 # Running LabLoop
 
 For installation and the demo, see the [README quick start](../README.md#quick-start).
-For the crossover workflow, see the [case study](../README.md#case-study-crossover-discovery)
+For the crossover workflow, see the [case study](../README.md#case-study-meiotic-crossover-discovery-in-trios)
 or [run the focused example](#run-the-focused-crossover-example).
 
 ## CLI options
