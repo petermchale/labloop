@@ -14,6 +14,11 @@ knowledge bases can also speed up peer review by helping reviewers trace
 claims to their supporting evidence and see which hypotheses are still open (compare
 [Paper2Agent](https://arxiv.org/pdf/2509.06917)).
 
+> The clear implication is that machine-readable science should be generated at
+> the point of publication, not after the fact.
+
+Booeshaghi, Luebbert, and Pachter (2026). [*Science should be machine-readable*](https://www.biorxiv.org/content/10.64898/2026.01.30.702911v1.full.pdf)
+
 LabLoop represents its knowledge base as RDF using Semantic Web standards.
 To share a live vault with agents on the web, run `labloop serve` behind an
 HTTPS reverse proxy. Agents can search the latest records or fetch the current
@@ -44,9 +49,6 @@ python -m pip install -e '.[test]'
 python -m labloop.cli run examples/demo.json --demo --cycles 2 --vault runs/demo-vault
 python -m pytest -q
 ```
-
-The demo uses a separate vault. `requirements-tested.txt` records tested direct
-dependency versions, rather than a complete dependency lockfile.
 
 ## Browse a run's evidence tree
 
