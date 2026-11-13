@@ -70,6 +70,15 @@ LabLoop. The defaults are `vault` and `runs`.
   <img src="docs/evidence-tree.png" width="480" alt="LabLoop evidence tree showing the crossover run on Cycle 2, with the tree guide expanded and the distilled lesson collapsed.">
 </a>
 
+### Walk through a completed run
+
+Read the [completed crossover run](examples/crossover-walkthrough/README.md)
+directly on GitHub without cloning the repository, installing dependencies, or
+starting the local evidence tree server. The walkthrough links the critic's
+audit, the distilled lesson, and the actor's follow-up test to their evidence.
+
+<!-- To feature a new run, see examples/crossover-walkthrough/MAINTAINING.md. -->
+
 ## Case study: crossover discovery
 
 LabLoop audits three candidate meiotic crossovers on chromosome 22 using trio
@@ -123,23 +132,6 @@ discovery, custom installations, and snapshot requirements.
 LabLoop uses Codex's saved authentication and configured model. Use `--model`
 to override it. See the [running guide](docs/usage.md#monitor-a-run) to find
 the run manifest and follow role logs.
-
-### Walk through a completed run
-
-Read the [completed crossover run](examples/crossover-walkthrough/README.md)
-directly on GitHub without cloning the repository, installing dependencies, or
-starting the local evidence tree server. The walkthrough links the critic's
-audit, the distilled lesson, and the actor's follow-up test to their evidence.
-
-<!-- To feature a new run, see examples/crossover-walkthrough/MAINTAINING.md. -->
-
-## How to summarize a run
-
-Point your agent at a run directory (`runs/RUN_ID/`) and ask for a summary,
-slides, or a short report. Have it start with `run.json` and cite the supporting
-evidence and vault records for its findings.
-
-We used this approach to produce the [crossover walkthrough](#walk-through-a-completed-run).
 
 ## Documentation
 
