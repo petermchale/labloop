@@ -165,19 +165,22 @@ This is a prototype.
 because they have write access to the project.
 Their prompts prohibit changing inputs, but LabLoop does not enforce that restriction.
 We'll want to harden that.
-- **Improve knowledge base:** add a transactional database backend for concurrent access,
-  indexed retrieval, and immutable record revisions; define whether Markdown
-  remains authoritative or becomes an import/export format. Add SHACL validation
-  for RDF structure and relationships, richer source and assertion provenance,
-  and graph-aware retrieval alongside text search.
+- **Validate the RDF graph with SHACL.** Define shapes for the RDF
+  graph to check required record properties and relationships, such as whether
+  a lesson cites an observation and whether that citation points to the right
+  type of record.
 - **Track provenance for auditing.** Use W3C PROV-O to link each processing
   step to the lab member responsible, the input files it used, and the outputs
   it produced. An auditor could see, for example, that lab member X processed
   file Y in a particular run and trace the resulting files back to that step.
+  Record the sources that support each research assertion.
   [W3C PROV-O](https://www.w3.org/TR/prov-o/)
 - **Share a lab vault across project checkouts.** Add an authenticated API for
-  reading and writing knowledge records, with project-level access and support
-  for concurrent runs. Lab members could run agents from their own Git checkouts
+  reading and writing knowledge records, with project-level access. Back it with
+  a transactional database for concurrent runs, indexed retrieval, and immutable
+  record revisions. Support graph queries alongside text search, and decide
+  whether Markdown remains authoritative or becomes an import/export format.
+  Lab members could run agents from their own Git checkouts
   on a laptop or on CHPC. With proposed options such as
   `--vault-url https://lab1.labloop.org --project crossover`, the controller
   would retrieve relevant prior findings and save new observations, lessons,
