@@ -116,5 +116,5 @@ graph as Turtle or JSON-LD and query it with RDF tools.
 
 <a name="roadmap"></a>
 
-The [full roadmap](docs/roadmap.md) also covers checkpoint commits for
+In addition to the goal of publishing vaults as Linked Data, the [roadmap](docs/roadmap.md) also covers checkpoint commits for
 reproducing experiments and authenticated access to shared lab vaults.
