@@ -1,19 +1,67 @@
 import argparse
 import json
+import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, urlparse
+from shutil import copyfileobj
+from urllib.parse import parse_qs, quote, urlparse
 
+from .evidence_view import cited_file, evidence_page
 from .knowledge import Vault
 
 
-def serve(vault_path, port):
+_IMAGE_PREVIEWS = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+                   ".gif": "image/gif", ".webp": "image/webp"}
+_TEXT_PREVIEWS = {".txt", ".md", ".log", ".py", ".r", ".sh", ".json", ".jsonl",
+                  ".csv", ".tsv", ".vcf", ".bed", ".ped", ".sam", ".ttl",
+                  ".html", ".svg", ".xml", ".yaml", ".yml"}
+
+
+def serve(vault_path, port, runs_path=Path("runs"), *, root=None):
+    root = Path.cwd() if root is None else root.resolve()
+
     class Handler(BaseHTTPRequestHandler):
+        def send_evidence_file(self, path):
+            if path is None:
+                self.send_error(404, "Cited file unavailable")
+                return
+            try:
+                file = path.open("rb")
+            except OSError:
+                self.send_error(404, "Cited file unavailable")
+                return
+            with file:
+                suffix = path.suffix.lower()
+                content_type = _IMAGE_PREVIEWS.get(suffix)
+                if suffix in _TEXT_PREVIEWS:
+                    content_type = "text/plain; charset=utf-8"
+                self.send_response(200)
+                self.send_header("Content-Type", content_type or "application/octet-stream")
+                self.send_header("Content-Length", str(os.fstat(file.fileno()).st_size))
+                self.send_header("X-Content-Type-Options", "nosniff")
+                self.send_header("Cache-Control", "no-store")
+                if content_type is None:
+                    self.send_header("Content-Disposition", f"attachment; filename*=UTF-8''{quote(path.name)}")
+                self.end_headers()
+                copyfileobj(file, self.wfile)
+
         def do_GET(self):
             parsed = urlparse(self.path)
             vault = Vault(vault_path)
-            if parsed.path == "/recall":
-                body = json.dumps(vault.recall(parse_qs(parsed.query).get("q", [""])[0])).encode()
+            query = parse_qs(parsed.query)
+            if parsed.path == "/evidence/file":
+                run, cycle, path = (query.get(key, [""])[0] for key in ("run", "cycle", "path"))
+                self.send_evidence_file(cited_file(vault.records, runs_path, root, run, cycle, path))
+                return
+            if parsed.path in ("/", "/evidence"):
+                page = evidence_page(vault.records, runs_path, query.get("run", [None])[0],
+                                     query.get("cycle", [None])[0], root=root)
+                if page is None:
+                    self.send_error(404, "Run or cycle not found in this vault")
+                    return
+                body, content_type = page.encode("utf-8"), "text/html; charset=utf-8"
+            elif parsed.path == "/recall":
+                body = json.dumps(vault.recall(query.get("q", [""])[0])).encode()
                 content_type = "application/json"
             elif parsed.path == "/graph.ttl":
                 body, content_type = vault.export().encode(), "text/turtle"
@@ -25,6 +73,8 @@ def serve(vault_path, port):
             self.send_response(200)
             self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(body)))
+            if content_type.startswith("text/html"):
+                self.send_header("Cache-Control", "no-store")
             self.end_headers()
             self.wfile.write(body)
     print(f"Knowledge server: http://127.0.0.1:{port}", flush=True)
@@ -57,7 +107,9 @@ def main():
     export.add_argument("--vault", type=Path, default=Path("vault"))
     export.add_argument("--format", choices=["turtle", "json-ld"], default="turtle")
     server = sub.add_parser("serve")
+    server.add_argument("--root", type=Path, default=Path.cwd(), help="Project root for vault, runs, and evidence paths")
     server.add_argument("--vault", type=Path, default=Path("vault"))
+    server.add_argument("--runs", type=Path, default=Path("runs"), help="Run manifest directory for the evidence view")
     server.add_argument("--port", type=int, default=8765)
     feedback = sub.add_parser("feedback", help="Record scientist outcome feedback or domain context")
     feedback.add_argument("report", type=Path)
@@ -106,7 +158,8 @@ def main():
     elif args.command == "export":
         print(Vault(args.vault).export(args.format))
     else:
-        serve(args.vault, args.port)
+        root = args.root.resolve()
+        serve(root / args.vault, args.port, root / args.runs, root=root)
 
 
 if __name__ == "__main__":

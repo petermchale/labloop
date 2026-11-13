@@ -1,4 +1,5 @@
 """A small Vault-LD-style server core; Markdown is authoritative, RDF is derived."""
+import hashlib
 import json
 import re
 from datetime import datetime, timezone
@@ -22,6 +23,10 @@ CONTEXT = {
     **{k: {"@id": "ll:" + k, "@type": "@id"} for k in
        ("because", "experiment", "files", "commit", "branch", "target")},
 }
+
+
+def heuristic_id(claim):
+    return "heuristic_" + hashlib.sha256(claim.strip().lower().encode()).hexdigest()[:24]
 
 
 class Vault:

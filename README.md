@@ -48,6 +48,28 @@ python -m pytest -q
 The demo uses a separate vault. `requirements-tested.txt` records tested direct
 dependency versions, rather than a complete dependency lockfile.
 
+## Browse a run's evidence tree
+
+From the repository root, with your virtual environment active, start the local server.
+
+```bash
+python -m labloop.cli serve --vault vault --runs runs
+```
+
+Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) and choose a run and cycle.
+Expand a distilled lesson to see the critic observations it cites. Each
+observation branches into the critic's evidence files and the actor work product
+it reviewed. Expand the work product to find the actor's evidence files.
+Click a filename to preview or download it, or choose **Open in VS Code**.
+
+For the quick-start demo above, use `--vault runs/demo-vault`. If you ran
+LabLoop with custom `--vault` or `--runs` directories, pass those same paths
+to the server.
+
+<a href="docs/evidence-tree.png">
+  <img src="docs/evidence-tree.png" width="480" alt="LabLoop evidence tree showing the crossover run on Cycle 2, with the tree guide expanded and the distilled lesson collapsed.">
+</a>
+
 ## Case study: crossover discovery
 
 ### Why crossover discovery needs more than a caller

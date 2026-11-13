@@ -1,11 +1,10 @@
-import hashlib
 import json
 import subprocess
 from pathlib import Path
 from uuid import uuid4
 
 from .critic_batch import review_batch
-from .knowledge import Vault
+from .knowledge import Vault, heuristic_id
 from .report_schemas import ActorReport, Critique, IgvActorReport, IgvCritique, distillation_schema
 from .file_provenance import RunArtifacts
 from .igv import render_views
@@ -182,7 +181,7 @@ def run_loop(config, root, agent, *, cycles=2, vault_dir="vault", run_dir="runs"
                 vault.add_type(name)
             for lesson in distilled.lessons:
                 # Stable claim identity avoids duplicate candidate rules across cycles/runs.
-                ident = "heuristic_" + hashlib.sha256(lesson.claim.strip().lower().encode()).hexdigest()[:24]
+                ident = heuristic_id(lesson.claim)
                 existing = vault.records.get(ident)
                 if existing and existing.get("status") == "rejected":
                     continue  # A dead end cannot silently resurrect itself.

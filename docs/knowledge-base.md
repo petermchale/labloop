@@ -14,6 +14,7 @@ access is read-only, bound to localhost, and is not an MCP server:
 python -m labloop.cli recall 'mapping ambiguity'
 python -m labloop.cli export --format turtle
 python -m labloop.cli serve --port 8765
+# Open http://127.0.0.1:8765/ in a browser for the evidence tree.
 # GET http://127.0.0.1:8765/recall?q=mapping
 # GET http://127.0.0.1:8765/graph.ttl
 # GET http://127.0.0.1:8765/graph.jsonld
@@ -63,6 +64,21 @@ relationships as an RDF graph. The local `serve` command reads the vault on
 each request, so `/graph.ttl`, `/graph.jsonld`, and `/recall` reflect changes
 as LabLoop writes them. `/recall` performs lexical search. The server listens
 on localhost.
+
+Open [the local evidence tree](http://127.0.0.1:8765/). Each run opens on its
+first cycle. Expand a lesson to follow its citations to critic observations.
+Each observation branches into the files the critic cited for its verdict and
+the actor work product it reviewed. Expand the work product to find the files
+the actor cited to support it. Shared records can appear on several branches.
+
+Click a cited filename to open it in a new tab. Text files and common image
+formats display in the browser, and other files download. **Open in VS Code**
+opens the local copy through the desktop editor. Reload the page to pick up
+new cycles or vault changes.
+The viewer matches each manifest's experiment IDs to the selected vault. If you
+used custom directories, pass the same `--vault` and `--runs` values to
+`serve` that you used for the run. Start the server from the project root
+or pass `--root` so it can resolve project-relative evidence paths.
 
 The planned web service will automatically refresh a published RDF graph as the
 vault evolves. Remote agents will be able to fetch the latest graph as Turtle
