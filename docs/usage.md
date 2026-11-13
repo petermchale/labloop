@@ -37,6 +37,17 @@ side. The chr22 FASTA retains the original coordinate system.
   --runs runs/focused --vault runs/focused-vault
 ```
 
+### Rebuild the crossover fixture
+
+The [pedigree file](../trio_dev_data/focused/trio.ped) records its data provenance.
+To rebuild the fixture, use the preparation script with the chromosome 22 trio
+inputs under `trio_dev_data/input/` and an absent `trio_dev_data/focused/` output
+directory:
+
+```bash
+.venv/bin/python examples/prepare_crossover_fixture.py
+```
+
 ## Setup troubleshooting
 
 ### IGV CLI and snapshots

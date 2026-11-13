@@ -72,60 +72,10 @@ LabLoop. The defaults are `vault` and `runs`.
 
 ## Case study: crossover discovery
 
-### Why crossover discovery needs more than a caller
-
-Bioinformaticians often need to separate biological signals from artifacts
-introduced by variant calling, alignment, and inference.
-Here the signal is an inherited meiotic crossover in a parent–child trio: a switch
-between the two homologs of a parent along the chromosome transmitted to the child.
-
-A predicted switch is only a candidate. Incorrect genotypes, misplaced reads, and
-phasing errors can mimic a change in inheritance. Repeats and structural variation
-can make several nearby markers wrong together, so a cluster of apparent switches
-may reflect one difficult region. Conversely, sparse informative markers can leave
-a genuine crossover localized only to a broad interval.
-
-Filtering therefore involves a tradeoff: permissive filters retain artifacts;
-strict filters can remove genuine events or the markers needed to resolve them.
-The task is to discover which evidence distinguishes reliable candidates in the
-dataset at hand, then turn that evidence into a reproducible filtering procedure.
-
-| Where to filter | Examples of rules to investigate | What could be lost |
-| --- | --- | --- |
-| Variants | Genotype quality, depth, allele balance, difficult genomic regions | Informative markers and breakpoint resolution |
-| Reads | Mapping/base quality, ambiguous alignments, support at informative markers | Coverage and haplotype connectivity |
-| Crossover candidates | Flanking-marker support, phase-block boundaries and phasing confidence, suspicious clusters | Real events with weak or unusual evidence |
-
-### How LabLoop audits crossover candidates
-
-LabLoop's **actor → critic → distiller** loop automates the repeated investigation
-normally done by a bioinformatician inspecting calls and revising scripts:
-
-1. **Build the evidence.** The actor evaluates three predefined chromosome 22
-   intervals using the trio's reads and genotype calls. It reports each candidate
-   with evidence and specifies an initial IGV view.
-2. **Audit the evidence.** The critic evaluates each reported candidate against
-   the scientist's fixed criteria, inspecting alignments and IGV snapshots,
-   informative markers, parental origin, and phasing context.
-3. **Explain failures.** The distiller turns the audits into evidence-linked,
-   testable lessons: for example, a hypothesis that a particular class of calls
-   depends on unreliable genotypes, with a suggested test using a genotype filter.
-4. **Iterate.** The next actor tests a proposed lesson on the same candidates,
-   and the critic reviews the follow-up evidence under the same criteria.
-
-For example, if audits implicate low-quality markers in an apparent cluster of
-crossovers, the actor could filter those markers and rerun phasing. The follow-up
-must examine whether the inheritance pattern is now better supported and what
-informative evidence was removed; A smaller call set alone is not success.
-
-The automation is the search for and testing of better analysis rules, guided by
-explanatory feedback in natural language. It is an agent-directed investigation, not a
-numerical optimizer. The current example defines
-candidate-level audits; it does not yet supply a held-out benchmark.
-Establishing improved precision and sensitivity requires an
-independent truth set or validation assay.
-IGV review helps diagnose artifacts but is not independent
-biological proof.
+LabLoop audits three candidate meiotic crossovers on chromosome 22 using trio
+reads and genotype calls. The [genomics presentation](https://docs.google.com/presentation/d/1FzK2NiQOgYmQbHzjBBOBRLEBbnM_KE8p-1YNgua9t1U/edit?usp=sharing)
+explains the crossover problem and follows the audit, distilled lesson, and
+follow-up test.
 
 ### Run the focused crossover example
 
@@ -137,15 +87,8 @@ python -m pip install -e '.[genomics]'
 ```
 
 The [focused configuration](examples/crossover-focused.json) uses the checked-in
-[three-candidate fixture](trio_dev_data/focused/). The
-[pedigree file](trio_dev_data/focused/trio.ped) records its data provenance.
-To rebuild the fixture, use the preparation script with the chromosome 22 trio
-inputs under `trio_dev_data/input/` and an absent `trio_dev_data/focused/` output
-directory:
-
-```bash
-.venv/bin/python examples/prepare_crossover_fixture.py
-```
+[three-candidate fixture](trio_dev_data/focused/). See the running guide if you
+need to [rebuild the fixture](docs/usage.md#rebuild-the-crossover-fixture).
 
 Log in to macOS on the Mac where IGV Desktop is installed.
 
@@ -174,46 +117,21 @@ Do not launch another experiment against the same vault concurrently.
 
 The Codex launch is subject to automatic approval review, organization policy,
 and macOS GUI access controls. IGV may open windows while the controller renders
-snapshots. If the critic needs a different view, it sends the request to the
-LabLoop controller, which runs IGV again and returns the new snapshot to the
-critic automatically.
-
-See [IGV setup](docs/usage.md#igv-cli-and-snapshots) for launcher discovery,
-custom installations, and snapshot requirements.
+snapshots. See [IGV setup](docs/usage.md#igv-cli-and-snapshots) for launcher
+discovery, custom installations, and snapshot requirements.
 
 LabLoop uses Codex's saved authentication and configured model. Use `--model`
-to override it.
-
-For your own task, copy an [example configuration](examples/demo.json), edit
-`goal`, `criteria`, and `distill`, and run it with a separate `--vault` per project.
-
-By default, an experiment creates and populates `vault/` with Markdown knowledge records,
-ontology classes, and a shared `context.jsonld`. Pass `--vault PATH` to use another
-location; the demo above uses `runs/demo-vault/`.
-
-Experiments save a `run.json` manifest, evidence, and per-role logs under `runs/`.
-To follow the first actor in a second terminal:
-
-```bash
-tail -n +1 -f runs/RUN_ID/1-actor.jsonl
-```
-
-Replace `RUN_ID` with your experiment directory. See the [running guide](docs/usage.md)
-for options, log names, and monitoring details. If an experiment stops with `needs_input`,
-[record scientist feedback](docs/knowledge-base.md#answer-a-request-for-scientist-input)
-and start another experiment with the same vault.
+to override it. See the [running guide](docs/usage.md#monitor-a-run) to find
+the run manifest and follow role logs.
 
 ### Walk through a completed run
 
-The [crossover walkthrough](examples/crossover-walkthrough/README.md) follows an
-actual run from the critic's audit through a lesson saved in the vault and the
-actor's follow-up test.
+Read the [completed crossover run](examples/crossover-walkthrough/README.md)
+directly on GitHub without cloning the repository, installing dependencies, or
+starting the local evidence tree server. The walkthrough links the critic's
+audit, the distilled lesson, and the actor's follow-up test to their evidence.
 
 <!-- To feature a new run, see examples/crossover-walkthrough/MAINTAINING.md. -->
-
-### Presentation of LabLoop to a genomics audience
-
-https://docs.google.com/presentation/d/1FzK2NiQOgYmQbHzjBBOBRLEBbnM_KE8p-1YNgua9t1U/edit?usp=sharing
 
 ## How to summarize a run
 
