@@ -5,6 +5,10 @@ A Python controller runs each role in a fresh Codex CLI session. Lessons persist
 and evolve in a compounding knowledge base; LLM weights stay unchanged
 ([conceptual background](docs/learning-agent.md)).
 
+The [LabLoop presentation](https://docs.google.com/presentation/d/1FzK2NiQOgYmQbHzjBBOBRLEBbnM_KE8p-1YNgua9t1U/edit?usp=sharing)
+introduces the ideas behind LabLoop and shows the learning loop in action
+through a genomics case study on crossover discovery.
+
 Publishing knowledge bases on the Semantic Web extends that feedback loop
 within and across labs, which is the idea behind the name **LabLoop**. Lab
 members can build on each other's work from a shared record of experiments,
@@ -76,9 +80,7 @@ start the local evidence tree server, look at the [walkthrough of a genomics exa
 ## Case study: crossover discovery
 
 LabLoop audits three candidate meiotic crossovers on chromosome 22 using trio
-reads and genotype calls. The [genomics presentation](https://docs.google.com/presentation/d/1FzK2NiQOgYmQbHzjBBOBRLEBbnM_KE8p-1YNgua9t1U/edit?usp=sharing)
-explains the crossover problem and follows the audit, distilled lesson, and
-follow-up test.
+reads and genotype calls.
 
 ### Run the focused crossover example
 
