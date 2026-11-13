@@ -215,7 +215,7 @@ actor's follow-up test.
 
 https://docs.google.com/presentation/d/1FzK2NiQOgYmQbHzjBBOBRLEBbnM_KE8p-1YNgua9t1U/edit?usp=sharing
 
-## Summarize a run
+## How to summarize a run
 
 Point your agent at a run directory (`runs/RUN_ID/`) and ask for a summary,
 slides, or a short report. Have it start with `run.json` and cite the supporting
@@ -223,7 +223,7 @@ evidence and vault records for its findings.
 
 We used this approach to produce the [crossover walkthrough](#walk-through-a-completed-run).
 
-## Status and documentation
+## Documentation
 
 This is a prototype.
 
@@ -258,6 +258,19 @@ We'll want to harden that.
   remains authoritative or becomes an import/export format. Add SHACL validation
   for RDF structure and relationships, richer source and assertion provenance,
   and graph-aware retrieval alongside text search.
+- **Publish vaults as Linked Data.** The `labloop.org` domain has already
+  been purchased for the project home.
+  One could give
+  participating labs their own subdomains, e.g.,
+  `lab1.labloop.org` and `lab2.labloop.org`. Having a subdomain of `labloop.org`
+  is not required, but could facilitate adoption.
+  Each lab's instance could publish stable HTTPS identifiers for
+  its lessons, observations, and evidence records, such as
+  `https://lab1.labloop.org/id/<record-id>`. Looking up a record's URL should
+  return a human-readable page or an RDF description with links to related
+  records. Agents could follow a lesson's citations to its evidence, and labs
+  could link their own findings to records they replicate or challenge or build upon.
+  [Linked Data principles](https://www.w3.org/DesignIssues/LinkedData.html)
 - **Introduce an automatic curriculum:** optionally use Russell and Norvig's
   [**problem generator**](docs/learning-agent.md#problem-generator)
   and [Voyager's curriculum](https://arxiv.org/abs/2305.16291) to propose and
