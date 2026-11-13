@@ -180,6 +180,10 @@ actor's follow-up test.
 
 <!-- To feature a new run, see examples/crossover-walkthrough/MAINTAINING.md. -->
 
+### Presentation of LabLoop to a genomics audience
+
+https://docs.google.com/presentation/d/1FzK2NiQOgYmQbHzjBBOBRLEBbnM_KE8p-1YNgua9t1U/edit?usp=sharing
+
 ## Summarize a run
 
 Point your agent at a run directory (`runs/RUN_ID/`) and ask for a summary,
