@@ -50,10 +50,11 @@ dependency versions, rather than a complete dependency lockfile.
 
 ## Browse a run's evidence tree
 
-From the repository root, with your virtual environment active, start the local server.
+After the quick-start demo, start the local server from the repository root
+with your virtual environment active.
 
 ```bash
-python -m labloop.cli serve --vault vault --runs runs
+python -m labloop.cli serve --vault runs/demo-vault --runs runs
 ```
 
 Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) and choose a run and cycle.
@@ -62,9 +63,8 @@ observation branches into the critic's evidence files and the actor work product
 it reviewed. Expand the work product to find the actor's evidence files.
 Click a filename to preview or download it, or choose **Open in VS Code**.
 
-For the quick-start demo above, use `--vault runs/demo-vault`. If you ran
-LabLoop with custom `--vault` or `--runs` directories, pass those same paths
-to the server.
+For other runs, pass the same `--vault` and `--runs` paths you used to run
+LabLoop. The defaults are `vault` and `runs`.
 
 <a href="docs/evidence-tree.png">
   <img src="docs/evidence-tree.png" width="480" alt="LabLoop evidence tree showing the crossover run on Cycle 2, with the tree guide expanded and the distilled lesson collapsed.">
