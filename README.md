@@ -1,5 +1,25 @@
 # LabLoop
 
+You define a research goal and the criteria for judging the evidence. LabLoop
+runs a loop: it performs an analysis, checks the results against your criteria,
+and records a lesson with a proposed follow-up test. The next round uses that
+lesson to guide the analysis.
+
+<a name="case-study-crossover-discovery"></a>
+
+## Case study: meiotic crossover discovery in trios
+
+LabLoop audited three candidate meiotic crossovers on chromosome 22 using trio
+reads and genotype calls. The critic found evidence for one paternal switch
+and left two maternal candidates unresolved. The distiller proposed checking
+flanking markers, and the next actor wrote a script to test that lesson.
+Three child reads corroborated the paternal switch on both sides.
+
+- [Explore the completed run on GitHub](examples/crossover-walkthrough/README.md)
+- [Run the focused crossover example locally](docs/usage.md#run-the-focused-crossover-example)
+
+## How LabLoop works
+
 A scientific learning loop: **actor → critic → distiller → actor → …**.
 A Python controller runs each role in a fresh Codex CLI session. Lessons persist
 and evolve in a compounding knowledge base; LLM weights stay unchanged
@@ -23,19 +43,6 @@ resulting evidence against the same criteria throughout the run.
 
 LabLoop is a prototype. See the [documentation index](docs/README.md) for guides
 and design notes.
-
-<a name="case-study-crossover-discovery"></a>
-
-## Case study: meiotic crossover discovery in trios
-
-LabLoop audited three candidate meiotic crossovers on chromosome 22 using trio
-reads and genotype calls. The critic found evidence for one paternal switch
-and left two maternal candidates unresolved. The distiller proposed checking
-flanking markers, and the next actor wrote a script to test that lesson.
-Three child reads corroborated the paternal switch on both sides.
-
-- [Explore the completed run on GitHub](examples/crossover-walkthrough/README.md)
-- [Run the focused crossover example locally](docs/usage.md#run-the-focused-crossover-example)
 
 ## Quick start
 
