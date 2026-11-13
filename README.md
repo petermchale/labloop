@@ -79,32 +79,27 @@ LabLoop. The defaults are `vault` and `runs`.
 
 ## Sharing knowledge across labs
 
-Publishing knowledge bases on the Semantic Web extends the learning loop
+Publishing knowledge bases on the Semantic Web would extend the learning loop
 within and across labs, which is the idea behind the name **LabLoop**. Lab
-members can build on each other's work from a shared record of experiments,
-evidence, and open hypotheses. Researchers in other labs can discover those
+members could build on each other's work from a shared record of experiments,
+evidence, and open hypotheses. Researchers in other labs could discover those
 records, test hypotheses on their own data, and share what they find. Published
-knowledge bases can also speed up peer review by helping reviewers trace
+knowledge bases could also speed up peer review by helping reviewers trace
 claims to their supporting evidence and see which hypotheses are still open (compare
 [Paper2Agent](https://arxiv.org/pdf/2509.06917)).
 
-> The clear implication is that machine-readable science should be generated at
-> the point of publication, not after the fact.
-
-Booeshaghi, Luebbert, and Pachter (2026). [*Science should be machine-readable*](https://www.biorxiv.org/content/10.64898/2026.01.30.702911v1.full.pdf)
+The proposed Linked Data publication model would give each published lesson,
+observation, and evidence record a stable HTTPS URL, such as
+`https://lab1.labloop.org/id/<record-id>`. The URL would serve a readable page
+or an RDF description with links to related records. Using coding agents,
+another lab could follow a lesson to its supporting evidence and link its own
+replication results back to the original record.
 
 LabLoop represents its knowledge base as RDF using Semantic Web standards.
 To share a live vault with agents on the web, run `labloop serve` behind an
 HTTPS reverse proxy. Agents can search the latest records or fetch the current
 graph as Turtle or JSON-LD and query it with RDF tools.
 [Knowledge-base guide for live web access](docs/knowledge-base.md#live-web-access)
-
-The planned Linked Data publication model would give each published lesson,
-observation, and evidence record a stable HTTPS URL, such as
-`https://lab1.labloop.org/id/<record-id>`. The URL would serve a readable page
-or an RDF description with links to related records. Another lab could follow
-a lesson to its supporting evidence and link its own replication results back
-to the original record.
 
 <a name="future-work"></a>
 

@@ -17,3 +17,10 @@ on definitions, methods, evaluation, and limitations.
 
 These sources motivate the design; they do not validate LabLoop's scientific
 performance.
+
+## Machine-readable science
+
+> The clear implication is that machine-readable science should be generated at
+> the point of publication, not after the fact.
+
+Booeshaghi, Luebbert, and Pachter (2026). [*Science should be machine-readable*](https://www.biorxiv.org/content/10.64898/2026.01.30.702911v1.full.pdf)
