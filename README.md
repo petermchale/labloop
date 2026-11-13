@@ -82,15 +82,22 @@ LabLoop. The defaults are `vault` and `runs`.
 Publishing knowledge bases on the Semantic Web would extend the learning loop
 within and across labs, which is the idea behind the name **LabLoop**. Lab
 members could build on each other's work from a shared record of experiments,
-evidence, and open hypotheses. Researchers in other labs could discover those
-records, test hypotheses on their own data, and share what they find. Published
-knowledge bases could also speed up peer review by helping reviewers trace
-claims to their supporting evidence and see which hypotheses are still open.
+evidence, and open hypotheses. Researchers across a network of labs could
+discover those records, test hypotheses on their own data, and share what they
+find. Published knowledge bases could also speed up peer review by helping
+reviewers trace claims to their supporting evidence and see which hypotheses are
+still open.
 
 These thoughts are not new.
-[Paper2Agent](https://arxiv.org/pdf/2509.06917) converts research papers into AI agents.
+[Paper2Agent](https://arxiv.org/pdf/2509.06917) serves research papers over MCP to AI agents.
 [Booeshaghi, Luebbert, and Pachter](https://www.biorxiv.org/content/10.64898/2026.01.30.702911v1.full.pdf) went further when they argued that “machine-readable science should
 be generated at the point of publication, not after the fact.” We agree.
+
+The network could be organized like Mastodon. A lab could run its own LabLoop
+server, much as a community can run its own Mastodon server. Just as a Mastodon
+client connects to a home server and shows posts from other servers, a LabLoop
+client could connect to a researcher's lab server and let them explore records
+published by other labs.
 
 The proposed Linked Data publication model would give each published lesson,
 observation, and evidence record a stable HTTPS URL, such as
