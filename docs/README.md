@@ -9,3 +9,4 @@
 - [Source review](source-review.md): research informing the design.
 - [Editable architecture diagram](architecture.mmd).
 - [Why LabLoop kept IGV CLI](why-labloop-kept-igv-cli.md).
+- [Roadmap](roadmap.md)
