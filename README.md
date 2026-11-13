@@ -95,40 +95,33 @@ graph as Turtle or JSON-LD and query it with RDF tools.
 
 ## Roadmap
 
-The roadmap starts with individual runs, then covers how labs share and
-publish results and use them to plan new experiments.
-
-1. **Move genomics support out of the core.** Keep shared role prompts, the CLI,
-   the controller, and base report schemas domain-neutral. Put crossover goals,
-   criteria, and scientific instructions in the example configuration, which
-   enables an optional IGV integration for launcher discovery, request schemas,
-   rendering, and follow-up instructions. Give the core a generic interface for
-   tool requests and their evidence or errors in single-product and batch reviews.
-   Test a generic task without an integration and a crossover task with IGV.
-   Keep existing manifests and vault records readable and defer new crossover
-   evidence until the next walkthrough update.
+1. **Move genomics support out of the core.** Keep shared prompts, the CLI,
+   controller, and base report schemas domain-neutral. Put crossover goals,
+   criteria, and instructions in the example config, which enables an optional
+   IGV integration for launcher discovery, request schemas, rendering, and
+   follow-up instructions. Use a common tool interface for requests and their
+   evidence or errors in single-product and batch reviews. Test a generic task
+   without an integration and a crossover task with IGV. Keep existing manifests
+   and vault records readable. Regenerate crossover evidence at the next
+   walkthrough update.
 2. **Protect criteria from edits.** Enforce the prompts' ban on changing inputs.
    Project write access currently lets the actor or critic overwrite criteria in
    `examples/crossover-focused.json`.
-3. **Introduce experiment branches and checkpoint commits.** Capture changes
-   during runs alongside the starting Git state already recorded. Preserve successful approaches
-   and evidence against failed ones by linking branches and exact code versions
-   to hypotheses, experiments, observations, and lessons. Retrieve outcomes
-   before new work, inspect diffs, restore versions to reproduce results, and
-   revisit failures when new evidence warrants it.
+3. **Introduce experiment branches and checkpoint commits.** Build on the
+   recorded starting Git state by committing changes during each run. Link
+   branches and exact commits to hypotheses, experiments, observations, and
+   lessons. Review past successes and evidence of failures before new work,
+   inspect diffs, restore commits to reproduce results, and revisit failures
+   when new evidence warrants it.
 4. **Validate the RDF graph with SHACL.** Define shapes for required properties
    and relationships, such as requiring a lesson to cite a record of type
    observation.
-5. **Share a lab vault across project checkouts.** Add an authenticated read/write
-   API with project-level access and a transactional database for concurrent runs,
-   indexed retrieval, and immutable record revisions. Use text search to find
-   records by keyword and graph queries to follow links from lessons through
-   observations to evidence files. Decide whether Markdown is authoritative or
-   serves as an import/export format. From their own Git checkouts on laptops or CHPC, lab
-   members could run agents with `--vault-url https://lab1.labloop.org --project crossover`
-   to retrieve relevant findings and save observations, lessons, and evidence
-   references. Records could include the starting Git commit and CHPC paths so
-   collaborators with cluster access can find inputs while large files stay on CHPC.
+5. **Share a lab vault across project checkouts.** Let agents on laptops or
+   CHPC read and write project records through an authenticated API. Use a
+   transactional database for concurrent runs, indexed keyword search, and
+   immutable revisions. Graph queries trace lessons through observations to
+   evidence. Record starting commits and link to large files on CHPC. Decide
+   whether Markdown is the source of truth or an import/export format.
 6. **Track provenance for auditing.** Use W3C PROV-O to link each processing
    step to its run, responsible lab member, inputs, and outputs. An auditor could
    see who processed a given file and trace the resulting files to that step.
