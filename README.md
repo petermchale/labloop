@@ -134,9 +134,5 @@ graph as Turtle or JSON-LD and query it with RDF tools.
    related records. Agents could follow citations to evidence, and labs could
    link findings to records they replicate, challenge, or build upon.
    [Linked Data principles](https://www.w3.org/DesignIssues/LinkedData.html)
-8. **Introduce an automatic curriculum.** Optionally use Russell and Norvig's
-   [problem generator](docs/learning-agent.md#problem-generator) and
-   [Voyager's curriculum](https://arxiv.org/abs/2305.16291) to propose follow-up
-   tasks from accumulated lessons and rank them by which open questions they
-   could resolve. Today the actor uses lessons to decide how to pursue the
-   scientist's existing goal.
+8. **Introduce an automatic curriculum.** See [Voyager's automatic curriculum](https://arxiv.org/html/2305.16291#S2.SS1) and
+   [Russell and Norvig's problem generator](docs/learning-agent.md#problem-generator)
