@@ -80,15 +80,15 @@ LabLoop. The defaults are `vault` and `runs`.
 ## Sharing knowledge across labs
 
 Publishing knowledge bases on the Semantic Web would extend the learning loop
-within and across labs, which is the idea behind the name **LabLoop**. Lab
-members could build on each other's work from a shared record of experiments,
+within and across labs, which is the idea behind the name **LabLoop**. Members of a given lab
+could build on each other's work from a shared record of experiments,
 evidence, and open hypotheses. Researchers across a network of labs could
-discover those records, test hypotheses on their own data, and share what they
-find. Published knowledge bases could also speed up peer review by helping
-reviewers trace claims to their supporting evidence and see which hypotheses are
-still open.
+discover those records, use data from their own labs to test hypotheses shared
+by other labs, and share their results. Published knowledge bases could also
+speed up peer review by helping reviewers trace claims to their supporting
+evidence and see which hypotheses are still open.
 
-These thoughts are not new.
+Some of these thoughts are not new.
 [Paper2Agent](https://arxiv.org/pdf/2509.06917) serves research papers over MCP to AI agents.
 [Booeshaghi, Luebbert, and Pachter](https://www.biorxiv.org/content/10.64898/2026.01.30.702911v1.full.pdf) went further when they argued that “machine-readable science should
 be generated at the point of publication, not after the fact.” We agree.
