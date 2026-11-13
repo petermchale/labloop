@@ -4,12 +4,24 @@ A scientific learning loop: **actor → critic → distiller → actor → …**
 A Python controller runs each role in a fresh Codex CLI session. Lessons persist
 and evolve in a compounding knowledge base; LLM weights stay unchanged
 ([conceptual background](docs/learning-agent.md)).
-
 The [LabLoop presentation](https://docs.google.com/presentation/d/1FzK2NiQOgYmQbHzjBBOBRLEBbnM_KE8p-1YNgua9t1U/edit?usp=sharing)
 introduces the ideas behind LabLoop and shows the learning loop in action
 through a genomics case study on crossover discovery.
 
-Publishing knowledge bases on the Semantic Web extends that feedback loop
+![LabLoop architecture: actor, critic, and distiller repeat over N cycles, sharing a knowledge base.](docs/architecture.svg)
+
+The scientist supplies three prompts in a JSON file:
+
+| Prompt | Role |
+| --- | --- |
+| `goal` | Actor: investigate and produce work products with evidence. |
+| `criteria` | Critic: audit each product against the scientist's criteria. |
+| `distill` | Distiller: propose lessons and suggested tests from the observations. |
+
+Lessons remain hypotheses for the next actor to test. The critic evaluates the
+resulting evidence against the same criteria throughout the run.
+
+Publishing knowledge bases on the Semantic Web extends the learning loop
 within and across labs, which is the idea behind the name **LabLoop**. Lab
 members can build on each other's work from a shared record of experiments,
 evidence, and open hypotheses. Researchers in other labs can discover those
@@ -28,19 +40,6 @@ To share a live vault with agents on the web, run `labloop serve` behind an
 HTTPS reverse proxy. Agents can search the latest records or fetch the current
 graph as Turtle or JSON-LD and query it with RDF tools.
 [Knowledge-base guide for live web access](docs/knowledge-base.md#live-web-access)
-
-The scientist supplies three prompts in a JSON file:
-
-| Prompt | Role |
-| --- | --- |
-| `goal` | Actor: investigate and produce work products with evidence. |
-| `criteria` | Critic: audit each product against the scientist's criteria. |
-| `distill` | Distiller: propose lessons and suggested tests from the observations. |
-
-Lessons remain hypotheses for the next actor to test. The critic evaluates the
-resulting evidence against the same criteria throughout the run.
-
-![LabLoop architecture: actor, critic, and distiller repeat over N cycles, sharing a knowledge base.](docs/architecture.svg)
 
 ## Quick start
 
