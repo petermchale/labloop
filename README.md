@@ -170,6 +170,11 @@ We'll want to harden that.
   remains authoritative or becomes an import/export format. Add SHACL validation
   for RDF structure and relationships, richer source and assertion provenance,
   and graph-aware retrieval alongside text search.
+- **Track provenance for auditing.** Use W3C PROV-O to link each processing
+  step to the lab member responsible, the input files it used, and the outputs
+  it produced. An auditor could see, for example, that lab member X processed
+  file Y in a particular run and trace the resulting files back to that step.
+  [W3C PROV-O](https://www.w3.org/TR/prov-o/)
 - **Share a lab vault across project checkouts.** Add an authenticated API for
   reading and writing knowledge records, with project-level access and support
   for concurrent runs. Lab members could run agents from their own Git checkouts
