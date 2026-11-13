@@ -81,8 +81,6 @@ start the local evidence tree server, look at the [walkthrough of a genomics exa
 LabLoop audits three candidate meiotic crossovers on chromosome 22 using trio
 reads and genotype calls.
 
-### Run the focused crossover example
-
 Install Codex CLI, sign in with `codex login`, and install
 [IGV Desktop](https://igv.org/doc/desktop/DownloadPage/). With the environment above activated:
 
