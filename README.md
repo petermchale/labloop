@@ -5,6 +5,10 @@ runs a loop: it performs an analysis, checks the results against your criteria,
 and records a lesson with a proposed follow-up test. The next round uses that
 lesson to guide the analysis.
 
+The [LabLoop presentation](https://docs.google.com/presentation/d/1FzK2NiQOgYmQbHzjBBOBRLEBbnM_KE8p-1YNgua9t1U/edit?usp=sharing)
+introduces the ideas behind LabLoop and shows the learning loop in action
+through a genomics case study on crossover discovery.
+
 <a name="case-study-crossover-discovery"></a>
 
 ## Case study: meiotic crossover discovery in trios
@@ -24,9 +28,6 @@ A scientific learning loop: **actor → critic → distiller → actor → …**
 A Python controller runs each role in a fresh Codex CLI session. Lessons persist
 and evolve in a compounding knowledge base; LLM weights stay unchanged
 ([conceptual background](docs/learning-agent.md)).
-The [LabLoop presentation](https://docs.google.com/presentation/d/1FzK2NiQOgYmQbHzjBBOBRLEBbnM_KE8p-1YNgua9t1U/edit?usp=sharing)
-introduces the ideas behind LabLoop and shows the learning loop in action
-through a genomics case study on crossover discovery.
 
 ![LabLoop architecture: actor, critic, and distiller repeat over N cycles, sharing a knowledge base.](docs/architecture.svg)
 
