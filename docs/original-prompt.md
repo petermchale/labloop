@@ -7,7 +7,7 @@ the subagent prompts quoted within it illustrate the intended case study.
 
 The development prompt below is preserved from the document's Markdown export. See the
 [main README](../README.md) for current behavior and
-[future work](../README.md#future-work) for planned improvements.
+[the roadmap](../README.md#roadmap) for planned improvements.
 
 ---
 
