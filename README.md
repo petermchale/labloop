@@ -8,6 +8,9 @@ The [LabLoop presentation](https://docs.google.com/presentation/d/1FzK2NiQOgYmQb
 introduces the ideas behind LabLoop and shows the learning loop in action
 through a genomics case study on crossover discovery.
 
+LabLoop is a prototype. See the [documentation index](docs/README.md) for guides
+and design notes.
+
 ![LabLoop architecture: actor, critic, and distiller repeat over N cycles, sharing a knowledge base.](docs/architecture.svg)
 
 The scientist supplies three prompts in a JSON file:
@@ -21,25 +24,16 @@ The scientist supplies three prompts in a JSON file:
 Lessons remain hypotheses for the next actor to test. The critic evaluates the
 resulting evidence against the same criteria throughout the run.
 
-Publishing knowledge bases on the Semantic Web extends the learning loop
-within and across labs, which is the idea behind the name **LabLoop**. Lab
-members can build on each other's work from a shared record of experiments,
-evidence, and open hypotheses. Researchers in other labs can discover those
-records, test hypotheses on their own data, and share what they find. Published
-knowledge bases can also speed up peer review by helping reviewers trace
-claims to their supporting evidence and see which hypotheses are still open (compare
-[Paper2Agent](https://arxiv.org/pdf/2509.06917)).
+## Case study: crossover discovery
 
-> The clear implication is that machine-readable science should be generated at
-> the point of publication, not after the fact.
+LabLoop audited three candidate meiotic crossovers on chromosome 22 using trio
+reads and genotype calls. The critic found evidence for one paternal switch
+and left two maternal candidates unresolved. The distiller proposed checking
+flanking markers, and the next actor wrote a script to test that lesson.
+Three child reads corroborated the paternal switch on both sides.
 
-Booeshaghi, Luebbert, and Pachter (2026). [*Science should be machine-readable*](https://www.biorxiv.org/content/10.64898/2026.01.30.702911v1.full.pdf)
-
-LabLoop represents its knowledge base as RDF using Semantic Web standards.
-To share a live vault with agents on the web, run `labloop serve` behind an
-HTTPS reverse proxy. Agents can search the latest records or fetch the current
-graph as Turtle or JSON-LD and query it with RDF tools.
-[Knowledge-base guide for live web access](docs/knowledge-base.md#live-web-access)
+- [Explore the completed run on GitHub](examples/crossover-walkthrough/README.md)
+- [Run the focused crossover example locally](docs/usage.md#run-the-focused-crossover-example)
 
 ## Quick start
 
@@ -73,72 +67,27 @@ LabLoop. The defaults are `vault` and `runs`.
   <img src="docs/evidence-tree.png" width="550" alt="LabLoop evidence tree showing the crossover run on Cycle 2, with the tree guide expanded and the distilled lesson collapsed.">
 </a>
 
-If you don't have time to clone the repository, install dependencies, and
-start the local evidence tree server, look at the [walkthrough of a genomics example](examples/crossover-walkthrough/README.md).
+## Sharing knowledge across labs
 
-## Case study: crossover discovery
+Publishing knowledge bases on the Semantic Web extends the learning loop
+within and across labs, which is the idea behind the name **LabLoop**. Lab
+members can build on each other's work from a shared record of experiments,
+evidence, and open hypotheses. Researchers in other labs can discover those
+records, test hypotheses on their own data, and share what they find. Published
+knowledge bases can also speed up peer review by helping reviewers trace
+claims to their supporting evidence and see which hypotheses are still open (compare
+[Paper2Agent](https://arxiv.org/pdf/2509.06917)).
 
-LabLoop audits three candidate meiotic crossovers on chromosome 22 using trio
-reads and genotype calls.
+> The clear implication is that machine-readable science should be generated at
+> the point of publication, not after the fact.
 
-Install Codex CLI, sign in with `codex login`, and install
-[IGV Desktop](https://igv.org/doc/desktop/DownloadPage/). With the environment above activated:
+Booeshaghi, Luebbert, and Pachter (2026). [*Science should be machine-readable*](https://www.biorxiv.org/content/10.64898/2026.01.30.702911v1.full.pdf)
 
-```bash
-python -m pip install -e '.[genomics]'
-```
-
-The [focused configuration](examples/crossover-focused.json) uses the checked-in
-[three-candidate fixture](trio_dev_data/focused/). See the running guide if you
-need to [rebuild the fixture](docs/usage.md#rebuild-the-crossover-fixture).
-
-Log in to macOS on the Mac where IGV Desktop is installed.
-
-- **Terminal.app:** Open Terminal.app on that Mac, change to the LabLoop
-  repository, and run
-  `.venv/bin/python -m labloop.cli run examples/crossover-focused.json --cycles 2`.
-- **Codex desktop:** Open this repository in Codex on the same Mac and paste
-  the prompt below. Adjust the project path to match your checkout. The
-  controller needs an approved launch outside the chat's sandbox so it can
-  open IGV.
-
-```text
-Run LabLoop's focused crossover example for two cycles from /Users/petermchale/labloop:
-.venv/bin/python -m labloop.cli run examples/crossover-focused.json --cycles 2
-
-I explicitly authorize an escalated launch of this command outside the chat's
-sandbox, use of my saved Codex authentication, and child Codex model sessions
-that may transmit sensitive trio/genomic data to the configured model service.
-Request escalation through the execution tool's approval mechanism. Keep
-LabLoop's existing per-role sandbox settings. If approval is denied, report
-the reason instead of bypassing it. Allow IGV batch execution for alignment
-snapshots. Monitor this run to completion or a failure/needs_input state,
-then report its manifest, results, and any remaining permission restrictions.
-Do not launch another experiment against the same vault concurrently.
-```
-
-The Codex launch is subject to automatic approval review, organization policy,
-and macOS GUI access controls. IGV may open windows while the controller renders
-snapshots. See [IGV setup](docs/usage.md#igv-cli-and-snapshots) for launcher
-discovery, custom installations, and snapshot requirements.
-
-LabLoop uses Codex's saved authentication and configured model. Use `--model`
-to override it. See the [running guide](docs/usage.md#monitor-a-run) to find
-the run manifest and follow role logs.
-
-## Documentation
-
-This is a prototype.
-
-- [Running guide](docs/usage.md): CLI options and detailed monitoring instructions.
-- [Knowledge and feedback](docs/knowledge-base.md): retrieval, RDF export, live vault
-  access, scientist corrections, and requests for input.
-- [Codex execution](docs/codex-backend.md): role invocation and experiment artifacts.
-- [Original development prompt](docs/original-prompt.md): instructions to a coding
-  agent to create LabLoop, distinct from its subagents' runtime prompts.
-- [Source review](docs/source-review.md): research informing the design.
-- [Editable architecture diagram](docs/architecture.mmd).
-- [Why LabLoop kept IGV CLI](docs/why-labloop-kept-igv-cli.md).
+LabLoop represents its knowledge base as RDF using Semantic Web standards.
+To share a live vault with agents on the web, run `labloop serve` behind an
+HTTPS reverse proxy. Agents can search the latest records or fetch the current
+graph as Turtle or JSON-LD and query it with RDF tools.
+[Knowledge-base guide for live web access](docs/knowledge-base.md#live-web-access)
 
 <a name="future-work"></a>
 
