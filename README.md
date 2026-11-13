@@ -50,8 +50,6 @@ python -m labloop.cli run examples/demo.json --demo --cycles 2 --vault runs/demo
 python -m pytest -q
 ```
 
-## Browse a run's evidence tree
-
 After the quick-start demo, start the local server from the repository root
 with your virtual environment active.
 
@@ -69,17 +67,11 @@ For other runs, pass the same `--vault` and `--runs` paths you used to run
 LabLoop. The defaults are `vault` and `runs`.
 
 <a href="docs/evidence-tree.png">
-  <img src="docs/evidence-tree.png" width="480" alt="LabLoop evidence tree showing the crossover run on Cycle 2, with the tree guide expanded and the distilled lesson collapsed.">
+  <img src="docs/evidence-tree.png" width="550" alt="LabLoop evidence tree showing the crossover run on Cycle 2, with the tree guide expanded and the distilled lesson collapsed.">
 </a>
 
-### Walk through a completed run
-
-Read the [completed crossover run](examples/crossover-walkthrough/README.md)
-directly on GitHub without cloning the repository, installing dependencies, or
-starting the local evidence tree server. The walkthrough links the critic's
-audit, the distilled lesson, and the actor's follow-up test to their evidence.
-
-<!-- To feature a new run, see examples/crossover-walkthrough/MAINTAINING.md. -->
+If you don't have time to clone the repository, install dependencies, and
+start the local evidence tree server, look at the [walkthrough of a genomics example](examples/crossover-walkthrough/README.md).
 
 ## Case study: crossover discovery
 
