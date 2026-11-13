@@ -5,6 +5,15 @@ A Python controller runs each role in a fresh Codex CLI session. Lessons persist
 and evolve in a compounding knowledge base; LLM weights stay unchanged
 ([conceptual background](docs/learning-agent.md)).
 
+Publishing knowledge bases on the Semantic Web extends that feedback loop
+within and across labs, which is the idea behind the name **LabLoop**. Lab
+members can build on each other's work from a shared record of experiments,
+evidence, and open hypotheses. Researchers in other labs can discover those
+records, test hypotheses on their own data, and share what they find. Published
+knowledge bases can also speed up peer review by helping reviewers trace
+claims to their supporting evidence and see which hypotheses are still open (compare
+[Paper2Agent](https://arxiv.org/pdf/2509.06917)).
+
 LabLoop represents its knowledge base as RDF using Semantic Web standards.
 To share a live vault with agents on the web, run `labloop serve` behind an
 HTTPS reverse proxy. Agents can search the latest records or fetch the current
