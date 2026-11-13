@@ -142,63 +142,51 @@ This is a prototype.
 
 ## Future work
 
-- **Move genomics support out of the core.** Keep the shared role prompts,
-  CLI, controller, and base report schemas domain-neutral. Put crossover goals,
-  criteria, and scientific instructions in the example configuration. Move IGV
-  launcher discovery, request schemas, rendering, and follow-up instructions
-  into an optional tool integration enabled by that configuration. The core can
-  provide a generic interface for a tool request and its evidence or error, for
-  both single-product and batch reviews. When implementing this, test a generic
-  task with no integration and a crossover task with IGV enabled. Preserve the
-  readability of existing run manifests and vault records. Defer generating new
-  crossover evidence until the walkthrough is next updated.
-- **Harden criteria:** The actor or critic could technically overwrite criteria in `examples/crossover-focused.json`
-because they have write access to the project.
-Their prompts prohibit changing inputs, but LabLoop does not enforce that restriction.
-We'll want to harden that.
-- **Validate the RDF graph with SHACL.** Define shapes for the RDF
-  graph to check required record properties and relationships, such as whether
-  a lesson cites an observation and whether that citation points to the right
-  type of record.
+- **Move genomics support out of the core.** Keep shared role prompts, the CLI,
+  the controller, and base report schemas domain-neutral. Put crossover goals,
+  criteria, and scientific instructions in the example configuration, which
+  enables an optional IGV integration for launcher discovery, request schemas,
+  rendering, and follow-up instructions. Give the core a generic interface for
+  tool requests and their evidence or errors in single-product and batch reviews.
+  Test a generic task without an integration and a crossover task with IGV.
+  Keep existing manifests and vault records readable and defer new crossover
+  evidence until the next walkthrough update.
+- **Protect criteria from edits.** Enforce the prompts' ban on changing inputs.
+  Project write access currently lets the actor or critic overwrite criteria in
+  `examples/crossover-focused.json`.
+- **Validate the RDF graph with SHACL.** Define shapes for required properties
+  and relationships, such as requiring a lesson to cite a record of type
+  observation.
 - **Track provenance for auditing.** Use W3C PROV-O to link each processing
-  step to the lab member responsible, the input files it used, and the outputs
-  it produced. An auditor could see, for example, that lab member X processed
-  file Y in a particular run and trace the resulting files back to that step.
-  Record the sources that support each research assertion.
+  step to its run, responsible lab member, inputs, and outputs. An auditor could
+  see who processed a given file and trace the resulting files to that step.
+  Record the sources supporting each research assertion.
   [W3C PROV-O](https://www.w3.org/TR/prov-o/)
-- **Share a lab vault across project checkouts.** Add an authenticated API for
-  reading and writing knowledge records, with project-level access. Back it with
-  a transactional database for concurrent runs, indexed retrieval, and immutable
-  record revisions. Support graph queries alongside text search, and decide
-  whether Markdown remains authoritative or becomes an import/export format.
-  Lab members could run agents from their own Git checkouts
-  on a laptop or on CHPC. With proposed options such as
-  `--vault-url https://lab1.labloop.org --project crossover`, the controller
-  would retrieve relevant prior findings and save new observations, lessons,
-  and evidence references to the shared vault. Records could include the starting
-  Git commit and CHPC file paths so collaborators with cluster access can find
-  the inputs while large files stay on CHPC.
-- **Publish vaults as Linked Data.** The `labloop.org` domain has already
-  been purchased for the project home.
-  One could give
-  participating labs their own subdomains, e.g.,
-  `lab1.labloop.org` and `lab2.labloop.org`. Having a subdomain of `labloop.org`
-  is not required, but could facilitate adoption.
-  Each lab's instance could publish stable HTTPS identifiers for
-  its lessons, observations, and evidence records, such as
-  `https://lab1.labloop.org/id/<record-id>`. Looking up a record's URL should
-  return a human-readable page or an RDF description with links to related
-  records. Agents could follow a lesson's citations to its evidence, and labs
-  could link their own findings to records they replicate or challenge or build upon.
+- **Share a lab vault across project checkouts.** Add an authenticated read/write
+  API with project-level access and a transactional database for concurrent runs,
+  indexed retrieval, and immutable record revisions. Support graph queries and
+  text search. Decide whether Markdown is authoritative or serves as an
+  import/export format. From their own Git checkouts on laptops or CHPC, lab
+  members could run agents with `--vault-url https://lab1.labloop.org --project crossover`
+  to retrieve relevant findings and save observations, lessons, and evidence
+  references. Records could include the starting Git commit and CHPC paths so
+  collaborators with cluster access can find inputs while large files stay on CHPC.
+- **Publish vaults as Linked Data.** The project already owns `labloop.org` for
+  its home. Optional subdomains such as `lab1.labloop.org` and `lab2.labloop.org`
+  could ease adoption. Each lab could publish stable HTTPS identifiers for
+  lessons, observations, and evidence, such as `https://lab1.labloop.org/id/<record-id>`.
+  Serve a human-readable page or RDF description at each URL with links to
+  related records. Agents could follow citations to evidence, and labs could
+  link findings to records they replicate, challenge, or build upon.
   [Linked Data principles](https://www.w3.org/DesignIssues/LinkedData.html)
-- **Introduce an automatic curriculum:** optionally use Russell and Norvig's
-  [**problem generator**](docs/learning-agent.md#problem-generator)
-  and [Voyager's curriculum](https://arxiv.org/abs/2305.16291) to propose and
-  prioritize tasks from accumulated knowledge and uncertainties. Currently lessons
-  pass directly to the actor, which chooses its next actions.
-- **Introduce experiment branches and checkpoint commits:** preserve successful approaches
-  and evidence against failed ones, linking branches and exact code versions to
-  hypotheses, experiments, observations, and lessons. Retrieve those outcomes before
-  new work, inspect diffs, restore versions for reproduction, and revisit failures
-  when new evidence warrants it. Capture changes made during a run, beyond the
-  starting Git state currently recorded.
+- **Introduce an automatic curriculum.** Optionally use Russell and Norvig's
+  [problem generator](docs/learning-agent.md#problem-generator) and
+  [Voyager's curriculum](https://arxiv.org/abs/2305.16291) to propose and
+  prioritize tasks from accumulated knowledge and uncertainties. Today the
+  actor receives lessons directly and chooses its next actions.
+- **Introduce experiment branches and checkpoint commits.** Capture changes
+  during runs alongside the starting Git state already recorded. Preserve successful approaches
+  and evidence against failed ones by linking branches and exact code versions
+  to hypotheses, experiments, observations, and lessons. Retrieve outcomes
+  before new work, inspect diffs, restore versions to reproduce results, and
+  revisit failures when new evidence warrants it.
