@@ -81,14 +81,12 @@ LabLoop. The defaults are `vault` and `runs`.
 
 ## GraphRAG and the evidence graph
 
-LabLoop combines retrieval-augmented generation (RAG) with a persistent evidence
-graph. Lessons link to the critic observations that motivated them, observations
-link to the actor work products they reviewed, and both observations and work
-products link to evidence files. The controller saves these records as Markdown
-with structured metadata and projects their relationships into RDF.
+LabLoop combines retrieval-augmented generation (RAG) with an evidence graph
+linking lessons, critic observations, actor work products, and evidence files.
+Records persist as Markdown with structured metadata and are mapped into RDF.
 
-The crossover example shows how a lesson becomes context for the next analysis.
-The diagram follows one of the lesson's three observation links.
+The diagram follows one of the crossover lesson's three observation links and
+shows how the lesson guides the next analysis.
 
 ```mermaid
 ---
@@ -121,23 +119,16 @@ flowchart TD
     Vault -->|Keyword recall + non-rejected lessons| Next["Cycle 2 · Actor tests flanking-marker support"]
 ```
 
-At each cycle, the controller searches the vault using the research goal and
-supplies matching records to the agents. It also gives the actor the vault's
+Each cycle retrieves records matching the research goal and gives the actor
 non-rejected lessons as hypotheses to test. Agents can search further with
-`recall --research-only`. Retrieval ranks records by keyword overlap, with
-recency breaking ties; the graph preserves the links for tracing evidence.
-Research-only retrieval excludes archived task instructions before ranking.
+`recall --research-only`, which excludes archived task instructions. Retrieval
+ranks records by keyword overlap and recency.
 [Knowledge-base guide](docs/knowledge-base.md)
 
-The evidence-tree viewer shown in [Quick start](#quick-start) presents these
-relationships as expandable branches. Shared records can appear on several
-branches, letting readers trace a lesson back to its supporting evidence.
-
-In this run, the next actor tested flanking-marker support and found three child
-reads corroborating the paternal switch on both sides. Both maternal candidates
-remained unresolved. The follow-up reused the original three candidates;
-measuring a gain in detection accuracy requires independently adjudicated cases.
-[Follow the records and results](examples/crossover-walkthrough/README.md)
+The [Quick start](#quick-start) evidence tree lets you follow these links from a
+lesson to its supporting files. The crossover walkthrough shows the lesson,
+its evidence, and the next actor's test.
+[Explore the run](examples/crossover-walkthrough/README.md)
 
 ## Sharing knowledge across labs
 
