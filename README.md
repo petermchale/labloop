@@ -1,11 +1,11 @@
 # LabLoop
 
-LabLoop turns what agents learn into reusable code and lessons: candidate facts
-(hypotheses) that later analyses test.
+LabLoop turns what agents learn into reusable code and hypotheses: candidate
+facts that later analyses test.
 You define a research goal and the criteria for judging the evidence. LabLoop
 runs a loop: it performs an analysis, checks the results against your criteria,
-and preserves code, evidence, and lessons with proposed follow-up tests. The next
-round builds on that code and tests the lessons in a new analysis.
+and preserves code, evidence, and hypotheses with proposed follow-up tests. The
+next round builds on that code and tests the hypotheses in a new analysis.
 
 <a name="case-study-crossover-discovery"></a>
 
@@ -17,10 +17,10 @@ through a genomics case study on crossover discovery.
 LabLoop audited three candidate meiotic crossovers on chromosome 22 using trio
 reads and genotype calls. The critic found evidence for one paternal switch
 and left two maternal candidates unresolved. The distiller proposed checking
-flanking markers, and the next actor turned that lesson into
+flanking markers, and the next actor implemented that test in
 [a reusable analysis script](runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py).
 Three child reads corroborated the paternal switch on both sides. The run left
-both executable code and a testable lesson for later analyses.
+both executable code and a testable hypothesis for later analyses.
 
 - [Explore the completed run on GitHub](examples/crossover-walkthrough/README.md)
 - [Run the focused crossover example locally](docs/usage.md#run-the-focused-crossover-example)
@@ -29,8 +29,8 @@ both executable code and a testable lesson for later analyses.
 
 A scientific learning loop: **actor → critic → distiller → actor → …**.
 A Python controller runs each role in a fresh Codex CLI session. Reusable code
-persists as experiment artifacts, linked to evidence and lessons in a compounding
-knowledge base; LLM weights stay unchanged
+persists as experiment artifacts, linked to evidence and hypotheses in a
+compounding knowledge base; LLM weights stay unchanged
 ([conceptual background](docs/learning-agent.md)).
 
 ![LabLoop architecture: actor, critic, and distiller repeat over N cycles, sharing a knowledge base.](docs/architecture.svg)
@@ -41,9 +41,9 @@ The scientist supplies three prompts in a JSON file:
 | --- | --- |
 | `goal` | Actor: investigate and produce work products, including reusable code, with evidence. |
 | `criteria` | Critic: evaluate each submitted work product against the scientist's criteria. |
-| `distill` | Distiller: propose lessons and suggested tests from the observations. |
+| `distill` | Distiller: propose hypotheses and suggested tests from the observations. |
 
-Lessons are candidate facts (hypotheses) for the next actor to test.
+The next actor tests the proposed hypotheses.
 Code makes analysis methods reusable and the proposed tests executable. The
 critic evaluates the resulting evidence against the same criteria throughout
 the run.
@@ -71,7 +71,7 @@ python -m labloop.cli serve --vault runs/demo-vault --runs runs
 ```
 
 Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) and choose a run and cycle.
-Expand a distilled lesson to see the critic observations it cites. Each
+Expand a distilled hypothesis to see the critic observations it cites. Each
 observation branches into the critic's evidence files and the actor work product
 it reviewed. Expand the work product to find the actor's evidence files.
 Follow these links to inspect the code behind an analysis as well as its results.
@@ -80,7 +80,7 @@ Click a filename to preview or download it, or choose **Open in VS Code**.
 The viewer looks like this, shown here with Cycle 2 of the crossover run.
 
 <a href="docs/evidence-tree.png">
-  <img src="docs/evidence-tree.png" width="550" alt="LabLoop evidence tree showing the crossover run on Cycle 2, with the tree guide expanded and the distilled lesson collapsed.">
+  <img src="docs/evidence-tree.png" width="550" alt="LabLoop evidence tree showing the crossover run on Cycle 2, with the tree guide expanded and the distilled hypothesis collapsed.">
 </a>
 
 For other runs, pass the same `--vault` and `--runs` paths you used to run
@@ -93,8 +93,8 @@ each new analysis. Its knowledge base stores structured Markdown records, links
 them to code and other evidence files, and represents their relationships as an
 RDF graph.
 
-The diagram follows one of the crossover lesson's three observation links and
-shows how the lesson guides the next analysis.
+The diagram follows one of the crossover hypothesis's three observation links
+and shows how the hypothesis guides the next analysis.
 
 ```mermaid
 ---
@@ -110,14 +110,14 @@ flowchart TD
     Run["Cycle 1 · Actor proposes candidates → Critic audits → Distiller proposes a test"]
 
     subgraph Vault["Vault · Records with typed links"]
-        Lesson["Lesson · Check phased markers on both sides"]
+        Hypothesis["Hypothesis · Flanking markers can clarify switches"]
         Obs["Critic observation · Maternal switch unresolved"]
         Product["Actor work product · Crossover candidate"]
         CriticFile["Critic evidence · IGV snapshot"]
         ActorFile["Actor evidence · Candidate JSON"]
         Code["Reusable code · Flanking-marker analysis script"]
 
-        Lesson -->|because| Obs
+        Hypothesis -->|because| Obs
         Obs -->|because| Product
         Obs -->|files| CriticFile
         Product -->|files| ActorFile
@@ -126,15 +126,15 @@ flowchart TD
 
     Run -->|Controller saves linked records| Vault
     Vault -->|Project records to RDF| Graph["Graph queries and evidence inspection"]
-    Vault -->|Keyword recall + non-rejected lessons| Next["Cycle 2 · Actor tests flanking-marker support"]
+    Vault -->|Keyword recall + non-rejected hypotheses| Next["Cycle 2 · Actor tests flanking-marker support"]
 ```
 
 Each cycle retrieves records matching the research goal and gives the actor
-non-rejected lessons as hypotheses to test. Agents can search further with
+non-rejected hypotheses to test. Agents can search further with
 `recall --research-only`, which excludes archived task instructions. Retrieval
 ranks records by keyword overlap and recency.
 Linked code artifacts let agents inspect and build on earlier analysis methods
-while testing the lessons those analyses produced.
+while testing the hypotheses those analyses produced.
 
 ## Evaluation and validation
 
@@ -143,10 +143,10 @@ LabLoop combines expert criteria, evidence traceability, and scientist oversight
 | Capability | What it does |
 | --- | --- |
 | [Critic evaluation](labloop/prompts/critic.md) | Reviews each submitted work product against the scientist's fixed `criteria`, returning `supported`, `contradicted`, or `uncertain`, with a diagnosis. Optional IGV views support visual review. |
-| [Evidence audit trail](docs/knowledge-base.md#live-web-access) | Links lessons to critic observations, reviewed work products, and cited evidence files for inspection. |
-| [Scientist correction](docs/knowledge-base.md#supply-scientist-feedback) | Supplies corrective feedback for later analyses or retires an eligible lesson through contradictory feedback. |
+| [Evidence audit trail](docs/knowledge-base.md#live-web-access) | Links hypotheses to critic observations, reviewed work products, and cited evidence files for inspection. |
+| [Scientist correction](docs/knowledge-base.md#supply-scientist-feedback) | Supplies corrective feedback for later analyses or retires an eligible hypothesis through contradictory feedback. |
 
-Every lesson must cite critic observations from the current cycle.
+Every distilled hypothesis must cite critic observations from the current cycle.
 [Pydantic schemas](labloop/report_schemas.py) and the
 [Python controller](labloop/loop.py) enforce citation requirements, check that
 evidence files exist, reject duplicate products, and require contradictory
@@ -164,9 +164,9 @@ calibration, and production quality gates and monitoring remain future work.
 ## Sharing knowledge across labs
 
 Publishing knowledge bases on the Semantic Web would extend the learning loop
-within and across labs. Members of a given lab
-could build on each other's reusable code and lessons from a shared record of
-experiments, evidence, and open hypotheses. Researchers across a network of labs
+within and across labs. Members of a given lab could build on each other's
+reusable code and hypotheses from a shared record of experiments and evidence.
+Researchers across a network of labs
 could discover those records, adapt linked code, use data from their own labs to
 test hypotheses shared by other labs, and share their results. Published knowledge bases could also
 speed up peer review by helping reviewers trace claims to their supporting
@@ -183,16 +183,16 @@ client connects to a home server and shows posts from other servers, a LabLoop
 client could connect to a researcher's lab server and let them explore records
 published by other labs.
 
-The proposed Linked Data publication model would give each published lesson,
+The proposed Linked Data publication model would give each published hypothesis,
 observation, and evidence record a stable HTTPS URL, such as
 `https://lab1.labloop.org/id/<record-id>`. The URL would serve a readable page
 or an RDF description with links to related records. Using coding agents,
-another lab could follow a lesson to its supporting code and evidence, reuse or
+another lab could follow a hypothesis to its supporting code and evidence, reuse or
 adapt the analysis, and link its own replication results back to the original
 record.
 
 For example, another lab could use LabLoop's RDF vocabulary and a standard tool
-such as RDFLib to follow links from lessons to observations and evidence files,
+such as RDFLib to follow links from hypotheses to observations and evidence files,
 without installing LabLoop. Reading the Markdown vault directly would instead
 require custom code to parse its YAML metadata and reconstruct those links,
 coupling that code to LabLoop's storage conventions.
