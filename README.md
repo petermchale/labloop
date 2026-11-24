@@ -155,7 +155,7 @@ Every distilled hypothesis must cite critic observations from the current cycle.
 evidence files exist, reject duplicate products, and require contradictory
 observations for agent-proposed retractions.
 
-[Run records](docs/codex-backend.md) preserve prompts, results, traces, and file
+Run records preserve prompts, results, traces, and file
 hashes for auditing. The [pytest suite](tests/) checks the supporting software;
 neither it nor the synthetic demo measures model quality.
 
