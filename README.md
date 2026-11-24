@@ -81,9 +81,9 @@ LabLoop. The defaults are `vault` and `runs`.
 
 ## GraphRAG and the evidence graph
 
-LabLoop combines retrieval-augmented generation (RAG) with an evidence graph
-linking lessons, critic observations, actor work products, and evidence files.
-Records persist as Markdown with structured metadata and are mapped into RDF.
+LabLoop uses retrieval-augmented generation (RAG) to bring prior findings into
+each new analysis. Its knowledge base stores structured Markdown records and
+represents their relationships as an RDF graph.
 
 The diagram follows one of the crossover lesson's three observation links and
 shows how the lesson guides the next analysis.
@@ -124,11 +124,6 @@ non-rejected lessons as hypotheses to test. Agents can search further with
 `recall --research-only`, which excludes archived task instructions. Retrieval
 ranks records by keyword overlap and recency.
 [Knowledge-base guide](docs/knowledge-base.md)
-
-The [Quick start](#quick-start) evidence tree lets you follow these links from a
-lesson to its supporting files. The crossover walkthrough shows the lesson,
-its evidence, and the next actor's test.
-[Explore the run](examples/crossover-walkthrough/README.md)
 
 ## Sharing knowledge across labs
 
