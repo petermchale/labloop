@@ -91,6 +91,15 @@ The crossover example shows how a lesson becomes context for the next analysis.
 The diagram follows one of the lesson's three observation links.
 
 ```mermaid
+---
+config:
+  themeVariables:
+    fontSize: 13px
+  flowchart:
+    wrappingWidth: 320
+    nodeSpacing: 35
+    rankSpacing: 35
+---
 flowchart TD
     Run["Cycle 1 · Actor proposes candidates → Critic audits → Distiller proposes a test"]
 
