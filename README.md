@@ -137,7 +137,34 @@ non-rejected lessons as hypotheses to test. Agents can search further with
 ranks records by keyword overlap and recency.
 Linked code artifacts let agents inspect and build on earlier analysis methods
 while testing the lessons those analyses produced.
-[Knowledge-base guide](docs/knowledge-base.md)
+
+## Evaluation and validation
+
+LabLoop evaluates evidence in every cycle against the scientist's fixed
+`criteria`. Its existing evaluation systems are:
+
+| System | What it does |
+| --- | --- |
+| [Critic](labloop/prompts/critic.md) | Audits each product's evidence and returns `supported`, `contradicted`, or `uncertain`, with a diagnosis. Optional IGV views support visual review. |
+| [Pydantic schemas](labloop/report_schemas.py) | Validate reports, verdicts, batch keys and counts, and allowed observation citations. |
+| [Python controller](labloop/loop.py) | Requires evidence files, rejects duplicate products and invented citations, and permits retractions only with contradictory observations. |
+| [Scientist feedback](docs/knowledge-base.md#supply-scientist-feedback) | Carries human assessments into later analyses and retires eligible contradicted assertions. |
+| [Audit records](docs/codex-backend.md) | Preserve prompts, results, traces, usage, file hashes, and links from lessons to evidence for inspection. |
+| [Pytest suite](tests/) | Checks orchestration, validation, feedback, RDF roundtrips, and integrations using fixtures. |
+
+Pydantic runtime validation and explicit Python logic enforce these structural
+and evidence checks without an RDF validator. Python type annotations alone
+do not enforce them at runtime.
+
+Valid reports and file references do not prove scientific correctness. Critic
+judgments still need expert review and independent validation; the demo and
+software tests do not measure model quality. LabLoop has no independent-trial
+benchmark, systematic critic calibration, or production quality gates and drift
+monitoring yet.
+
+For the broader evaluation practices, see
+[Anthropic's agent-evals guide](https://www.anthropic.com/research/demystifying-evals-for-ai-agents)
+and [AWS's AgentCore framework](https://aws.amazon.com/blogs/machine-learning/building-trust-in-ai-agents-a-production-ready-evaluation-framework-with-amazon-bedrock-agentcore/).
 
 ## Sharing knowledge across labs
 
@@ -169,7 +196,16 @@ another lab could follow a lesson to its supporting code and evidence, reuse or
 adapt the analysis, and link its own replication results back to the original
 record.
 
-LabLoop represents its knowledge base as RDF using Semantic Web standards.
+For example, another lab could use LabLoop's RDF vocabulary and a standard tool
+such as RDFLib to follow links from lessons to observations and evidence files,
+without installing LabLoop. Reading the Markdown vault directly would instead
+require custom code to parse its YAML metadata and reconstruct those links,
+coupling that code to LabLoop's storage conventions.
+
+The RDF vocabulary describes record types and relationships; it does not yet
+express all the validation rules in LabLoop's Pydantic models and Python
+controller.
+
 To share a live vault with agents on the web, run `labloop serve` behind an
 HTTPS reverse proxy. Agents can search the latest records or fetch the current
 graph as Turtle or JSON-LD and query it with RDF tools.
