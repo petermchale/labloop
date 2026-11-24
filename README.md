@@ -1,9 +1,12 @@
 # LabLoop
 
+LabLoop turns what agents learn into reusable code and lessons: candidate facts
+(hypotheses) that later analyses test.
+
 You define a research goal and the criteria for judging the evidence. LabLoop
 runs a loop: it performs an analysis, checks the results against your criteria,
-and records a lesson with a proposed follow-up test. The next round uses that
-lesson to guide the analysis.
+and preserves code, evidence, and lessons with proposed follow-up tests. The next
+round builds on that code and tests the lessons in a new analysis.
 
 <a name="case-study-crossover-discovery"></a>
 
@@ -16,8 +19,10 @@ through a genomics case study on crossover discovery.
 LabLoop audited three candidate meiotic crossovers on chromosome 22 using trio
 reads and genotype calls. The critic found evidence for one paternal switch
 and left two maternal candidates unresolved. The distiller proposed checking
-flanking markers, and the next actor wrote a script to test that lesson.
-Three child reads corroborated the paternal switch on both sides.
+flanking markers, and the next actor turned that lesson into
+[a reusable analysis script](runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py).
+Three child reads corroborated the paternal switch on both sides. The run left
+both executable code and a testable lesson for later analyses.
 
 - [Explore the completed run on GitHub](examples/crossover-walkthrough/README.md)
 - [Run the focused crossover example locally](docs/usage.md#run-the-focused-crossover-example)
@@ -25,8 +30,9 @@ Three child reads corroborated the paternal switch on both sides.
 ## How LabLoop works
 
 A scientific learning loop: **actor → critic → distiller → actor → …**.
-A Python controller runs each role in a fresh Codex CLI session. Lessons persist
-and evolve in a compounding knowledge base; LLM weights stay unchanged
+A Python controller runs each role in a fresh Codex CLI session. Reusable code
+persists as experiment artifacts, linked to evidence and lessons in a compounding
+knowledge base; LLM weights stay unchanged
 ([conceptual background](docs/learning-agent.md)).
 
 ![LabLoop architecture: actor, critic, and distiller repeat over N cycles, sharing a knowledge base.](docs/architecture.svg)
@@ -35,12 +41,14 @@ The scientist supplies three prompts in a JSON file:
 
 | Prompt | Role |
 | --- | --- |
-| `goal` | Actor: investigate and produce work products with evidence. |
+| `goal` | Actor: investigate and produce work products, including reusable code, with evidence. |
 | `criteria` | Critic: audit each product against the scientist's criteria. |
 | `distill` | Distiller: propose lessons and suggested tests from the observations. |
 
-Lessons remain hypotheses for the next actor to test. The critic evaluates the
-resulting evidence against the same criteria throughout the run.
+Lessons are candidate facts (hypotheses) for the next actor to test.
+Code makes analysis methods reusable and the proposed tests executable. The
+critic evaluates the resulting evidence against the same criteria throughout
+the run.
 
 LabLoop is a prototype. See the [documentation index](docs/README.md) for guides
 and design notes.
@@ -68,6 +76,7 @@ Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) and choose a run and cycle
 Expand a distilled lesson to see the critic observations it cites. Each
 observation branches into the critic's evidence files and the actor work product
 it reviewed. Expand the work product to find the actor's evidence files.
+Follow these links to inspect the code behind an analysis as well as its results.
 Click a filename to preview or download it, or choose **Open in VS Code**.
 
 The viewer looks like this, shown here with Cycle 2 of the crossover run.
@@ -82,8 +91,9 @@ LabLoop. The defaults are `vault` and `runs`.
 ## GraphRAG and the evidence graph
 
 LabLoop uses retrieval-augmented generation (RAG) to bring prior findings into
-each new analysis. Its knowledge base stores structured Markdown records and
-represents their relationships as an RDF graph.
+each new analysis. Its knowledge base stores structured Markdown records, links
+them to code and other evidence files, and represents their relationships as an
+RDF graph.
 
 The diagram follows one of the crossover lesson's three observation links and
 shows how the lesson guides the next analysis.
@@ -107,11 +117,13 @@ flowchart TD
         Product["Actor work product · Crossover candidate"]
         CriticFile["Critic evidence · IGV snapshot"]
         ActorFile["Actor evidence · Candidate JSON"]
+        Code["Reusable code · Flanking-marker analysis script"]
 
         Lesson -->|because| Obs
         Obs -->|because| Product
         Obs -->|files| CriticFile
         Product -->|files| ActorFile
+        Product -->|files| Code
     end
 
     Run -->|Controller saves linked records| Vault
@@ -123,16 +135,18 @@ Each cycle retrieves records matching the research goal and gives the actor
 non-rejected lessons as hypotheses to test. Agents can search further with
 `recall --research-only`, which excludes archived task instructions. Retrieval
 ranks records by keyword overlap and recency.
+Linked code artifacts let agents inspect and build on earlier analysis methods
+while testing the lessons those analyses produced.
 [Knowledge-base guide](docs/knowledge-base.md)
 
 ## Sharing knowledge across labs
 
 Publishing knowledge bases on the Semantic Web would extend the learning loop
 within and across labs, which is the idea behind the name **LabLoop**. Members of a given lab
-could build on each other's work from a shared record of experiments,
-evidence, and open hypotheses. Researchers across a network of labs could
-discover those records, use data from their own labs to test hypotheses shared
-by other labs, and share their results. Published knowledge bases could also
+could build on each other's reusable code and lessons from a shared record of
+experiments, evidence, and open hypotheses. Researchers across a network of labs
+could discover those records, adapt linked code, use data from their own labs to
+test hypotheses shared by other labs, and share their results. Published knowledge bases could also
 speed up peer review by helping reviewers trace claims to their supporting
 evidence and see which hypotheses are still open.
 
@@ -151,8 +165,9 @@ The proposed Linked Data publication model would give each published lesson,
 observation, and evidence record a stable HTTPS URL, such as
 `https://lab1.labloop.org/id/<record-id>`. The URL would serve a readable page
 or an RDF description with links to related records. Using coding agents,
-another lab could follow a lesson to its supporting evidence and link its own
-replication results back to the original record.
+another lab could follow a lesson to its supporting code and evidence, reuse or
+adapt the analysis, and link its own replication results back to the original
+record.
 
 LabLoop represents its knowledge base as RDF using Semantic Web standards.
 To share a live vault with agents on the web, run `labloop serve` behind an

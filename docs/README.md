@@ -1,5 +1,9 @@
 # LabLoop documentation
 
+LabLoop turns what agents learn into reusable code and lessons: candidate facts
+(hypotheses) that later analyses test. These guides cover running the loop, preserving code
+and evidence, and retrieving lessons for further testing.
+
 - [Running guide](usage.md): CLI options and detailed monitoring instructions.
 - [Knowledge and feedback](knowledge-base.md): retrieval, RDF export, live vault
   access, scientist corrections, and requests for input.
