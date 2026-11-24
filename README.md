@@ -142,7 +142,7 @@ while testing the lessons those analyses produced.
 ## Sharing knowledge across labs
 
 Publishing knowledge bases on the Semantic Web would extend the learning loop
-within and across labs, which is the idea behind the name **LabLoop**. Members of a given lab
+within and across labs. Members of a given lab
 could build on each other's reusable code and lessons from a shared record of
 experiments, evidence, and open hypotheses. Researchers across a network of labs
 could discover those records, adapt linked code, use data from their own labs to
