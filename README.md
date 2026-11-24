@@ -142,9 +142,12 @@ LabLoop combines expert criteria, evidence traceability, and scientist oversight
 
 | Capability | What it does |
 | --- | --- |
-| [Critic evaluation](labloop/prompts/critic.md) | Reviews each submitted work product against the scientist's fixed `criteria`, returning `supported`, `contradicted`, or `uncertain`, with a diagnosis. Optional IGV views support visual review. |
-| [Evidence audit trail](docs/knowledge-base.md#live-web-access) | Links hypotheses to critic observations, reviewed work products, and cited evidence files for inspection. |
-| [Scientist correction](docs/knowledge-base.md#supply-scientist-feedback) | Supplies corrective feedback for later analyses or retires an eligible hypothesis through contradictory feedback. |
+| Critic evaluation | Reviews each submitted work product against the scientist's fixed `criteria`, returning `supported`, `contradicted`, or `uncertain`, with a diagnosis. Optional IGV views support visual review. |
+| Evidence audit trail | Links hypotheses to critic observations, reviewed work products, and cited evidence files for inspection. |
+| Scientist correction | Supplies corrective feedback for later analyses or retires an eligible hypothesis through contradictory feedback. |
+
+See how to [inspect the evidence trail](docs/knowledge-base.md#live-web-access)
+or [supply scientist feedback](docs/knowledge-base.md#supply-scientist-feedback).
 
 Every distilled hypothesis must cite critic observations from the current cycle.
 [Pydantic schemas](labloop/report_schemas.py) and the
