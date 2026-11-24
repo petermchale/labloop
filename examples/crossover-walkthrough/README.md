@@ -3,7 +3,7 @@
 LabLoop used the [focused configuration](../crossover-focused.json) to review
 three candidate crossovers on chromosome 22 over two cycles. The original run
 artifacts and vault records are linked below. The run produced reusable analysis
-code and a lesson to test in later analyses.
+code and a hypothesis to test in later analyses.
 [Run manifest](../../runs/45e83829807b4e04b831c48a8359d7f1/run.json)
 
 ## Cycle 1 · Audit the candidates
@@ -15,17 +15,17 @@ The critic requested a zoomed IGV view to inspect local alignment gaps and misma
 [Critic observation](../../vault/Records/07e889d3f722427c81c21fe482365c69.md) ·
 [IGV snapshot](../../runs/45e83829807b4e04b831c48a8359d7f1/igv-p90h8th3/view-2.png)
 
-## Between cycles · Store a testable lesson
+## Between cycles · Formulate a testable hypothesis
 
 The distiller proposed ranking candidates using child reads that link the
 endpoints to confidently phased markers on both sides. The vault record links
 the proposal to the three audits and describes a test on independent candidates.
-[Distilled lesson](../../vault/Records/heuristic_8d6779429db1e79ea69cd632.md)
+[Proposed hypothesis](../../vault/Records/heuristic_8d6779429db1e79ea69cd632.md)
 
-## Cycle 2 · Apply the lesson and audit again
+## Cycle 2 · Investigate the hypothesis and audit again
 
 The next actor searched within 15 kb of each interval and checked marker phase
-against parental reads, turning the proposed lesson into an executable test.
+against parental reads, implementing the proposed flanking-marker analysis.
 The [baseline script](../../runs/45e83829807b4e04b831c48a8359d7f1/trio_baseline.py)
 and [flanking-marker script](../../runs/45e83829807b4e04b831c48a8359d7f1/trio_flank_linkage.py)
 preserve the methods for reuse and further testing.
