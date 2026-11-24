@@ -14,7 +14,6 @@ round builds on that code and tests the lessons in a new analysis.
 The [LabLoop presentation](https://docs.google.com/presentation/d/1FzK2NiQOgYmQbHzjBBOBRLEBbnM_KE8p-1YNgua9t1U/edit?usp=sharing)
 introduces the ideas behind LabLoop and shows the learning loop in action
 through a genomics case study on crossover discovery.
-
 LabLoop audited three candidate meiotic crossovers on chromosome 22 using trio
 reads and genotype calls. The critic found evidence for one paternal switch
 and left two maternal candidates unresolved. The distiller proposed checking
