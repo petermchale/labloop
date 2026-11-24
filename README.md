@@ -146,19 +146,18 @@ LabLoop combines expert criteria, evidence traceability, and scientist oversight
 | Evidence audit trail | Links hypotheses to critic observations, reviewed work products, and cited evidence files for inspection. Run records preserve prompts, results, traces, and file hashes for auditing. |
 | Scientist correction | Supplies corrective feedback for later analyses or retires an eligible hypothesis through contradictory feedback. |
 
-See how to [inspect the evidence trail](docs/knowledge-base.md#live-web-access)
-or [supply scientist feedback](docs/knowledge-base.md#supply-scientist-feedback).
-
 Every distilled hypothesis must cite critic observations from the current cycle.
 [Pydantic schemas](labloop/report_schemas.py) and the
 [Python controller](labloop/loop.py) enforce citation requirements, check that
 evidence files exist, reject duplicate products, and require contradictory
 observations for agent-proposed retractions.
-
 Citation checks establish traceability, not scientific correctness. Critic
-judgments still need expert review and independent validation. These are building
-blocks for evaluation: independent-trial benchmarks, systematic critic
-calibration, and production quality gates and monitoring remain future work.
+judgments still need expert review and independent validation.
+
+Critic evaluation, evidence traceability, and scientist feedback provide a
+foundation for evaluation. Measuring reliability across independent trials,
+calibrating critic judgments against expert assessments, and detecting quality
+regressions remain future work.
 
 ## Sharing knowledge across labs
 
