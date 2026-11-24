@@ -140,34 +140,28 @@ while testing the lessons those analyses produced.
 
 ## Evaluation and validation
 
-In every cycle, the critic evaluates each submitted work product against the
-scientist's fixed `criteria`. Its existing evaluation systems are:
+LabLoop combines expert criteria, evidence traceability, and scientist oversight:
 
-| System | What it does |
+| Capability | What it does |
 | --- | --- |
-| [Critic](labloop/prompts/critic.md) | Audits each submitted work product's evidence and returns `supported`, `contradicted`, or `uncertain`, with a diagnosis. Optional IGV views support visual review. |
-| [Pydantic schemas](labloop/report_schemas.py) | Validate reports, verdicts, batch keys and counts, and allowed observation citations. |
-| [Python controller](labloop/loop.py) | Requires evidence files, rejects duplicate products and invented citations, and permits retractions only with contradictory observations. |
-| [Scientist feedback](docs/knowledge-base.md#supply-scientist-feedback) | Lets a scientist supply corrective feedback for later analyses or retire an eligible lesson through contradictory feedback. |
-| [Audit records](docs/codex-backend.md) | Preserve prompts, results, traces, usage, file hashes, and links from lessons to evidence for inspection. |
-| [Pytest suite](tests/) | Checks orchestration, validation, feedback, RDF roundtrips, and integrations using fixtures. |
+| [Critic evaluation](labloop/prompts/critic.md) | Reviews each submitted work product against the scientist's fixed `criteria`, returning `supported`, `contradicted`, or `uncertain`, with a diagnosis. Optional IGV views support visual review. |
+| [Evidence audit trail](docs/knowledge-base.md#live-web-access) | Links lessons to critic observations, reviewed work products, and cited evidence files for inspection. |
+| [Scientist correction](docs/knowledge-base.md#supply-scientist-feedback) | Supplies corrective feedback for later analyses or retires an eligible lesson through contradictory feedback. |
 
-The knowledge graph provides an audit trail: every lesson must cite critic
-observations from the current cycle, which link to the reviewed work products
-and any cited evidence files. Pydantic runtime validation and explicit Python
-logic enforce these citation and file checks without an RDF validator; they do
-not establish that the evidence supports the lesson. Python type annotations
-alone do not enforce the checks at runtime.
+Every lesson must cite critic observations from the current cycle.
+[Pydantic schemas](labloop/report_schemas.py) and the
+[Python controller](labloop/loop.py) enforce citation requirements, check that
+evidence files exist, reject duplicate products, and require contradictory
+observations for agent-proposed retractions.
 
-Valid reports and file references do not prove scientific correctness. Critic
-judgments still need expert review and independent validation; the demo and
-software tests do not measure model quality. LabLoop has no independent-trial
-benchmark, systematic critic calibration, or production quality gates and drift
-monitoring yet.
+[Run records](docs/codex-backend.md) preserve prompts, results, traces, and file
+hashes for auditing. The [pytest suite](tests/) checks the supporting software;
+neither it nor the synthetic demo measures model quality.
 
-For the broader evaluation practices, see
-[Anthropic's agent-evals guide](https://www.anthropic.com/research/demystifying-evals-for-ai-agents)
-and [AWS's AgentCore framework](https://aws.amazon.com/blogs/machine-learning/building-trust-in-ai-agents-a-production-ready-evaluation-framework-with-amazon-bedrock-agentcore/).
+Citation checks establish traceability, not scientific correctness. Critic
+judgments still need expert review and independent validation. These are building
+blocks for evaluation: independent-trial benchmarks, systematic critic
+calibration, and production quality gates and monitoring remain future work.
 
 ## Sharing knowledge across labs
 
