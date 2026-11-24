@@ -42,7 +42,7 @@ The scientist supplies three prompts in a JSON file:
 | Prompt | Role |
 | --- | --- |
 | `goal` | Actor: investigate and produce work products, including reusable code, with evidence. |
-| `criteria` | Critic: audit each product against the scientist's criteria. |
+| `criteria` | Critic: evaluate each submitted work product against the scientist's criteria. |
 | `distill` | Distiller: propose lessons and suggested tests from the observations. |
 
 Lessons are candidate facts (hypotheses) for the next actor to test.
@@ -140,21 +140,24 @@ while testing the lessons those analyses produced.
 
 ## Evaluation and validation
 
-LabLoop evaluates evidence in every cycle against the scientist's fixed
-`criteria`. Its existing evaluation systems are:
+In every cycle, the critic evaluates each submitted work product against the
+scientist's fixed `criteria`. Its existing evaluation systems are:
 
 | System | What it does |
 | --- | --- |
-| [Critic](labloop/prompts/critic.md) | Audits each product's evidence and returns `supported`, `contradicted`, or `uncertain`, with a diagnosis. Optional IGV views support visual review. |
+| [Critic](labloop/prompts/critic.md) | Audits each submitted work product's evidence and returns `supported`, `contradicted`, or `uncertain`, with a diagnosis. Optional IGV views support visual review. |
 | [Pydantic schemas](labloop/report_schemas.py) | Validate reports, verdicts, batch keys and counts, and allowed observation citations. |
 | [Python controller](labloop/loop.py) | Requires evidence files, rejects duplicate products and invented citations, and permits retractions only with contradictory observations. |
-| [Scientist feedback](docs/knowledge-base.md#supply-scientist-feedback) | Carries human assessments into later analyses and retires eligible contradicted assertions. |
+| [Scientist feedback](docs/knowledge-base.md#supply-scientist-feedback) | Lets a scientist supply corrective feedback for later analyses or retire an eligible lesson through contradictory feedback. |
 | [Audit records](docs/codex-backend.md) | Preserve prompts, results, traces, usage, file hashes, and links from lessons to evidence for inspection. |
 | [Pytest suite](tests/) | Checks orchestration, validation, feedback, RDF roundtrips, and integrations using fixtures. |
 
-Pydantic runtime validation and explicit Python logic enforce these structural
-and evidence checks without an RDF validator. Python type annotations alone
-do not enforce them at runtime.
+The knowledge graph provides an audit trail: every lesson must cite critic
+observations from the current cycle, which link to the reviewed work products
+and any cited evidence files. Pydantic runtime validation and explicit Python
+logic enforce these citation and file checks without an RDF validator; they do
+not establish that the evidence supports the lesson. Python type annotations
+alone do not enforce the checks at runtime.
 
 Valid reports and file references do not prove scientific correctness. Critic
 judgments still need expert review and independent validation; the demo and
