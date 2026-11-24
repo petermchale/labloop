@@ -2,7 +2,6 @@
 
 LabLoop turns what agents learn into reusable code and lessons: candidate facts
 (hypotheses) that later analyses test.
-
 You define a research goal and the criteria for judging the evidence. LabLoop
 runs a loop: it performs an analysis, checks the results against your criteria,
 and preserves code, evidence, and lessons with proposed follow-up tests. The next
