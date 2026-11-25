@@ -157,7 +157,9 @@ judgments still need expert review and independent validation.
 Critic evaluation, evidence traceability, and scientist feedback provide a
 foundation for evaluation. Measuring reliability across independent trials,
 calibrating critic judgments against expert assessments, and detecting quality
-regressions remain future work.
+regressions remain future work
+([Anthropic's agent-evaluation guide](https://www.anthropic.com/research/demystifying-evals-for-ai-agents),
+[AWS's evaluation framework](https://aws.amazon.com/blogs/machine-learning/building-trust-in-ai-agents-a-production-ready-evaluation-framework-with-amazon-bedrock-agentcore/)).
 
 ## Sharing knowledge across labs
 
