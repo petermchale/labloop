@@ -154,6 +154,12 @@ observations for agent-proposed retractions.
 Citation checks establish traceability, not scientific correctness. Critic
 judgments still need expert review and independent validation.
 
+For related background, see Frank Coyle's
+[Why Agentic Systems Need Ontologies](https://www.youtube.com/watch?v=Sir59K8ZDPU)
+(AI Engineer), which distinguishes type checks from domain-rule validation in
+agent loops. LabLoop currently enforces the rules above through Pydantic and
+Python; ontology-based validation could extend this approach.
+
 Critic evaluation, evidence traceability, and scientist feedback provide a
 foundation for evaluation. Measuring reliability across independent trials,
 calibrating critic judgments against expert assessments, and detecting quality
